@@ -20,11 +20,9 @@ phases:
     commands:
       - npm install
       - pwd && npm run build:productionWithoutWatch
-      - npm run copilot:extract-data
       - ls -la && cp ./cicd/cumulus-deployspec-nonprod.yaml .
 
 artifacts:
   files:
-    - "./dataExtractionForSafCopilot/**/*" #This is the static content of copliot raw data
-    - "./dist/saffron-angular-example/**/*"
+    - "./dist/password-generator/browser/**/*"
     - "./cicd/cumulus-deployspec-nonprod.yaml"

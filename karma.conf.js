@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/saffron-angular-example'),
+      dir: require('path').join(__dirname, './coverage/password-generator'),
       subdir: '.',
       reporters: [
         { type: 'html' },

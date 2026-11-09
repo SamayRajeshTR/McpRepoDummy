@@ -1,110 +1,82 @@
-# Saffron components in Angular
+# Secure Password Generator
 
-## Overview
+A standalone Angular application for generating strong random passwords, built with
+Saffron Design System components. The password generator is the application’s main
+page; the original component demos and navigation have been removed.
 
-This sample project is a developer sandbox and playground for developer acceptance testing of Saffron components. Certain components shown may not be available for production use.
+## Features
 
-For production-ready components, refer to the [Saffron Documentation Site](https://saffron.thomsonreuters.com/).
+- Cryptographically secure generation using browser Web Crypto.
+- Configurable length from 12 to 128 characters (20 by default).
+- Lowercase, uppercase, numbers, and symbols, with at least one character from
+  each selected type.
+- Show/hide, copy, and clear controls.
+- Passwords remain in page memory: the generator does not send, log, or persist them.
 
-## Documentation
+## Getting started
 
-- [Saffron Documentation Site](https://saffron.thomsonreuters.com/) — component library, design guidance, and API reference
-- [FAQ](https://github.com/tr/saffron_angular-examples/blob/main/FAQ.md) — troubleshooting and common questions
-- [Build and deployment pipeline](docs/architecture/BUILD-AND-DEPLOYMENT-PIPELINE.md) — GitHub Pages preview and release deployment
-- Other Angular versions: [Angular 15](https://github.com/tr/saffron_angular-examples/blob/main/angular15) · [14](https://github.com/tr/saffron_angular-examples/blob/main/angular14) · [13](https://github.com/tr/saffron_angular-examples/blob/main/angular13) · [12](https://github.com/tr/saffron_angular-examples/blob/main/angular12) · [11](https://github.com/tr/saffron_angular-examples/blob/main/angular11) · [10](https://github.com/tr/saffron_angular-examples/blob/main/angular10)
+Requires Node.js `^22.22.3 || ^24.15.0 || >=26.0.0`, npm, and a modern browser.
+The Saffron packages are private: configure authentication for the registry in
+`.npmrc` using your organization’s approved process. Never commit credentials.
 
-## Quick start
-
-To use the Saffron Web Components in Angular, you can use this sample Angular application as your reference.
-
-Requires Node.js `^22.22.3 || ^24.15.0 || >=26.0.0` (Angular 22 CLI's minimum supported runtimes).
-
-To run this sample project:
-
-1. Clone the project `git clone https://github.com/tr/saffron_angular-example.git`
-2. `cd saffron_angular-example`
-3. `npm install`
-4. `npm run start`
-
-To add Saffron web components to your Angular project:
-
-1. `npm install @saffron/core-components` or `yarn add @saffron/core-components`
-
-2. Create a `saffron-loader.ts` file to register all components:
-
-```typescript
-import * as saffronComponents from "@saffron/core-components";
-
-export const loadSaffronComponents = (): void => {
-  if (typeof window === "undefined") return;
-
-  Object.values(saffronComponents).forEach((component: any) => {
-    if (typeof component === "function" && component.length === 0) {
-      try {
-        component(); // Invoke the component definition function
-      } catch (error) {
-        // Silently ignore duplicate registrations
-      }
-    }
-  });
-};
-
-loadSaffronComponents();
+```bash
+npm ci
+npm start
 ```
 
-3. Import the loader in `main.ts` **before** bootstrapping your application:
+Open `http://localhost:4200`.
 
-```typescript
-import "./saffron-loader"; // This must come before bootstrapApplication
-import { bootstrapApplication } from "@angular/platform-browser";
-import { AppComponent } from "./app/app.component";
+## Usage
 
-bootstrapApplication(AppComponent, appConfig);
+1. Choose a length and at least one character type.
+2. Select **Generate password**.
+3. Use **Show password** or **Copy password**, then save it in a trusted password manager.
+4. Select **Clear password** when finished.
+
+Changing the settings clears the previous password so it cannot be mistaken for
+a password generated with the new options.
+
+## Security
+
+Generation uses `crypto.getRandomValues`, never `Math.random`. Rejection sampling
+avoids modulo bias, and candidates missing a selected character type are retried.
+If secure randomness is unavailable, generation fails rather than falling back.
+
+Longer passwords with more character types provide more protection; prefer the
+default settings or stronger ones. Use a unique password for every account.
+
+Clipboard access requires HTTPS or localhost and browser permission. If copying
+is unavailable, show the password and copy it manually. Other applications or
+clipboard history may retain copied values; **Clear password** only clears this
+page, not the system clipboard. Closing or refreshing the page discards its state.
+
+## Development
+
+| Command | Purpose |
+| --- | --- |
+| `npm start` | Start the development server |
+| `npm run build` | Create the production build |
+| `npm run lint` | Run the configured Angular/TypeScript lint checks |
+| `npm test -- --watch=false` | Run Jasmine/Karma tests once |
+
+Tests require Chrome or Chromium; set `CHROME_BIN` to its executable if necessary.
+Build output is written to `dist/password-generator/browser`. Serve that directory
+as static files over HTTPS for deployment.
+
+## Project structure
+
+```text
+src/
+  app/
+    app.component.ts             # Main page and Saffron theme
+    app.config.ts                # Angular providers
+    password-generator/
+      password-generator.ts     # Secure generation logic
+      password-generator.component.*  # UI and component tests
+      password-generator.spec.ts       # Generation tests
+  saffron-loader.ts             # Saffron web-component registration
+  styles.scss                  # Saffron styles and app typography
 ```
 
-4. Add `CUSTOM_ELEMENTS_SCHEMA` to your components to use web components:
-
-```typescript
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-
-@Component({
-  selector: "app-root",
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  template: `<saf-button appearance="primary">Click</saf-button>`,
-})
-export class AppComponent {}
-```
-
-3. Add the component to your view such as `app.component.html`
-
-`<saf-button appearance="primary">Click</saf-button>`
-
-## Key features
-
-- **Angular integration reference** — demonstrates how to register and use Saffron web components in an Angular application using `CUSTOM_ELEMENTS_SCHEMA`
-- **Component sandbox** — covers 70+ Saffron components with live examples and variant exploration
-- **Developer acceptance testing** — used by the Saffron team to validate components before they reach production
-
-## Tech stack
-
-| Technology                 | Purpose                         |
-| -------------------------- | ------------------------------- |
-| Angular 22                 | Application framework           |
-| TypeScript                 | Language                        |
-| `@saffron/core-components` | Saffron web components          |
-| `@saffron/core-styles`     | Design tokens and global styles |
-| Angular CLI                | Build and dev server            |
-| Jasmine + Karma            | Unit testing                    |
-
-## Contributing
-
-This repo is maintained by the Saffron team. To contribute to the Saffron component library, see [Contributing to Saffron](https://saffron.thomsonreuters.com/?path=/docs/get-started-contributing--docs).
-
-- [`@saffron/core-components` repository](https://github.com/tr/saffron_design-system/tree/main/core-packages/core-components)
-- [`@saffron/core-styles` repository](https://github.com/tr/saffron_design-system/tree/main/core-packages/core-styles)
-- [Roadmap](https://saffron.thomsonreuters.com/?path=/docs/about-saffron-roadmap--docs)
-
-## Support
-
-- [Report a bug or enhancement](https://forms.office.com/pages/responsepage.aspx?id=ZLjMYhpqXUuOHDl97BqCWLT-Zr9eGJ1Aoo0it293ZMpUMDBTT0dFUTBGOEZBSU1XQU9LQ1JMNlI4TyQlQCN0PWcu)
-- [Ask a question or give feedback](https://teams.microsoft.com/l/channel/19%3Ac554c5c248ba4ba491954f4038529bf2%40thread.tacv2/Developer%20Support?groupId=bf66feb4-185e-409d-a28d-22b76f7764ca&tenantId=62ccb864-6a1a-4b5d-8e1c-397dec1a8258)
+Built with Angular, TypeScript, Saffron, and Jasmine/Karma. See the
+[Saffron documentation](https://saffron.thomsonreuters.com/) for design-system guidance.
