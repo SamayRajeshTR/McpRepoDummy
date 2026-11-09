@@ -1,0 +1,121 @@
+name: Tag non-Saffron maintainers as contribution PRs
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  tag-pr:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
+      issues: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Get GATE token
+        # GATE issues repo-scoped tokens only — used here for the label read/write
+        # API calls. The internal/external check below uses author_association
+        # from the PR event payload (no API call, no secret, fork-PR safe).
+        id: gate
+        uses: ./.github/actions/gate-token
+        with:
+          target-repo: tr/saffron_angular-example
+          permissions: '{"pull_requests":"write","issues":"write"}'
+
+      - name: Check for 'contribution' label
+        id: check-label
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ steps.gate.outputs.token }}
+          script: |
+            // Log the entire context to debug the structure
+            // console.log(`Context: ${JSON.stringify(context, null, 2)}`);
+            const issue_number = context.payload.pull_request.number;
+            const owner = context.payload.repository?.owner?.login;
+            const repo = context.payload.repository?.name;
+
+            // Log extracted values
+            // console.log(`Owner: ${owner}`);
+            // console.log(`Repo: ${repo}`);
+            // console.log(`Issue Number: ${issue_number}`);
+
+            if (!issue_number) {
+              throw new Error('Issue number not found in the pull request context');
+            }
+            try {
+              const { data: labels } = await github.rest.issues.listLabelsOnIssue({
+                owner,
+                repo,
+                issue_number
+              });
+
+              const hasContributionLabel = labels.some(label => label.name === 'contribution');
+              core.setOutput('hasContributionLabel', hasContributionLabel.toString());
+            } catch (error) {
+              console.error(`Failed to list labels for issue: ${error.message}`);
+              throw error;
+            }
+
+      - name: Cancel workflow if 'contribution' label exists
+        id: cancel-workflow
+        if: steps.check-label.outputs.hasContributionLabel == 'true'
+        run: echo "Contribution label already exists, cancelling workflow."
+        continue-on-error: true
+
+      - name: Set continue output
+        id: set-continue
+        run: echo "continue=false" >> $GITHUB_OUTPUT
+        if: steps.check-label.outputs.hasContributionLabel == 'true'
+
+      - name: Determine if user is internal (skip-label) or external (apply-label)
+        # Uses github.event.pull_request.author_association from the PR event payload —
+        # no API call, no secret, no token. This works for fork PRs (which is the
+        # primary external-contributor case) where secrets are NOT exposed to
+        # pull_request workflows.
+        #
+        # Mapping:
+        #   OWNER, MEMBER, COLLABORATOR                          → "internal" → do NOT add "contribution"
+        #   CONTRIBUTOR, FIRST_TIME_CONTRIBUTOR, FIRST_TIMER,
+        #   NONE, MANNEQUIN                                       → "external" → ADD "contribution"
+        #
+        # Replaces the old teams.listMembersInOrg / getMembershipForUserInOrg check
+        # (secrets.BOBBY_GITHUB, dead as of 2026-09-08) — GATE cannot mint org-scoped
+        # members:read tokens (repo-scoped requests only), and org membership isn't
+        # needed here: author_association already tells us internal vs external.
+        # Mirrors tr/saffron_design_system's tag-contributors-prs.yml fix (AB#158165, PR #2836).
+        if: steps.set-continue.outputs.continue != 'false'
+        id: check-member
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const assoc = context.payload.pull_request.author_association;
+            const INTERNAL = new Set(["OWNER", "MEMBER", "COLLABORATOR"]);
+            const isMember = INTERNAL.has(assoc);
+            console.log(`PR author: ${context.payload.pull_request.user.login}`);
+            console.log(`author_association: ${assoc}  →  ${isMember ? "internal (skip label)" : "external (apply label)"}`);
+            core.setOutput('isMember', isMember.toString());
+
+      - name: Add 'contribution' label
+        if: steps.check-member.outputs.isMember == 'false'
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ steps.gate.outputs.token }}
+          script: |
+            const issue_number = context.payload.pull_request.number;
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number,
+              labels: ['contribution']
+            });
+
+      - name: Mark job as successful
+        if: steps.set-continue.outputs.continue == 'false'
+        run: echo "Job marked as successful."
+        continue-on-error: true

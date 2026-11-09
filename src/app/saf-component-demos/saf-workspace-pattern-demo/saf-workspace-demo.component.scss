@@ -1,0 +1,83 @@
+/* Skip links */
+.skip-link-container {
+  position: relative;
+  height: 0;
+  z-index: 1000;
+}
+.skip-link::part(control) {
+  position: absolute;
+  height: 0;
+  top: 0;
+  left: -9999px;
+  background: var(--saf-color-background-level-1);
+  padding: var(--saf-spacing-1) var(--saf-spacing-2);
+}
+.skip-link::part(control):focus {
+  left: var(--saf-spacing-8);
+  top: var(--saf-spacing-8);
+  height: auto;
+  z-index: 1000;
+}
+/*Chat panel styles */
+#skip-link-chat {
+  --saf-chat-max-height: 546px; /* custom height for chat scroll in skip links */
+}
+/* custom height for processing demo */
+#processing-chat saf-chat {
+  min-height: 660px;
+}
+.button-group,
+#regenerate {
+  margin-bottom: var(--saf-spacing-2);
+}
+.chat-actions {
+  display: flex;
+  gap: var(--saf-spacing-2);
+  justify-content: flex-end;
+}
+/* Workspace panel styles */
+saf-window-panel saf-text:first-child,
+.workspace-title saf-text:first-child {
+  color: var(--saf-color-text-subtle);
+}
+saf-window-panel h2,
+h2.workspace-title {
+  margin-top: 0;
+  margin-bottom: var(--saf-spacing-6);
+}
+saf-card {
+  margin-bottom: var(--saf-spacing-4);
+}
+/* Suggested actions */
+.suggested-action {
+  margin-bottom: var(--saf-spacing-2);
+  border: 1px solid var(--saf-color-border-subtle);
+  background: var(--saf-color-background-level-2);
+  border-radius: 8px;
+}
+.suggested-action::part(control) {
+  display: flex;
+  text-align: left;
+}
+/* Get started actions */
+.get-started-container {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: var(--saf-spacing-6);
+  margin-top: var(--saf-spacing-6);
+}
+.get-started-actions {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex: 1 0 auto;
+  width: 100%;
+  gap: var(--saf-spacing-6);
+}
+@media (max-width: 767px) {
+  .get-started-actions {
+    flex-wrap: wrap;
+  }
+}

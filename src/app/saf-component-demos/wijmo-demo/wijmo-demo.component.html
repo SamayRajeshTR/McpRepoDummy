@@ -1,0 +1,788 @@
+<section class="Component">
+  <div class="Component-heading">
+    <h3 id="wijmo">Wijmo</h3>
+    <saf-anchor href="#wijmo">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div>
+    <p>
+      Choose one of the following methods to get the Saffron data-grid styles:
+    </p>
+    <ol>
+      <li>
+        Import stylesheets in <strong>src/styles.scss</strong><br /><br />
+        <code>
+          @use "./node_modules/@saffron/core-styles/dist/index.css";<br />
+          @use "./node_modules/@saffron/core-styles/dist/wijmo.css";
+        </code>
+      </li>
+      <br />
+      <li>
+        Load stylesheet in <strong>angular.json</strong><br /><br />
+        <code>
+          "styles": [<br />
+          "src/styles.scss",<br />
+          "node_modules/@saffron/core-styles/dist/index.css",<br />
+          "node_modules/@saffron/core-styles/dist/wijmo.css"<br />
+          ],
+        </code>
+      </li>
+    </ol>
+    <p style="margin: 32px 0">
+      Wijmo FlexGrid that has been styled with Saffron core-styles. This demo
+      shows examples of how to approach common accessibility issues with the
+      grid's functionality. This demo also includes custom Font Awesome icons
+      for sorting and filtering. Default sorting is by country in descending
+      order.
+    </p>
+    <div
+      style="margin-bottom: 32px; display: flex; gap: 24px; width: fit-content"
+      >
+      <saf-switch [checked]="false" (change)="handleCompactDensityChange($event)"
+        >Compact</saf-switch
+        >
+        <saf-switch checked="true" (change)="handleAlternatingRowsChange($event)"
+          >Alternating rows</saf-switch
+          >
+          <saf-switch checked="true" (change)="handleFlexsheetChange($event)"
+            >Spreadsheet</saf-switch
+            >
+          </div>
+        </div>
+        <style>
+          saf-drawer#keyboard-instructions::part(content):focus-within {
+          outline: 2px solid var(--saf-color-focus);
+          outline-offset: -2px;
+        }
+        .keyboard-two-columns {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .keyboard-two-columns:focus {
+      outline: none;
+    }
+    .keyboard-two-columns > div {
+    padding: 0;
+    width: 100%;
+  }
+  .keyboard-two-columns > div > p {
+  margin-top: 0;
+}
+.keyboard-two-columns > div:last-child > p:last-child {
+margin-bottom: 0;
+}
+.keyboard-two-columns > div > p > saf-badge:last-child {
+margin-right: 12px;
+}
+@media (min-width: 768px) {
+.keyboard-two-columns > div {
+width: 50%;
+}
+.keyboard-two-columns > div > p:last-child {
+margin-bottom: 0;
+}
+}
+</style>
+<div style="--var-density: 'inherit'">
+  <saf-toolbar [density]="isCompactDensity ? 'compact' : 'standard'">
+    <div slot="top-row-start">
+      <saf-button
+        appearance="primary"
+        [attr.density]="isCompactDensity === true ? 'compact' : 'standard'"
+        >
+        <saf-icon slot="start" icon-name="plus" appearance="outline"></saf-icon>
+        Add
+      </saf-button>
+      <saf-button
+        appearance="secondary"
+        [attr.density]="isCompactDensity === true ? 'compact' : 'standard'"
+        >
+        <saf-icon
+          slot="start"
+          icon-name="paper-plane"
+          appearance="outline"
+        ></saf-icon>
+        Send
+      </saf-button>
+      <saf-button
+        appearance="secondary"
+        [attr.density]="isCompactDensity === true ? 'compact' : 'standard'"
+        >
+        <saf-icon
+          slot="start"
+          icon-name="arrow-up-from-bracket"
+          appearance="outline"
+        ></saf-icon>
+        Upload
+      </saf-button>
+      <saf-button
+        appearance="secondary"
+        [attr.density]="isCompactDensity === true ? 'compact' : 'standard'"
+        >
+        <saf-icon
+          slot="start"
+          icon-name="share-from-square"
+          appearance="outline"
+        ></saf-icon>
+        Share
+      </saf-button>
+    </div>
+    <div slot="top-row-end">
+      <span style="font: var(--saf-type-body-base-md-strong-standard)"
+        >Search</span
+        >
+        <saf-search-field
+          id="saf-search-field"
+          [value]="filter"
+          (input)="searchFilter($event)"
+          (clear)="searchFilter($event)"
+          [attr.density]="isCompactDensity === true ? 'compact' : 'standard'"
+        ></saf-search-field>
+      </div>
+      <div slot="bottom-row-start">
+        <saf-checkbox
+          [checked]="currentSelectAllState === SELECT_ALL.ALL_SELECTED"
+          [indeterminate]="currentSelectAllState === SELECT_ALL.SOME_SELECTED"
+          (change)="selectAllToolbar()"
+          style="margin-left: 16px"
+          >Select all</saf-checkbox
+          >
+          {{ selectedIdsToolbar.length }} selected
+          <saf-button
+            [attr.density]="isCompactDensity === true ? 'compact' : 'standard'"
+            appearance="secondary"
+            class="demo-1440-hidden"
+            style="margin-left: 16px"
+            >
+            <saf-icon slot="end" icon-name="chevron-down"></saf-icon>
+            Row actions
+          </saf-button>
+          <saf-button
+            appearance="tertiary"
+            class="demo-1440-block"
+            [attr.density]="isCompactDensity === true ? 'compact' : 'standard'"
+            >
+            <saf-icon
+              slot="start"
+              icon-name="pen-line"
+              appearance="outline"
+            ></saf-icon>
+            Edit
+          </saf-button>
+          <saf-button
+            appearance="tertiary"
+            class="demo-1440-block"
+            [attr.density]="isCompactDensity === true ? 'compact' : 'standard'"
+            >
+            <saf-icon
+              slot="start"
+              icon-name="arrow-down-to-bracket"
+              appearance="outline"
+            ></saf-icon>
+            Download
+          </saf-button>
+          <saf-button
+            appearance="tertiary"
+            class="demo-1440-block"
+            [attr.density]="isCompactDensity === true ? 'compact' : 'standard'"
+            >
+            <saf-icon
+              slot="start"
+              icon-name="trash-can"
+              appearance="outline"
+            ></saf-icon>
+            Delete
+          </saf-button>
+        </div>
+        <div slot="bottom-row-end">
+          <saf-tooltip anchor="keyboard-btn" placement="top" aria-hidden="true">
+            Keyboard interactions
+          </saf-tooltip>
+          <saf-button
+            id="keyboard-btn"
+            appearance="secondary"
+            icon-only
+            a11y-aria-label="Keyboard interactions"
+            className="demo-1440-hidden"
+            (click)="handleOpenDrawer('bottomDrawerRef')"
+            [attr.density]="isCompactDensity === true ? 'compact' : 'standard'"
+            >
+            <saf-icon icon-name="keyboard" presentation></saf-icon>
+          </saf-button>
+          <saf-button
+            appearance="secondary"
+            class="demo-1440-hidden"
+            [attr.density]="isCompactDensity === true ? 'compact' : 'standard'"
+            >
+            <saf-icon slot="end" icon-name="chevron-down"></saf-icon>
+            Grid actions
+          </saf-button>
+          <saf-button
+            appearance="secondary"
+            class="demo-1440-block"
+            [attr.density]="isCompactDensity === true ? 'compact' : 'standard'"
+            >
+            <saf-icon
+              slot="start"
+              icon-name="filter"
+              appearance="outline"
+            ></saf-icon>
+            Filter
+          </saf-button>
+          <saf-button
+            appearance="secondary"
+            class="demo-1440-block"
+            [attr.density]="isCompactDensity === true ? 'compact' : 'standard'"
+            >
+            <saf-icon
+              slot="start"
+              icon-name="list-tree"
+              appearance="outline"
+            ></saf-icon>
+            Group
+          </saf-button>
+          <saf-button
+            appearance="secondary"
+            class="demo-1440-block"
+            [attr.density]="isCompactDensity === true ? 'compact' : 'standard'"
+            >
+            <saf-icon slot="start" icon-name="eye" appearance="outline"></saf-icon>
+            Show/hide
+          </saf-button>
+          <saf-divider orientation="vertical" style="height: 42px"></saf-divider>
+          @if (itemsSourceToolbar.totalItemCount) {
+            <span
+              >(Showing {{ pageIndexToolbar * itemsSourceToolbar.pageSize + 1 }} to
+              {{
+              Math.min(
+              (pageIndexToolbar + 1) * itemsSourceToolbar.pageSize,
+              itemsSourceToolbar.totalItemCount
+              )
+              }}
+              of {{ itemsSourceToolbar.totalItemCount }} items)</span
+              >
+            }
+            @if (!itemsSourceToolbar.totalItemCount) {
+              <span
+                >(Showing 0 items)</span
+                >
+              }
+            </div>
+          </saf-toolbar>
+          <saf-drawer
+            #bottomDrawerRef
+            id="keyboard-instructions"
+            [modal]="false"
+            [isFooter]="false"
+            drawer-title="Keyboard interactions"
+            drawer-subtitle="Available keyboard interactions for data grid"
+            trigger-id="keyboard-btn"
+            placement="bottom"
+            >
+            <div
+              class="keyboard-two-columns"
+              role="region"
+              aria-label="Keyboard interactions"
+              tabIndex="0"
+              >
+              <div>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="arrow-alt-up" presentation></saf-icon>
+                    <saf-sr-only>Shift</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">+</saf-text>
+                  <saf-badge status="info" emphasis="subtle">Space</saf-badge>
+                  Select row
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">Alt</saf-badge>
+                  <saf-text appearance="body-default-sm">+</saf-text>
+                  <saf-badge status="info" emphasis="subtle">
+                    <span aria-hidden="true">PgUp</span>
+                    <saf-sr-only>Page Up</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">/</saf-text>
+                  <saf-badge status="info" emphasis="subtle">
+                    <span aria-hidden="true">PgDn</span>
+                    <saf-sr-only>Page Down</saf-sr-only>
+                  </saf-badge>
+                  Move selection to first or last row
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="chevron-up" presentation></saf-icon>
+                    <saf-sr-only>Control</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">+</saf-text>
+                  <saf-badge status="info" emphasis="subtle">Space</saf-badge>
+                  Select column
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">F2</saf-badge>
+                  Edit current cell
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">F4</saf-badge>
+                  <saf-text appearance="body-default-sm">or</saf-text>
+                  <saf-badge status="info" emphasis="subtle">Alt</saf-badge>
+                  <saf-text appearance="body-default-sm">+</saf-text>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="arrow-up" presentation></saf-icon>
+                    <saf-sr-only>Up Arrow</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">/</saf-text>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="arrow-down" presentation></saf-icon>
+                    <saf-sr-only>Down Arrow</saf-sr-only>
+                  </saf-badge>
+                  Open or close current cell editor
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">Space</saf-badge>
+                  Edit or toggle checkbox
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="chevron-up" presentation></saf-icon>
+                    <saf-sr-only>Control</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm" style="margin-right: 12px">
+                    test
+                  </saf-text>
+                  Select entire grid
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="arrow-alt-up" presentation></saf-icon>
+                    <saf-sr-only>Shift</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">+</saf-text>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="arrow-left" presentation></saf-icon>
+                    <saf-sr-only>Left Arrow</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">/</saf-text>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="arrow-right" presentation></saf-icon>
+                    <saf-sr-only>Right Arrow</saf-sr-only>
+                  </saf-badge>
+                  Extend selection to include cell to the left or right
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="arrow-up" presentation></saf-icon>
+                    <saf-sr-only>Up Arrow</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">/</saf-text>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="arrow-down" presentation></saf-icon>
+                    <saf-sr-only>Down Arrow</saf-sr-only>
+                  </saf-badge>
+                  Select cell above or below current selection
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="arrow-alt-up" presentation></saf-icon>
+                    <saf-sr-only>Shift</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">+</saf-text>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="arrow-up" presentation></saf-icon>
+                    <saf-sr-only>Up Arrow</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">/</saf-text>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="arrow-down" presentation></saf-icon>
+                    <saf-sr-only>Down Arrow</saf-sr-only>
+                  </saf-badge>
+                  Extend selection to include cell above or below
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">
+                    <span aria-hidden="true">PgUp</span>
+                    <saf-sr-only>Page Up</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">/</saf-text>
+                  <saf-badge status="info" emphasis="subtle">
+                    <span aria-hidden="true">PgDn</span>
+                    <saf-sr-only>Page Down</saf-sr-only>
+                  </saf-badge>
+                  Select cell one page above or below current selection
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="arrow-alt-up" presentation></saf-icon>
+                    <saf-sr-only>Shift</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">+</saf-text>
+                  <saf-badge status="info" emphasis="subtle">
+                    <span aria-hidden="true">PgUp</span>
+                    <saf-sr-only>Page Up</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">/</saf-text>
+                  <saf-badge status="info" emphasis="subtle">
+                    <span aria-hidden="true">PgDn</span>
+                    <saf-sr-only>Page Down</saf-sr-only>
+                  </saf-badge>
+                  Extend selection to include page above or below
+                </p>
+              </div>
+              <div>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="arrow-alt-up" presentation></saf-icon>
+                    <saf-sr-only>Shift</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">+</saf-text>
+                  <saf-badge status="info" emphasis="subtle">Alt</saf-badge>
+                  <saf-text appearance="body-default-sm">+</saf-text>
+                  <saf-badge status="info" emphasis="subtle">
+                    <span aria-hidden="true">PgUp</span>
+                    <saf-sr-only>Page Up</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">/</saf-text>
+                  <saf-badge status="info" emphasis="subtle">
+                    <span aria-hidden="true">PgDn</span>
+                    <saf-sr-only>Page Down</saf-sr-only>
+                  </saf-badge>
+                  Extend selection to include first or last row
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">Home</saf-badge>
+                  <saf-text appearance="body-default-sm">/</saf-text>
+                  <saf-badge status="info" emphasis="subtle">End</saf-badge>
+                  Move selection to the first or last column
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="arrow-alt-up" presentation></saf-icon>
+                    <saf-sr-only>Shift</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">+</saf-text>
+                  <saf-badge status="info" emphasis="subtle">Home</saf-badge>
+                  <saf-text appearance="body-default-sm">/</saf-text>
+                  <saf-badge status="info" emphasis="subtle">End</saf-badge>
+                  Extend selection to include first or last column
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="chevron-up" presentation></saf-icon>
+                    <saf-sr-only>Control</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">+</saf-text>
+                  <saf-badge status="info" emphasis="subtle">Home</saf-badge>
+                  <saf-text appearance="body-default-sm">/</saf-text>
+                  <saf-badge status="info" emphasis="subtle">End</saf-badge>
+                  Move selection to first or last row and column
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="arrow-alt-up" presentation></saf-icon>
+                    <saf-sr-only>Shift</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">+</saf-text>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="chevron-up" presentation></saf-icon>
+                    <saf-sr-only>Control</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">+</saf-text>
+                  <saf-badge status="info" emphasis="subtle">Home</saf-badge>
+                  <saf-text appearance="body-default-sm">/</saf-text>
+                  <saf-badge status="info" emphasis="subtle">End</saf-badge>
+                  Extend selection to include first or last row and column
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">
+                    <span aria-hidden="true">Esc</span>
+                    <saf-sr-only>Escape</saf-sr-only>
+                  </saf-badge>
+                  Cancel edit to current cell or row
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">Tab</saf-badge>
+                  Select next focusable element
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">Enter</saf-badge>
+                  Exit edit mode and select cell below the current one
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">
+                    <span aria-hidden="true">Del</span>
+                    <saf-sr-only>Delete</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">or</saf-text>
+                  <saf-badge status="info" emphasis="subtle">Backspace</saf-badge>
+                  Delete selection
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="chevron-up" presentation></saf-icon>
+                    <saf-sr-only>Control</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">+ C or</saf-text>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="chevron-up" presentation></saf-icon>
+                    <saf-sr-only>Control</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">+</saf-text>
+                  <saf-badge status="info" emphasis="subtle">Insert</saf-badge>
+                  Copy selection
+                </p>
+                <p>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="chevron-up" presentation></saf-icon>
+                    <saf-sr-only>Control</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">+ V or</saf-text>
+                  <saf-badge status="info" emphasis="subtle">
+                    <saf-icon icon-name="arrow-alt-up" presentation></saf-icon>
+                    <saf-sr-only>Shift</saf-sr-only>
+                  </saf-badge>
+                  <saf-text appearance="body-default-sm">+</saf-text>
+                  <saf-badge status="info" emphasis="subtle">Insert</saf-badge>
+                  Paste selection
+                </p>
+              </div>
+            </div>
+          </saf-drawer>
+          <!-- Grid -->
+          <wj-flex-grid
+            #gridRef
+            [itemsSource]="itemsSourceToolbar"
+            selectionMode="CellRange"
+            [showMarquee]="true"
+            [anchorCursor]="true"
+            [isReadOnly]="false"
+            headersVisibility="All"
+            headersFocusability="All"
+            (initialized)="initGrid(gridRef)"
+            aria-labelledby="tableHeader-toolbar"
+            aria-describedby="tableDescription-toolbar"
+            data-testid="table-toolbar"
+            style="margin-top: 16px; max-height: 656px"
+      [ngClass]="{
+        'wj-flexgrid': true,
+        'wj-flexsheet': isFlexsheet,
+        'saf-flexgrid--compact': isCompactDensity
+      }"
+            [alternatingRowStep]="isAlternatingRows ? 1 : 0"
+            >
+            <wj-flex-grid-column [width]="'92'" binding="id" header="ID">
+              <ng-template
+                wjFlexGridCellTemplate
+                cellType="ColumnHeader"
+                let-col="col"
+                >
+                <span>{{ col.header }}</span>
+                <span
+            [ngStyle]="{
+              display: 'inline-block',
+              height: isCompactDensity ? '24px' : '32px',
+              width: isCompactDensity ? '24px' : '32px',
+              'text-align': 'center',
+              'align-content': 'center',
+              'margin-left': '16px',
+              'margin-right': '4px'
+            }"
+                  >
+                  <saf-icon
+              [iconName]="
+                col.currentSort === '+'
+                  ? 'arrow-up'
+                  : col.currentSort === '-'
+                  ? 'arrow-down'
+                  : 'arrow-up-arrow-down'
+              "
+                    appearance="outline"
+                  ></saf-icon>
+                </span>
+              </ng-template>
+            </wj-flex-grid-column>
+            <wj-flex-grid-column width="*" binding="country" header="Country">
+              <ng-template
+                wjFlexGridCellTemplate
+                cellType="ColumnHeader"
+                let-col="col"
+                >
+                <span>{{ col.header }}</span>
+                <span
+            [ngStyle]="{
+              display: 'inline-block',
+              height: isCompactDensity ? '24px' : '32px',
+              width: isCompactDensity ? '24px' : '32px',
+              'text-align': 'center',
+              'align-content': 'center',
+              'margin-left': '16px',
+              'margin-right': '4px'
+            }"
+                  >
+                  <saf-icon
+              [iconName]="
+                col.currentSort === '+'
+                  ? 'arrow-up'
+                  : col.currentSort === '-'
+                  ? 'arrow-down'
+                  : 'arrow-up-arrow-down'
+              "
+                    appearance="outline"
+                  ></saf-icon>
+                </span>
+              </ng-template>
+            </wj-flex-grid-column>
+            <wj-flex-grid-column
+              [width]="120"
+              binding="select"
+              header="Select"
+              [dataMap]="selectDataMap"
+              >
+              <ng-template
+                wjFlexGridCellTemplate
+                cellType="ColumnHeader"
+                let-col="col"
+                >
+                <span>{{ col.header }}</span>
+                <span
+            [ngStyle]="{
+              display: 'inline-block',
+              height: isCompactDensity ? '24px' : '32px',
+              width: isCompactDensity ? '24px' : '32px',
+              'text-align': 'center',
+              'align-content': 'center',
+              'margin-left': '16px',
+              'margin-right': '4px'
+            }"
+                  >
+                  <saf-icon
+              [iconName]="
+                col.currentSort === '+'
+                  ? 'arrow-up'
+                  : col.currentSort === '-'
+                  ? 'arrow-down'
+                  : 'arrow-up-arrow-down'
+              "
+                    appearance="outline"
+                  ></saf-icon>
+                </span>
+              </ng-template>
+            </wj-flex-grid-column>
+            <wj-flex-grid-column [width]="145" binding="checkbox" header="Checkbox">
+              <ng-template
+                wjFlexGridCellTemplate
+                cellType="ColumnHeader"
+                let-col="col"
+                >
+                <span>{{ col.header }}</span>
+                <span
+            [ngStyle]="{
+              display: 'inline-block',
+              height: isCompactDensity ? '24px' : '32px',
+              width: isCompactDensity ? '24px' : '32px',
+              'text-align': 'center',
+              'align-content': 'center',
+              'margin-left': '16px',
+              'margin-right': '4px'
+            }"
+                  >
+                  <saf-icon
+              [iconName]="
+                col.currentSort === '+'
+                  ? 'arrow-up'
+                  : col.currentSort === '-'
+                  ? 'arrow-down'
+                  : 'arrow-up-arrow-down'
+              "
+                    appearance="outline"
+                  ></saf-icon>
+                </span>
+              </ng-template>
+            </wj-flex-grid-column>
+            <wj-flex-grid-column [width]="121" header="Status" binding="status">
+              <ng-template
+                wjFlexGridCellTemplate
+                cellType="ColumnHeader"
+                let-col="col"
+                >
+                <span>{{ col.header }}</span>
+                <span
+            [ngStyle]="{
+              display: 'inline-block',
+              height: isCompactDensity ? '24px' : '32px',
+              width: isCompactDensity ? '24px' : '32px',
+              'text-align': 'center',
+              'align-content': 'center',
+              'margin-left': '16px',
+              'margin-right': '4px'
+            }"
+                  >
+                  <saf-icon
+              [iconName]="
+                col.currentSort === '+'
+                  ? 'arrow-up'
+                  : col.currentSort === '-'
+                  ? 'arrow-down'
+                  : 'arrow-up-arrow-down'
+              "
+                    appearance="outline"
+                  ></saf-icon>
+                </span>
+              </ng-template>
+            </wj-flex-grid-column>
+            <wj-flex-grid-column
+              width="*"
+              header="Link"
+              [cellTemplate]="linkCellTemplate"
+              [allowSorting]="false"
+              >
+              <ng-template
+                wjFlexGridCellTemplate
+                cellType="ColumnHeader"
+                let-col="col"
+                >
+                <span>{{ col.header }}</span>
+                <span
+            [ngStyle]="{
+              display: 'inline-block',
+              height: isCompactDensity ? '24px' : '32px',
+              width: isCompactDensity ? '24px' : '32px',
+              'text-align': 'center',
+              'align-content': 'center',
+              'margin-left': '16px',
+              'margin-right': '4px'
+            }"
+                  >
+                  <saf-icon
+              [iconName]="
+                col.currentSort === '+'
+                  ? 'arrow-up'
+                  : col.currentSort === '-'
+                  ? 'arrow-down'
+                  : 'arrow-up-arrow-down'
+              "
+                    appearance="outline"
+                  ></saf-icon>
+                </span>
+              </ng-template>
+            </wj-flex-grid-column>
+            <wj-flex-grid-filter
+              #filterRef
+              [filterColumns]="['country']"
+            ></wj-flex-grid-filter>
+          </wj-flex-grid>
+          <!-- Pagination -->
+          <saf-pagination
+            [attr.density]="isCompactDensity === true ? 'compact' : 'standard'"
+            [totalItemCount]="itemsSourceToolbar.totalItemCount"
+            [itemsPerPage]="itemsSourceToolbar.pageSize"
+            [currentPageIndex]="itemsSourceToolbar.pageIndex + 1"
+            (change)="_setPageIndexToolbar($event)"
+            (items-per-page-change)="setItemsPerPageToolbar($event)"
+            [hasBorder]="true"
+            style="margin-top: -6px"
+            data-aria-live="polite"
+            items-label="items"
+          ></saf-pagination>
+        </div>
+      </section>

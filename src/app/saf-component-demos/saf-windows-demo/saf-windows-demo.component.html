@@ -1,0 +1,32 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="windows">Windows</h3>
+    <saf-anchor href="#windows">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <saf-windows id="windows" (add)="onAdd()">
+      @for (item of windowData; track item) {
+        <saf-window
+          [id]="item.id"
+          [closeable]="item.closeable"
+          (close)="onClose($event)"
+          >
+          {{ item.title }}
+        </saf-window>
+        <saf-window-panel [is-full-width]="!!item.isFullWidth">
+          Window Panel for <strong>{{ item.title }}</strong>
+          @if (item.isFullWidth) {
+            <span> with full width option</span>
+          }
+          @if (!item.closeable) {
+            <span> non-closeable</span>
+          }
+        </saf-window-panel>
+      }
+    </saf-windows>
+    <saf-button (click)="onAdd()">Add Window</saf-button>
+  </div>
+</section>

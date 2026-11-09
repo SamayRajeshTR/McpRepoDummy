@@ -1,0 +1,100 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="checkbox-group">Checkbox Group</h3>
+    <saf-anchor href="#checkbox-group">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-heading">
+    <h3 id="checkbox-group-default">Default</h3>
+    <saf-anchor href="#checkbox-group-default">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <saf-checkbox-group
+      id="fruitgroup"
+      label="Fruits"
+      instructional-text="Select your favorite fruits"
+      validation-message="Validation message"
+    >
+      <saf-checkbox checked=""> Mango </saf-checkbox>
+
+      <saf-checkbox> Banana </saf-checkbox>
+
+      <saf-checkbox checked=""> Peach </saf-checkbox>
+
+      <saf-checkbox> Apple </saf-checkbox>
+    </saf-checkbox-group>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="checkbox-group-horizontal">Horizontal</h4>
+    <saf-anchor href="#checkbox-group-horizontal">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <div class="Component-demo Component-demo--centered">
+    <saf-checkbox-group
+      label="Label"
+      orientation="horizontal"
+      instructional-text="Instructional text"
+      [invalid]="false"
+      validation-message="Validation message"
+    >
+      <saf-checkbox checked=""> Checkbox text label </saf-checkbox>
+
+      <saf-checkbox> Checkbox text label </saf-checkbox>
+
+      <saf-checkbox> Checkbox text label </saf-checkbox>
+
+      <saf-checkbox checked=""> Checkbox text label </saf-checkbox>
+    </saf-checkbox-group>
+  </div>
+  <div class="Component-demo">
+    <div class="Component-heading">
+      <h4 id="checkbox-group-horizontal">In Form</h4>
+      <saf-anchor href="#in-form">
+        <app-link-icon> </app-link-icon>
+      </saf-anchor>
+    </div>
+    <form id="validation-form" (submit)="onSubmit($event)">
+      <saf-checkbox-group
+        id="example"
+        #checkboxGroupValue
+        label="Grocery List"
+        orientation="vertical"
+        instructional-text="Instructional text"
+        [attr.invalid]="isInvalid"
+        [attr.validation-message]="validationMessage"
+        (change)="onChange()"
+        required
+        (reset)="onReset()"
+        (click)="onChange()"
+      >
+        <saf-checkbox> Steak </saf-checkbox>
+
+        <saf-checkbox> Eggs </saf-checkbox>
+
+        <saf-checkbox> Green Peppers </saf-checkbox>
+
+        <saf-checkbox> Toilet Paper </saf-checkbox>
+      </saf-checkbox-group>
+      <div>
+        <saf-form-button type="submit" appearance="primary">Submit</saf-form-button>
+
+        <saf-form-button
+          class="form-cancel-button"
+          type="reset"
+          appearance="secondary"
+          (click)="onReset()"
+          >Reset</saf-form-button
+        >
+      </div>
+    </form>
+
+    <p>Selected: {{ selectedList ?? "None" }}</p>
+  </div>
+</section>

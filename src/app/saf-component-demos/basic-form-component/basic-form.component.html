@@ -1,0 +1,264 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="basic-form">Basic form</h3>
+    <saf-anchor href="#basic-form">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <!-- Form -->
+  <form
+    [formGroup]="testForm"
+    (ngSubmit)="saveBasicForm()"
+    (ngReset)="clearForm()"
+    ngNativeValidate
+    >
+    <h4 class="form-title">Form title</h4>
+    <p class="required-text-info">* Indicates required field</p>
+    <div class="form-grid">
+      <saf-text-field
+        class="input-field"
+        id="firstName"
+        [(ngModel)]="firstName"
+        ngDefaultControl
+        formControlName="firstName"
+        (keypress)="keyPressInputField($event)"
+        label="First name"
+        instructional-text=""
+        [attr.validation-message]="validationMessage"
+        [invalid]="isInvalid"
+        tabindex="0"
+        required
+        >
+      </saf-text-field>
+      <saf-text-field
+        class="input-field"
+        id="lastName"
+        label="Last name"
+        instructional-text=""
+        name="lastName"
+        [(ngModel)]="lastName"
+        ngDefaultControl
+        formControlName="lastName"
+        [invalid]="isInvalidLastName"
+        (keypress)="keyPressInputField($event)"
+        [attr.validation-message]="validationMessage"
+        tabindex="0"
+        type="text"
+        required
+        >
+      </saf-text-field>
+      <saf-text-field
+        class="input-field input-field-full-width"
+        id="emailAddress"
+        [invalid]="false"
+        ngDefaultControl
+        label="Email address"
+        instructional-text="Use the format email@address.com."
+        name="emailAddress"
+        [(ngModel)]="emailAddress"
+        formControlName="emailAddress"
+        [invalid]="emailInvalid"
+        [attr.validation-message]="emailValidationMessage"
+        tabindex="0"
+        type="email"
+        required
+        >
+      </saf-text-field>
+      <saf-select
+        class="input-field"
+        id="country"
+        formControlName="country"
+        [(ngModel)]="country"
+        label="Country"
+        ngDefaultControl
+        name="country"
+        validation-message="Custom validation message"
+        required
+        >
+        <saf-listbox-option> Choose </saf-listbox-option>
+        <saf-listbox-option> Australia </saf-listbox-option>
+        <saf-listbox-option> India </saf-listbox-option>
+        <saf-listbox-option> United States </saf-listbox-option>
+      </saf-select>
+      <saf-text-field
+        class="input-field"
+        id="zipPostalCode"
+        [invalid]="false"
+        ngDefaultControl
+        label="ZIP or postal code"
+        instructional-text=""
+        name="zipPostalCode"
+        [(ngModel)]="zipPostalCode"
+        formControlName="zipPostalCode"
+        [attr.validation-message]="zipCodeValidationMessage"
+        tabindex="0"
+        max="6"
+        [invalid]="postalCodeIsInvalid"
+        [isSuccess]="postalCodeIsSuccess"
+        type="text"
+        required
+        >
+      </saf-text-field>
+      <saf-text-field
+        class="input-field"
+        id="phoneNumber"
+        label="Phone number"
+        instructional-text="Use the format 123-123-1234."
+        name="phoneNumber"
+        formControlName="phoneNumber"
+        ngDefaultControl
+        [attr.validation-message]="phoneNumberValidationMessage"
+        tabindex="0"
+        type="tel"
+        [invalid]="phoneNumberInvalid"
+        [(ngModel)]="phoneNumber"
+        required
+        >
+      </saf-text-field>
+      <saf-text-field
+        class="input-field"
+        id="jobTitle"
+        label="Job title"
+        instructional-text=""
+        name="jobTitle"
+        [(ngModel)]="jobTitle"
+        formControlName="jobTitle"
+        ngDefaultControl
+        tabindex="0"
+        [invalid]="jobTitleIsInvalid"
+        (keypress)="keyPressInputField($event)"
+        [attr.validation-message]="jobTitleIsInvalidValidationMessage"
+        type="text"
+        required
+        >
+      </saf-text-field>
+      <saf-text-field
+        class="input-field"
+        id="organizationName"
+        label="Organization name"
+        instructional-text=""
+        name="organizationName"
+        [(ngModel)]="organizationName"
+        formControlName="organizationName"
+        ngDefaultControl
+        tabindex="0"
+        type="text"
+        required
+        >
+        <saf-button
+          density="extra-compact"
+          id="anchor-overview"
+          slot="label-after"
+          icon-only
+          appearance="tertiary"
+          a11y-aria-label="help details"
+          >
+          <saf-icon icon-name="info-circle" size="16"></saf-icon>
+        </saf-button>
+      </saf-text-field>
+      <saf-tooltip
+        anchor="anchor-overview"
+        trigger-on-click
+        placement="bottom-start"
+        >
+        <div>
+          <saf-text appearance="body-default-md">
+            Popover content, supplemental to the user's workflow, displays on
+            click or tap. The button retains focus. 40 words max.
+          </saf-text>
+        </div>
+      </saf-tooltip>
+      <saf-select
+        class="input-field"
+        id="organizationType"
+        [(ngModel)]="organizationType"
+        formControlName="organizationType"
+        ngDefaultControl
+        name="organizationType"
+        label="Organization type"
+        [invalid]="false"
+        aria-invalid="false"
+        >
+        <saf-listbox-option> Choose </saf-listbox-option>
+        <saf-listbox-option> Education </saf-listbox-option>
+        <saf-listbox-option> Product </saf-listbox-option>
+        <saf-listbox-option> Technology </saf-listbox-option>
+      </saf-select>
+      <saf-combobox class="input-field" id="companyRevenue" [(ngModel)]="companyRevenue" (input)="onRenevueInput($event)"
+        formControlName="companyRevenue" ngDefaultControl
+        name="companyRevenue" label="Organization revenue"
+        validation-message="Custom validation message" instructional-text="Select a range.">
+        <saf-listbox-option (click)="onRenevueSelect('Choose')"> Choose </saf-listbox-option>
+        <saf-listbox-option (click)="onRenevueSelect('Less than $50 million')"> Less than $50 million </saf-listbox-option>
+        <saf-listbox-option (click)="onRenevueSelect('$50 million to $1 billion')"> $50 million to $1 billion </saf-listbox-option>
+        <saf-listbox-option (click)="onRenevueSelect('Over $1 billion')"> Over $1 billion </saf-listbox-option>
+      </saf-combobox>
+      <saf-select class="input-field" name="selectedCompanySizeValue" [(ngModel)]="selectedCompanySizeValue "
+        formControlName="selectedCompanySizeValue" ngDefaultControl label="Organization size"
+        validation-message="Custom validation message">
+        <saf-listbox-option> Choose </saf-listbox-option>
+        <saf-listbox-option> 0 to 100 </saf-listbox-option>
+        <saf-listbox-option> 100 to 999 </saf-listbox-option>
+        <saf-listbox-option> Over 1,000 </saf-listbox-option>
+      </saf-select>
+    </div>
+    <saf-checkbox
+      formControlName="isAllowReceiveMailNotification"
+      [(ngModel)]="isAllowReceiveMailNotification"
+      (click)="checkCheckBoxvalue($event)"
+      ngDefaultControl
+      name="isAllowReceiveMailNotification"
+      >
+      Opt-in to emails about related products and services.
+    </saf-checkbox>
+    <div class="button-bar">
+      <saf-form-button type="submit" appearance="primary">Submit</saf-form-button>
+      <saf-form-button type="reset" (click)="clearForm()" appearance="secondary"
+        >Cancel</saf-form-button
+        >
+      </div>
+    </form>
+
+    <!-- Submission details -->
+    @if (showView) {
+      <h2>Form submission details</h2>
+      <table class="form-details-table">
+        <tr>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Email address</th>
+          <th>Country</th>
+          <th>ZIP or postal code</th>
+          <th>Phone number</th>
+        </tr>
+        <tr>
+          <td>{{ this.firstName }}</td>
+          <td>{{ this.lastName }}</td>
+          <td>{{ this.emailAddress }}</td>
+          <td>{{ this.country }}</td>
+          <td>{{ this.zipPostalCode }}</td>
+          <td>{{ this.phoneNumber }}</td>
+        </tr>
+      </table>
+      <table class="form-details-table">
+        <tr>
+          <th>Job title</th>
+          <th>Organization name</th>
+          <th>Organization type</th>
+          <th>Organization revenue</th>
+          <th>Organization size</th>
+          <th>Opt-in to emails</th>
+        </tr>
+        <tr>
+          <td>{{ this.jobTitle }}</td>
+          <td>{{ this.organizationName }}</td>
+          <td>{{ this.organizationType }}</td>
+          <td>{{ this.companyRevenue }}</td>
+          <td>{{ this.selectedCompanySizeValue }}</td>
+          <td>{{ this.isAllowReceiveMailNotification }}</td>
+        </tr>
+      </table>
+    }
+  </section>

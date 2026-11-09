@@ -1,0 +1,12 @@
+.Component-demo {
+  padding-left: 0;
+}
+.skip-link-demo-main, .skip-link-demo-secondary {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.skip-link-demo-main:focus, .skip-link-demo-secondary:focus {
+  outline: none;
+}

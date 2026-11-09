@@ -1,0 +1,28 @@
+.footer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.btn-footer {
+    display: block;
+}
+
+.btn-footer::part(control) {
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+
+@media (width >= 500px) {
+    .footer {
+        display: flex; 
+        flex-flow: row wrap;
+        justify-content: flex-start;
+    }
+
+    .btn-footer::part(control) {
+        display: flex;
+    }
+}

@@ -1,0 +1,59 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="logo-title">Logo</h3>
+    <saf-anchor href="#logo">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-heading">
+    <h3 id="logo-default-background">Default Background</h3>
+    <saf-anchor href="#logo-default-background">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <saf-logo id="1-color-blacks" appearance="1-color-black"></saf-logo>
+    <saf-logo id="full-color" appearance="full-color"></saf-logo>
+    <saf-logo id="1-color-orange" appearance="1-color-orange"></saf-logo>
+  </div>
+  <div class="Component-heading">
+    <h3 id="logo-inverse-background">Inverse Background</h3>
+    <saf-anchor href="#logo-inverse-background">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo inverse-background">
+    <div>
+      <saf-logo appearance="2-color-reversed"></saf-logo>
+      <saf-logo appearance="1-color-reversed"></saf-logo>
+    </div>
+  </div>
+
+  <div class="Component-heading">
+    <h3 id="logo-product-default-background">Product Default Background</h3>
+    <saf-anchor href="#logo-product-default-background">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <div>
+      <saf-logo appearance="full-color" product-name="Product Name"></saf-logo>
+    </div>
+  </div>
+
+  <div class="Component-heading">
+    <h3 id="logo-product-inverse-background">Product Inverse Background</h3>
+    <saf-anchor href="#logo-product-inverse-background">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo inverse-background">
+    <div>
+      <saf-logo
+        appearance="2-color-reversed"
+        product-name="Product Name"
+      ></saf-logo>
+    </div>
+  </div>
+</section>

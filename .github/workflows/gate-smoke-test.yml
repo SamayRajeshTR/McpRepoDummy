@@ -1,0 +1,33 @@
+name: GATE Token Smoke Test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  smoke-test:
+    name: Verify GATE token exchange
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Exchange OIDC token via GATE
+        id: gate
+        uses: ./.github/actions/gate-token
+        with:
+          target-repo: tr/saffron_angular-example
+          permissions: '{"contents":"read"}'
+
+      - name: Verify token received
+        run: |
+          if [ -z "${{ steps.gate.outputs.token }}" ]; then
+            echo "::error::GATE exchange produced an empty token"
+            exit 1
+          fi
+          echo "GATE exchange succeeded — short-lived token received and masked"

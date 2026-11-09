@@ -1,0 +1,20 @@
+<saf-skip-link href="#main-content" positioning="fixed">Skip to main content</saf-skip-link>
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="skip-link-title">Skip Link</h3>
+    <saf-anchor href="#skip-link">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <p>
+      A skip link is a hypertext link placed at the top of a web page, that allows users to
+      bypass repetitive content like menus, headers, or other navigational elements.
+    </p>
+  </div>
+  <div id="main-content" tabIndex="-1" class="Component-demo skip-link-demo-main">
+    <h5>Main Content</h5>
+    <p>This is the main content of the page, accessible via the skip link.</p>
+  </div>
+</section>

@@ -1,0 +1,66 @@
+name: Update Saffron
+
+on:
+  repository_dispatch:
+    types: [update-saffron]
+
+jobs:
+  update-to-latest-alpha:
+    name: "Update Saffron packages"
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Authenticate NPM for Package Install
+      uses: ./.github/actions/npm-login
+      with:
+        user: ${{ secrets.NPM_USER }}
+        token: ${{ secrets.NPM_TOKEN }}
+        email: ${{ secrets.NPM_EMAIL }}
+        npmrc_path: ~/.npmrc
+
+    - name: Use Node.js 20.x
+      with:
+        node-version: 22
+        cache: 'npm'
+      uses: actions/setup-node@v3
+
+    - name: Install Dependencies
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      run: npm install
+
+    - name: Install Latest @saffron/core-components
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      run: npm install @saffron/core-components@alpha --save-exact
+
+    - name: Install Latest @saffron/core-styles
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      run: npm install @saffron/core-styles@alpha --save-exact
+
+    - name: Build
+      run: npm run build
+
+    - name: Import GPG Key
+      id: import-gpg
+      uses: crazy-max/ghaction-import-gpg@v6
+      with:
+        gpg_private_key: ${{ secrets.SAFFRON_BOT_GPG_KEY_B64 }}
+        passphrase: ${{ secrets.SAFFRON_BOT_GPG_PHRASE }}
+        git_user_signingkey: true
+        git_commit_gpgsign: true
+        git_config_global: true
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v6
+      with:
+        commit-message: update Saffron Packages to latest alpha
+        title: Update Saffron Packages
+        body: Update Saffron Packages to latest alpha
+        branch: update-saffron-packages
+        token: ${{ github.token }}
+        committer: ${{ steps.import-gpg.outputs.name }} <${{ steps.import-gpg.outputs.email }}>

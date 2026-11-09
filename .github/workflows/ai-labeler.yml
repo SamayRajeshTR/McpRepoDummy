@@ -1,0 +1,87 @@
+# AI Labeler
+#
+# Labels every PR with "AI Generated" plus a per-agent label (Claude Code / Copilot / Cursor)
+# whenever a commit in the PR carries a matching `Co-authored-by:` trailer. Labels stay in
+# sync on every push: added when a matching trailer appears, removed again if a later push
+# (e.g. a rebase or squash) no longer matches.
+#
+# Coverage note: detection relies solely on `Co-authored-by:` trailers. Tools that don't add
+# one (e.g. inline autocomplete-style edits) won't be labeled — tracked as a follow-up in the
+# rollout ticket, not handled here.
+
+name: AI Labeler 🤖
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write # label create/add/remove operate on the Issues API
+
+env:
+  AI_GENERATED_LABEL: 'AI Generated'
+  # Map of co-author-trailer pattern -> the label to apply for that agent.
+  AGENT_LABELS: |
+    {
+      "claude": "Claude Code",
+      "copilot": "Copilot",
+      "cursor": "Cursor"
+    }
+
+jobs:
+  label:
+    name: Detect AI Commits
+    runs-on: ubuntu-latest
+    steps:
+      # Labels must already exist on the repo before `gh pr edit --add-label` can apply them.
+      # --force makes this idempotent so re-runs don't fail once the label already exists.
+      - name: Ensure labels exist
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create "$AI_GENERATED_LABEL" --color "0E8A16" --force --repo "$GITHUB_REPOSITORY" || true
+          # while-read (not `for x in $(...)`) so multi-word label values like "Claude Code"
+          # aren't word-split into two separate labels.
+          echo "$AGENT_LABELS" | jq -r '.[]' | while IFS= read -r label; do
+            gh label create "$label" --color "5319E7" --force --repo "$GITHUB_REPOSITORY" || true
+          done
+
+      # Scans every commit in the PR for a `Co-authored-by:` trailer matching each known agent,
+      # then adds/removes the corresponding label (plus the aggregate "AI Generated" label) in
+      # one batched `gh pr edit` call.
+      - name: Check commits for AI co-authorship and apply labels
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_NUMBER=${{ github.event.pull_request.number }}
+          COMMITS=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER/commits" \
+            --paginate --jq '.[].commit.message')
+
+          AI_DETECTED=false
+          ADD_ARGS=()
+          REMOVE_ARGS=()
+
+          for pattern in $(echo "$AGENT_LABELS" | jq -r 'keys[]'); do
+            label=$(echo "$AGENT_LABELS" | jq -r --arg p "$pattern" '.[$p]')
+            if echo "$COMMITS" | grep -qiE "co-authored-by:.*$pattern"; then
+              ADD_ARGS+=(--add-label "$label")
+              AI_DETECTED=true
+            else
+              REMOVE_ARGS+=(--remove-label "$label")
+            fi
+          done
+
+          if [ "$AI_DETECTED" = true ]; then
+            ADD_ARGS+=(--add-label "$AI_GENERATED_LABEL")
+          else
+            REMOVE_ARGS+=(--remove-label "$AI_GENERATED_LABEL")
+          fi
+
+          # One call so a transient failure can't leave labels half-applied, and so repeated
+          # runs don't burn extra API calls doing add/remove one label at a time.
+          gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" "${ADD_ARGS[@]}" "${REMOVE_ARGS[@]}" || true

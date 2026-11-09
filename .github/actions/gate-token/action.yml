@@ -1,0 +1,35 @@
+name: 'Get GATE Token'
+description: >
+  Exchange a GitHub Actions OIDC token for a short-lived, scoped GitHub token
+  via the Thomson Reuters GATE service. Thin wrapper around the official
+  tr/prodsec_github_actions/gate action — refer to that action for full docs.
+
+inputs:
+  target-repo:
+    description: 'Target repository the token should be scoped to (org/repo)'
+    required: true
+  permissions:
+    description: 'JSON object of GitHub permissions, e.g. {"issues":"write"}'
+    required: true
+
+outputs:
+  token:
+    description: 'Short-lived scoped GitHub token from GATE (expires automatically)'
+    value: ${{ steps.gate.outputs.token }}
+  expires_at:
+    description: 'Token expiration timestamp (ISO 8601), if returned by GATE'
+    value: ${{ steps.gate.outputs.expires_at }}
+  permissions_granted:
+    description: 'Permissions granted by GATE (JSON string), if returned by GATE'
+    value: ${{ steps.gate.outputs.permissions_granted }}
+
+runs:
+  using: composite
+  steps:
+    - name: Exchange OIDC token via GATE
+      id: gate
+      # Pinned to 618c6581 — tr/prodsec_github_actions (feat: add gate_policy_name input)
+      uses: tr/prodsec_github_actions/gate@618c6581e50798cbcd5180d2ad7e80c8957e53ca
+      with:
+        target_repository: ${{ inputs.target-repo }}
+        requested_permissions: ${{ inputs.permissions }}

@@ -1,0 +1,29 @@
+.Component-container {
+  background-color: var(--saf-color-background-level-0);
+  border: 1px solid var(--saf-color-border-strong);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 24px;
+}
+.Component-container:last-of-type {
+  margin-top: 32px;
+}
+.IconDemo {
+  column-gap: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 36px;
+}
+.IconDemo-container {
+  align-items: center;
+  display: flex;
+  flex: 1 1 20%;
+  flex-direction: column;
+}
+saf-icon {
+  margin-bottom: 8px;
+}
+p {
+  margin: 0;
+}

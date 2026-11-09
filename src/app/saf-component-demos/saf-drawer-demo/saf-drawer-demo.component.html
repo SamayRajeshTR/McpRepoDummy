@@ -1,0 +1,124 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="drawer">Drawer</h3>
+    <saf-anchor href="#drawer">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <!-- Toggle -->
+  <div class="Component-heading">
+    <h4 id="drawer-toggle">Toggle</h4>
+    <saf-anchor href="#drawer-toggle">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <saf-button
+      data-testid="togglebutton"
+      id="toggle-button"
+      appearance="primary"
+      (click)="toggleDrawer('drawerRef')"
+      style="margin-left: 20px; margin-top: 20px"
+      >Toggle drawer</saf-button
+    >
+    <ng-template appBodyPortal>
+      <saf-drawer
+        #drawerRef
+        trigger-id="toggle-button"
+        data-testid="saf-drawer"
+        id="toggle-drawer"
+        modal="true"
+        is-header="true"
+        is-footer="true"
+        [noFocusTrap]="false"
+        drawer-title="Toggle drawer"
+        (close)="hideDrawer()"
+        drawer-subtitle="Subtitle (optional)"
+      >
+        <p>
+          Result of intended action, lorem ipsum dolor sit amet, consectetur
+          adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Lorem ipsum
+        </p>
+        <!-- Nested drawer trigger button -->
+  <saf-button
+    appearance="secondary"
+    id="nested-drawer-trigger"
+    (click)="toggleDrawer('nestedDrawerRef')"
+    style="margin: 16px 0;"
+  >
+    Open nested drawer
+  </saf-button>
+  <!-- Nested drawer -->
+  <saf-drawer
+    #nestedDrawerRef
+    trigger-id="nested-drawer-trigger"
+    modal="true"
+    is-header="true"
+    is-footer="true"
+    drawer-title="Nested drawer"
+    drawer-subtitle="Nested drawer subtitle"
+  >
+    <p>
+      This is a nested drawer. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </p>
+    <div
+      slot="footer"
+      style="display: flex; gap: 12px; justify-content: flex-end; width: 100%;"
+    >
+      <saf-button appearance="secondary">Cancel</saf-button>
+      <saf-button appearance="primary">Confirm</saf-button>
+    </div>
+  </saf-drawer>
+  <div
+    slot="footer"
+    style="display: flex; gap: 12px; justify-content: flex-end; width: 100%;"
+  >
+    <saf-button appearance="secondary">secondary</saf-button>
+    <saf-button appearance="primary">primary</saf-button>
+  </div>
+      </saf-drawer>
+    </ng-template>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="drawer-toggle-bottom-right-drawer">Toggle bottom right drawer</h4>
+    <saf-anchor href="#drawer-toggle-bottom-right-drawer">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <saf-button
+      data-testid="togglebutton"
+      id="toggle-bottom"
+      appearance="primary"
+      (click)="toggleDrawer('bottomDrawerRef')"
+      style="margin-left: 20px; margin-top: 20px"
+      >Toggle drawer</saf-button
+    >
+    <ng-template appBodyPortal>
+      <saf-drawer
+        #bottomDrawerRef
+        trigger-id="toggle-bottom"
+        data-testid="saf-drawer"
+        id="toggle-drawer"
+        [modal]="false"
+        is-header="true"
+        is-footer="true"
+        [noFocusTrap]="false"
+        drawer-title="Toggle drawer"
+        (close)="hideDrawer()"
+        drawer-subtitle="Subtitle (optional)"
+        placement="bottom"
+      >
+        <p>
+          Result of intended action, lorem ipsum dolor sit amet, consectetur
+          adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Lorem ipsum
+        </p>
+      </saf-drawer>
+    </ng-template>
+  </div>
+</section>

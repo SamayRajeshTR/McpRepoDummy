@@ -1,0 +1,41 @@
+Defaults:
+  AccountId: '674700511554'
+  AccountRegion: us-east-1
+  AssetId: "208070"
+  DeployerParameters:
+    AutoApprove: false
+    Cleanup:
+      DenyDeploymentMinutes: 0
+      FailedTrafficShiftMinutes: 2
+      GenericFailureMinutes: 1
+  DeployerType: simple_static_content_deployer
+  EnvironmentType: PRE-PRODUCTION
+  ResourceOwner: Design-System-Engineering@thomsonreuters.com
+  ServiceName: saffron-angular-example-14
+  Validation: false
+  RoleArn: arn:aws:iam::674700511554:role/human-role/a208070-PowerUser2
+nonprod:
+  AccountId: '674700511554'
+  AccountRegion: us-east-1
+  DeployerParameters:
+    AutoApprove: true
+    Cloudfront:
+      SourceDir: dist/saffron-angular-example/
+      InvalidationPath: ['/*']
+      Live:
+        Distribution: E3PMJ4RYWYIK3S
+        Bucket: a208070-staticcontent-saffron-nonprod-use1
+        Key: /angular-14
+
+dev:
+  AccountId: "674700511554"
+  AccountRegion: us-east-1
+  DeployerParameters:
+    AutoApprove: true
+    Cloudfront:
+      SourceDir: dataExtractionForSafCopilot/
+      InvalidationPath: ["/*"]
+      Live:
+        Distribution: E3PMJ4RYWYIK3S
+        Bucket: a208070-staticcontent-saffron-nonprod-use1
+        Key: /saffron-copilot-raw-data/saffron_angular-example

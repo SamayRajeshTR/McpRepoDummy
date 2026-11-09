@@ -1,0 +1,252 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="divider-title">File upload</h3>
+    <saf-anchor href="#file-upload">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <!-- Vertical -->
+  <div class="Component-heading">
+    <h4 id="file-upload-default">Default</h4>
+    <saf-anchor href="#file-upload-default"><app-link-icon></app-link-icon></saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <div class="Component-container">
+      <saf-file-upload>
+        <saf-button>
+           <saf-icon slot="start" icon-name="upload"></saf-icon>
+          Upload
+        </saf-button>
+      </saf-file-upload>
+    </div>
+  </div>
+  <div class="Component-heading">
+    <h4 id="file-upload-in-a-form">In a form</h4>
+    <saf-anchor href="#file-upload-in-a-form"><app-link-icon></app-link-icon></saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <div class="Component-container">
+        <form (submit)="handleSubmit($event)" novalidate class="upload-form">
+	<saf-layout-grid>
+		<!-- Success Alert -->
+		<saf-layout-grid-item *ngIf="isSubmitted" xs="12">
+			<saf-alert appearance="success" alert-type="inline">
+				Form submitted successfully! Your application has been received.
+				<saf-button
+					slot="end"
+					appearance="tertiary"
+					aria-label="Dismiss success message"
+					(click)="isSubmitted = false"
+				>
+					<saf-icon icon-name="close" size="16"></saf-icon>
+				</saf-button>
+			</saf-alert>
+		</saf-layout-grid-item>
+
+		<!-- Form Header -->
+		<saf-layout-grid-item xs="12">
+			<h2>Work for Saffron!</h2>
+			<p>Fill out the form to submit your application. All fields marked with an * are required.</p>
+		</saf-layout-grid-item>
+
+		<!-- Error Summary -->
+		<saf-layout-grid-item *ngIf="formErrors.length > 1" xs="12">
+			<div
+				#errorSummaryRef
+				id="error-summary"
+				tabIndex="-1"
+				role="alert"
+				aria-live="assertive"
+				class="error-summary"
+			>
+				<h3 class="error-summary__heading">
+					There are {{ formErrors.length }} errors in this form
+				</h3>
+				<ul class="error-summary__list">
+					<li *ngFor="let error of formErrors" class="error-summary__list-item">
+						<a
+							href="#{{ error.fieldId }}"
+							(click)="focusField(error.fieldId, $event)"
+							class="error-summary__link"
+						>
+							{{ error.fieldLabel }}: {{ error.message }}
+						</a>
+					</li>
+				</ul>
+			</div>
+		</saf-layout-grid-item>
+
+		<!-- First Name Field -->
+		<saf-layout-grid-item xs="12" sm="6">
+			<saf-text-field
+				#firstNameField
+				id="firstName"
+				required
+				label="First Name"
+				name="firstName"
+				type="text"
+				inputMode="text"
+				[attr.invalid]="firstNameInvalid ? true : null"
+				[attr.validation-message]="firstNameValidationMessage"
+				instructional-text="Enter your first name"
+			></saf-text-field>
+		</saf-layout-grid-item>
+
+		<!-- Last Name Field -->
+		<saf-layout-grid-item xs="12" sm="6">
+			<saf-text-field
+				#lastNameField
+				id="lastName"
+				required
+				label="Last Name"
+				name="lastName"
+				type="text"
+				inputMode="text"
+				[attr.invalid]="lastNameInvalid ? true : null"
+				[attr.validation-message]="lastNameValidationMessage"
+				instructional-text="Enter your last name"
+			></saf-text-field>
+		</saf-layout-grid-item>
+
+		<!-- File Upload Section -->
+		<saf-layout-grid-item xs="12">
+			<div
+				role="group"
+				[attr.aria-labelledby]="'upload-heading' + (fileUploadInvalid ? ' file-upload-error' : '')"
+			>
+				<h3 id="upload-heading" class="upload-heading">
+					<saf-text appearance="body-strong-md">
+						Upload Your Resume and Cover Letter<span aria-hidden="true">*</span>
+					</saf-text>
+					<saf-sr-only>(Required)</saf-sr-only>
+				</h3>
+				<saf-text appearance="body-sm">
+					Accepted file types: .pdf, .doc, .docx. Maximum file size: 5MB.
+				</saf-text>
+
+				<!-- File Errors Alert -->
+				<saf-alert
+					*ngIf="fileErrors.length > 0"
+					#uploadAlert
+					(close)="handleAlertClose()"
+					[class.multi-error]="getTotalRejectedFiles() > 1"
+					tabIndex="0"
+					appearance="error"
+					alert-type="inline"
+					class="file-errors-alert"
+				>
+					<ng-container *ngIf="getTotalRejectedFiles() === 1">
+						{{ generateErrorMessage(fileErrors) }}
+					</ng-container>
+					<ng-container *ngIf="getTotalRejectedFiles() > 1">
+						<h3 class="file-errors-alert__heading">
+							{{ getTotalRejectedFiles() }} upload errors
+						</h3>
+						<ul class="file-errors-alert__list">
+							<li *ngFor="let message of getErrorMessages()" class="file-errors-alert__list-item">
+								{{ message }}
+							</li>
+						</ul>
+					</ng-container>
+					<saf-button
+						slot="end"
+						appearance="tertiary"
+						aria-label="Dismiss error message"
+					>
+						<saf-icon icon-name="close" size="16"></saf-icon>
+					</saf-button>
+				</saf-alert>
+
+				<!-- File Upload Validation Error -->
+				<div
+					*ngIf="fileUploadInvalid"
+					id="file-upload-error"
+					role="alert"
+					class="file-upload-validation-error"
+				>
+					<saf-icon
+						icon-name="hexagon-exclamation"
+						appearance="filled"
+						size="16"
+						[attr.presentation]="false"
+						aria-label="Error"
+					></saf-icon>
+					{{ fileUploadValidationMessage }}
+				</div>
+
+				<!-- File Upload Component -->
+				<saf-file-upload
+					#fileUploadElement
+					id="fileUpload"
+					required
+					multiple
+					accept="image/*,.pdf,.doc,.docx"
+					max-file-size="1000000"
+					max-files="6"
+					[attr.current-files-count]="selectedFiles.length"
+					(click)="handleUploadClick()"
+				>
+					<saf-button
+						#uploadButton
+            class="upload-button"
+						a11y-aria-description="Accepted file types: .pdf, .doc, .docx. Maximum file size: 5MB."
+						id="uploadButton"
+						appearance="secondary"
+					>
+						<saf-icon slot="start" icon-name="upload"></saf-icon>
+						Upload Files
+					</saf-button>
+				</saf-file-upload>
+
+				<!-- Progress Panel -->
+				<saf-file-upload-progress-panel
+					*ngIf="selectedFiles.length > 0"
+					#progressPanel
+					trigger-id="uploadButton"
+					max-visible-items="3"
+					heading="Upload"
+					heading-level="4"
+					[attr.subheading]="getSubheading()"
+					class="progress-panel"
+				>
+					<saf-button
+						slot="clear-action"
+						appearance="secondary"
+						(click)="clearAll()"
+					>
+						Clear All
+					</saf-button>
+					<saf-file-upload-status-item
+						*ngFor="let file of selectedFiles"
+						[attr.filename]="file.filename"
+						[attr.status]="file.status"
+						[attr.progress]="file.progress"
+						[attr.error-message]="file.errorMessage"
+						(remove)="handleOnRemove($any($event))"
+					></saf-file-upload-status-item>
+				</saf-file-upload-progress-panel>
+
+				<hr class="section-divider" />
+			</div>
+		</saf-layout-grid-item>
+
+		<!-- Submit Button -->
+		<saf-layout-grid-item xs="fit">
+			<saf-form-button type="submit" appearance="primary">
+				Submit
+			</saf-form-button>
+		</saf-layout-grid-item>
+
+		<!-- Reset Button -->
+		<saf-layout-grid-item xs="fit">
+			<saf-button #resetButton appearance="secondary" (click)="handleReset()">
+				Reset
+			</saf-button>
+		</saf-layout-grid-item>
+	</saf-layout-grid>
+</form>
+      </div>
+    </div>
+</section>

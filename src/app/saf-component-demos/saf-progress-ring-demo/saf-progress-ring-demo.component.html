@@ -1,0 +1,68 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="progress-ring-title">Progress ring</h3>
+    <saf-anchor href="#progress-ring">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <div>
+      <div class="Component-container">
+        <saf-progress-ring
+          class="progressRing-default"
+          role="progressbar"
+          max="100"
+          min="1"
+          value="80"
+          progress-size="large"
+          label="Loading..."
+        ></saf-progress-ring>
+        <saf-progress-ring
+          class="progressRing-intermediate"
+          role="progressbar"
+          max="10"
+          min="1"
+          intermediate="true"
+          progress-size="large"
+          label="Loading..."
+        ></saf-progress-ring>
+        <saf-progress-ring
+          class="progressRing-paused"
+          paused
+          label="Paused"
+          max="100"
+          min="1"
+          progress-size="large"
+          value="60"
+        ></saf-progress-ring>
+      </div>
+      <div class="Component-container loading">
+        <saf-progress-ring
+          role="progressbar"
+          id="progressRing-large"
+          max="10"
+          min="1"
+          progress-size="large"
+          label="Loading..."
+        ></saf-progress-ring>
+        <saf-progress-ring
+          role="progressbar"
+          class="progressRing-medium"
+          max="10"
+          min="1"
+          progress-size="medium"
+          label="Loading..."
+        ></saf-progress-ring>
+        <saf-progress-ring
+          role="progressbar"
+          class="progressRing-small"
+          max="10"
+          min="1"
+          progress-size="small"
+          label="Loading..."
+        ></saf-progress-ring>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,88 @@
+name: Multi Deployment GitHub Pages PR
+
+on:
+  pull_request:
+    types: [labeled]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    if: github.event.label.name == 'GitHub Pages Deployment'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Import GPG Key
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.MOHAMED_ABED_GPG_SIGNING_KEY }}
+          passphrase: ${{ secrets.MOHAMED_ABED_GPG_SIGNING_PHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+          git_config_global: true
+
+      - name: List GPG Key
+        run: gpg -K
+
+      - name: Extract Branch Name
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
+
+      - name: Get Current Date In ISO8601
+        id: date
+        run: echo "date=$(date -u +'%Y-%m-%dT%H-%M-%SZ')" >> $GITHUB_OUTPUT
+
+      - name: Add new link to index.html
+        run: |
+          DEPLOYMENT_NAME="${{ steps.extract_branch.outputs.branch }}-${{ steps.date.outputs.date }}"
+          FILE_PATH="multiDeployment/index.html"
+
+          # Create the new <a> tag
+          NEW_LINK="<br/> <a href=\"/${DEPLOYMENT_NAME}/index.html\">Go to ${DEPLOYMENT_NAME}</a>"
+
+          # Debug: Print the file content before modification
+          echo "Content of ${FILE_PATH} before modification:"
+          cat $FILE_PATH
+
+          # Insert the new <a> tag before the closing </body> tag
+          sed -i "/<\/body>/i ${NEW_LINK}" $FILE_PATH
+
+          # Debug: Print the file content after modification
+          echo "Content of ${FILE_PATH} after modification:"
+          cat $FILE_PATH
+
+          echo "Added new link to ${FILE_PATH}: ${NEW_LINK}"
+        shell: bash
+
+      - name: Create Pull Request
+        id: create_pr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          committer: Mohamed Abed <mohamed.abed@thomsonreuters.com>
+          commit-message: "Add new link for deployment: ${{ steps.extract_branch.outputs.branch }}-${{ steps.date.outputs.date }}"
+          branch: ${{ steps.extract_branch.outputs.branch }}-${{ steps.date.outputs.date }}
+          title: "Add new link for deployment: ${{ steps.extract_branch.outputs.branch }}-${{ steps.date.outputs.date }}"
+          body: "${{ github.event.pull_request.number }}"
+          labels: "Automated GitHub Pages Deployment PR"
+          delete-branch: true
+          base: "main"
+
+      - name: Add comment to original PR
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const repoUrl = 'https://github.com/tr/saffron_angular-example'; // Replace with your repository URL
+            const prNumber = ${{ steps.create_pr.outputs.pull-request-number }};
+            const originalPRNumber = ${{ github.event.pull_request.number }};
+            const comment = `This deployment process consists of two steps. First, adding the tag, you've done that successfully. Then, to complete the process, approve and merge the PR created for this deployment. [PR #${prNumber}](${repoUrl}/pull/${prNumber})`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: originalPRNumber,
+              body: comment
+            });

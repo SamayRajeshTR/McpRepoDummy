@@ -1,0 +1,59 @@
+<section class="Component menu-component">
+  <app-in-page-navigation [links]="inPageLinks" />
+    <span class="Component-heading">
+      <h3 id="listbox">Listbox</h3>
+      <saf-anchor href="#listbox">
+        <app-link-icon></app-link-icon>
+      </saf-anchor>
+    </span>
+
+    <!-- Default -->
+    <span class="Component-heading">
+      <h4 id="listbox-default-listbox">Default listbox</h4>
+      <saf-anchor href="#listbox-default-listbox">
+        <app-link-icon></app-link-icon>
+      </saf-anchor>
+    </span>
+    <div class="Component-demo Component-demo--centered">
+      <saf-listbox aria-labelledby="listbox-default-listbox">
+        <saf-option>Listbox option 1</saf-option>
+        <saf-option>Listbox option 2</saf-option>
+        <saf-option>Listbox option 3</saf-option>
+        <saf-option>Listbox option 4</saf-option>
+      </saf-listbox>
+    </div>
+
+    <!-- Compact -->
+    <span class="Component-heading">
+      <h4 id="listbox-compact-listbox">Compact listbox</h4>
+      <saf-anchor href="#listbox-compact-listbox">
+        <app-link-icon></app-link-icon>
+      </saf-anchor>
+    </span>
+    <div class="Component-demo Component-demo--centered">
+      <saf-listbox density="compact" aria-labelledby="listbox-compact-listbox">
+        <saf-option>Listbox option 1</saf-option>
+        <saf-option>Listbox option 2</saf-option>
+        <saf-option>Listbox option 3</saf-option>
+        <saf-option>Listbox option 4</saf-option>
+      </saf-listbox>
+    </div>
+
+    <!-- Listbox in multiple selection mode -->
+    <span class="Component-heading">
+      <h4 id="listbox-listbox-with-multiple-selection">
+        Listbox with multiple selection
+      </h4>
+      <saf-anchor href="#listbox-listbox-with-multiple-selection">
+        <app-link-icon></app-link-icon>
+      </saf-anchor>
+    </span>
+    <div class="Component-demo Component-demo--centered">
+      <saf-listbox multiple aria-labelledby="listbox-listbox-with-multiple-selection">
+        <saf-option>Listbox option 1</saf-option>
+        <saf-option>Listbox option 2</saf-option>
+        <saf-option>Listbox option 3</saf-option>
+        <saf-option>Listbox option 4</saf-option>
+      </saf-listbox>
+    </div>
+  </section>

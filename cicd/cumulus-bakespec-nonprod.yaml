@@ -1,0 +1,30 @@
+version: 0.2
+env:
+  secrets-manager:
+    NPM_TOKEN: a208070-saffron-jfrog-access-token-use1
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 22
+    commands:
+      - n 22
+
+  pre_build:
+    commands:
+      - echo -n "" > .npmrc
+      - echo "registry=https://tr1.jfrog.io/tr1/api/npm/npm/" >> .npmrc
+      - echo "//tr1.jfrog.io/tr1/api/npm/npm/:_authToken = ${NPM_TOKEN}" >> .npmrc
+      - echo "always-auth = true" >> .npmrc
+  build:
+    commands:
+      - npm install
+      - pwd && npm run build:productionWithoutWatch
+      - npm run copilot:extract-data
+      - ls -la && cp ./cicd/cumulus-deployspec-nonprod.yaml .
+
+artifacts:
+  files:
+    - "./dataExtractionForSafCopilot/**/*" #This is the static content of copliot raw data
+    - "./dist/saffron-angular-example/**/*"
+    - "./cicd/cumulus-deployspec-nonprod.yaml"

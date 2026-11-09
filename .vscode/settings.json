@@ -1,0 +1,9 @@
+{
+  "html.customData": [
+    "./node_modules/@saffron/core-components/dist/vscode.html-custom-data.json"
+  ],
+  "css.customData": [
+    "./node_modules/@saffron/core-components/dist/vscode.css-custom-data.json"
+  ],
+  "snyk.advanced.autoSelectOrganization": true
+}

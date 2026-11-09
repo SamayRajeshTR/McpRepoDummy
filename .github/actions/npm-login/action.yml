@@ -1,0 +1,40 @@
+name: TR Artifactory NPM Authenticator
+description: Authenticates into TR Artifactory NPM using credentials provided in the inputs
+
+inputs:
+  user:
+    required: true
+    description: 'TR Artifactory user name'
+  token:
+    required: true
+    description: 'TR Artifactory access token'
+  email:
+    required: true
+    description: 'TR Artifactory email'
+  npmrc_path:
+    required: true
+    description: 'Path of the .npmrc file'
+
+runs:
+  using: composite
+  steps:
+    - run: |
+        echo "::add-mask::${{ inputs.token }}";
+        echo "::add-mask::${{ inputs.user }}";
+        npmToken=$(curl -s -u${{ inputs.user }}:${{ inputs.token }} https://tr1.jfrog.io/artifactory/api/npm/auth | head -n 1 | sed 's?_auth = \(.*\)?\1?');
+        echo "//tr1.jfrog.io/tr1/api/npm/npm/:_auth=$npmToken" >> ${{ inputs.npmrc_path }};
+        echo "//tr1.jfrog.io/tr1/api/npm/npm/:email=${{ inputs.email }}" >> ${{ inputs.npmrc_path }};
+        echo "//tr1.jfrog.io/tr1/api/npm/npm/:always-auth=true" >> ${{ inputs.npmrc_path }};
+        echo "//tr1.jfrog.io/tr1/api/npm/npm-local/:_auth=$npmToken" >> ${{ inputs.npmrc_path }};
+        echo "//tr1.jfrog.io/tr1/api/npm/npm-local/:email=${{ inputs.email }}" >> ${{ inputs.npmrc_path }};
+        echo "//tr1.jfrog.io/tr1/api/npm/npm-local/:always-auth=true" >> ${{ inputs.npmrc_path }};
+        echo "//tr1.jfrog.io/artifactory/api/npm/npm/:_auth=$npmToken" >> ${{ inputs.npmrc_path }};
+        echo "//tr1.jfrog.io/artifactory/api/npm/npm/:email=${{ inputs.email }}" >> ${{ inputs.npmrc_path }};
+        echo "//tr1.jfrog.io/artifactory/api/npm/npm/:always-auth=true" >> ${{ inputs.npmrc_path }};
+        echo "//tr1.jfrog.io/artifactory/api/npm/npm-local/:_auth=$npmToken" >> ${{ inputs.npmrc_path }};
+        echo "//tr1.jfrog.io/artifactory/api/npm/npm-local/:email=${{ inputs.email }}" >> ${{ inputs.npmrc_path }};
+        echo "//tr1.jfrog.io/artifactory/api/npm/npm-local/:always-auth=true" >> ${{ inputs.npmrc_path }};
+
+        echo "NPM Version: $(npm -v)";
+
+      shell: bash

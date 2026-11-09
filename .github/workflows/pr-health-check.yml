@@ -1,0 +1,56 @@
+name: PR Health Check
+
+concurrency:
+  group: pr-health-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+
+permissions:
+  contents: read
+
+jobs:
+  health-check:
+    name: health-check
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Authenticate NPM for Package Install
+        uses: ./.github/actions/npm-login
+        with:
+          user: ${{ secrets.NPM_USER }}
+          token: ${{ secrets.NPM_TOKEN }}
+          email: ${{ secrets.NPM_EMAIL }}
+          npmrc_path: ~/.npmrc
+
+      - name: Install dependencies
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test -- --watch=false --browsers=ChromeHeadless
+
+      - name: Build
+        run: npm run build

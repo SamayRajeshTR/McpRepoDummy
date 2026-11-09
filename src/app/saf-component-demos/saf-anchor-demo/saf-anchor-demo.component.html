@@ -1,0 +1,186 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <!-- Anchor -->
+  <div class="Component-heading">
+    <h3 id="anchor-title">Anchor</h3>
+    <saf-anchor href="#anchor">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <saf-anchor href="https://www.thomsonreuters.com/en.html" target="_blank"
+      >Open in new tab</saf-anchor
+    >
+    <saf-anchor href="https://www.thomsonreuters.com/en.html" target="_parent"
+      >Open in same tab</saf-anchor
+    >
+    <saf-anchor (click)="handleOnClickForAnchor()"
+      >Anchor without href</saf-anchor
+    >
+  </div>
+
+  <!-- Anchor inline -->
+  <div class="Component-heading">
+    <h4 id="anchor-inline">Anchor inline</h4>
+    <saf-anchor href="#anchor-inline">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <ol>
+      <li>
+        <h5>
+          An anchor is a
+          <saf-anchor href="https://www.thomsonreuters.com/en.html"
+            >hypertext link</saf-anchor
+          >
+          that provides an interactive reference to a resource.
+        </h5>
+      </li>
+      <li class="u-weightSemiBold">
+        An anchor is a
+        <saf-anchor href="https://www.thomsonreuters.com/en.html"
+          >hypertext link</saf-anchor
+        >
+        that provides an interactive reference to a resource.
+      </li>
+      <li>
+        <saf-anchor href="https://www.thomsonreuters.com/en.html"
+          >An anchor</saf-anchor
+        >
+        is a
+        <saf-anchor href="https://www.thomsonreuters.com/en.html">
+          hypertext link
+        </saf-anchor>
+        that provides an interactive reference to a resource.
+      </li>
+      <li>
+        An inline
+        <saf-anchor
+          href="https://legal.thomsonreuters.com/en/support/billing-returns-refunds/findlaw-and-super-lawyer-products-billing"
+        >
+          anchor
+        </saf-anchor>
+        with a body of plain text on a page. For example, Log in to the
+        <saf-anchor
+          href="https://legal.thomsonreuters.com/en/support/billing-returns-refunds/findlaw-and-super-lawyer-products-billing"
+        >
+          self-service portal
+        </saf-anchor>
+        and follow the prompts on the Billing page. A standalone anchor after a
+        body of plain text within a card to explore more information. For
+        example,
+        <saf-anchor
+          href="https://legal.thomsonreuters.com/en/support/billing-returns-refunds/findlaw-and-super-lawyer-products-billing"
+        >
+          See details
+        </saf-anchor>
+      </li>
+    </ol>
+  </div>
+  <!-- Anchor CTA -->
+  <div class="Component-heading">
+    <h4 id="anchor-cta">Anchor CTA</h4>
+    <saf-anchor href="#anchor-cta">
+      <app-link-icon></app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+      <div>
+        <h5>Primary</h5>
+        <div style="display: flex; gap: 16px; align-items: center;">
+          <saf-anchor appearance="cta-primary" href="https://www.thomsonreuters.com/en.html">
+            Standard
+          </saf-anchor>
+          <saf-anchor
+            appearance="cta-primary"
+            density="compact"
+            href="https://www.thomsonreuters.com/en.html"
+          >
+            Compact
+          </saf-anchor>
+          <saf-anchor
+            appearance="cta-primary"
+            density="extra-compact"
+            href="https://www.thomsonreuters.com/en.html"
+          >
+            Extra Compact
+          </saf-anchor>
+        </div>
+      </div>
+
+      <div>
+        <h5>Secondary</h5>
+        <div style="display: flex; gap: 16px; align-items: center;">
+          <saf-anchor appearance="cta-secondary" href="https://www.thomsonreuters.com/en.html">
+            Standard
+          </saf-anchor>
+          <saf-anchor
+            appearance="cta-secondary"
+            density="compact"
+            href="https://www.thomsonreuters.com/en.html"
+          >
+            Compact
+          </saf-anchor>
+          <saf-anchor
+            appearance="cta-secondary"
+            density="extra-compact"
+            href="https://www.thomsonreuters.com/en.html"
+          >
+            Extra Compact
+          </saf-anchor>
+        </div>
+      </div>
+
+      <div>
+        <h5>Tertiary</h5>
+        <div style="display: flex; gap: 16px; align-items: center;">
+          <saf-anchor appearance="cta-tertiary" href="https://www.thomsonreuters.com/en.html">
+            Standard
+          </saf-anchor>
+          <saf-anchor
+            appearance="cta-tertiary"
+            density="compact"
+            href="https://www.thomsonreuters.com/en.html"
+          >
+            Compact
+          </saf-anchor>
+          <saf-anchor
+            appearance="cta-tertiary"
+            density="extra-compact"
+            href="https://www.thomsonreuters.com/en.html"
+          >
+            Extra Compact
+          </saf-anchor>
+        </div>
+      </div>
+
+      <div>
+        <h5>With Icons</h5>
+        <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+          <saf-anchor appearance="cta-primary" href="https://www.thomsonreuters.com/en.html">
+            <saf-icon slot="start" icon-name="search"></saf-icon>
+            Primary with Start Icon
+          </saf-anchor>
+          <saf-anchor
+            appearance="cta-secondary"
+            density="compact"
+            href="https://www.thomsonreuters.com/en.html"
+          >
+            Secondary with End Icon
+            <saf-icon slot="end" icon-name="arrow-right"></saf-icon>
+          </saf-anchor>
+          <saf-anchor
+            appearance="cta-tertiary"
+            density="extra-compact"
+            href="https://www.thomsonreuters.com/en.html"
+          >
+            <saf-icon slot="start" icon-name="search"></saf-icon>
+            Tertiary with Icon
+          </saf-anchor>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

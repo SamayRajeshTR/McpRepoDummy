@@ -1,0 +1,38 @@
+---
+Pipeline:
+  AssetId: '208070'
+  ResourceOwner: Design-System-Engineering@thomsonreuters.com
+  EnvironmentType: PRE-PRODUCTION
+  ServiceName: saffron-angular-example-14
+  GroupName: saffron
+  ArtifactBucket: a208070-saffron-example-angular-14-cumulus-bucket
+  Notifications:
+    SnsArn: arn:aws:sns:us-east-1:606349626084:a208070-saffron-bluegreen-resource-cleanup-topic
+    NotifyOn:
+      PipelineSuccess: true
+      PipelineFailure: true
+      DeploySuccess: true
+      DeployFailure: true
+
+Components:
+  Source:
+    Type: GitHub
+    Repo: saffron_angular-example
+    Connection: a206264-github
+    Branch: main
+    Owner: tr
+    FullClone: false
+  Bake:
+    Type: BasicCodeBuild
+    BuildSpecLocation: ./cicd/cumulus-bakespec-nonprod.yaml
+    EnvironmentVariables:
+      ENV: 'nonprod'
+      REGION: 'us-east-1'
+      GITHUB_COMMIT_ID:
+        Value: '#{SourceVariables.CommitId}'
+        Type: PLAINTEXT
+  Deploy:
+    - Environment: nonprod
+      DeployspecLocation: cicd/cumulus-deployspec-nonprod.yaml
+    - Environment: dev
+      DeployspecLocation: cicd/cumulus-deployspec-nonprod.yaml

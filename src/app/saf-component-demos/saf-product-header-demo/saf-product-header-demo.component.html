@@ -1,0 +1,208 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <!-- Product Header -->
+  <div class="Component-heading">
+    <h3 id="product-header">Product Header</h3>
+    <saf-anchor href="#product-header">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <saf-product-header tasks-aria-label="Product" global-aria-label="Global">
+      <saf-logo
+        slot="logo"
+        appearance="1-color-reversed"
+        product-name="Product name"
+      ></saf-logo>
+      <div slot="tasks">
+        <saf-product-header-item>
+          <saf-button appearance="tertiary" icon-only="">
+            <saf-icon icon-name="magnifying-glass"></saf-icon>
+            <saf-sr-only> Search </saf-sr-only>
+          </saf-button>
+        </saf-product-header-item>
+        <saf-product-header-item>
+          <saf-button appearance="tertiary" icon-only="">
+            <saf-icon icon-name="star"></saf-icon>
+            <saf-sr-only> Favorites </saf-sr-only>
+          </saf-button>
+        </saf-product-header-item>
+      </div>
+      <div slot="global">
+        <saf-product-header-item>
+          <saf-button appearance="tertiary" icon-only="">
+            <saf-icon icon-name="circle-question"></saf-icon>
+            <saf-sr-only> Help </saf-sr-only>
+          </saf-button>
+        </saf-product-header-item>
+        <saf-product-header-item>
+          <saf-button appearance="tertiary" icon-only="">
+            <saf-icon icon-name="bell"></saf-icon>
+            <saf-sr-only> Notifications </saf-sr-only>
+          </saf-button>
+        </saf-product-header-item>
+        <saf-product-header-item>
+          <saf-button appearance="tertiary" icon-only="">
+            <saf-icon icon-name="grid"></saf-icon>
+            <saf-sr-only> Applications </saf-sr-only>
+          </saf-button>
+        </saf-product-header-item>
+        <saf-product-header-item>
+          <saf-button appearance="tertiary" icon-only="">
+            <saf-icon icon-name="circle-user"></saf-icon>
+            <saf-sr-only> User profile </saf-sr-only>
+          </saf-button>
+        </saf-product-header-item>
+      </div>
+    </saf-product-header>
+  </div>
+
+  <!-- Header With Avatar -->
+  <div class="Component-heading">
+    <h4 id="product-header-with-avatar">Header With Avatar</h4>
+    <saf-anchor href="#product-header-with-avatar">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <saf-product-header tasks-aria-label="Product" global-aria-label="Global">
+      <saf-logo
+        slot="logo"
+        appearance="1-color-reversed"
+        product-name="Product Name"
+      ></saf-logo>
+      <div slot="tasks">
+        <saf-product-header-item>
+          <saf-button id="tertiary" appearance="tertiary" icon-only="">
+            <saf-icon icon-name="magnifying-glass"></saf-icon>
+            <saf-sr-only> Search </saf-sr-only>
+          </saf-button>
+        </saf-product-header-item>
+        <saf-product-header-item>
+          <saf-button appearance="tertiary" icon-only="">
+            <saf-icon icon-name="star"></saf-icon>
+            <saf-sr-only> Favorites </saf-sr-only>
+          </saf-button>
+        </saf-product-header-item>
+      </div>
+      <div slot="global">
+        <saf-product-header-item>
+          <saf-button appearance="tertiary" icon-only="">
+            <saf-icon icon-name="circle-question"></saf-icon>
+            <saf-sr-only> Help </saf-sr-only>
+          </saf-button>
+        </saf-product-header-item>
+        <saf-product-header-item>
+          <saf-button appearance="tertiary" icon-only="">
+            <saf-icon icon-name="bell"></saf-icon>
+            <saf-sr-only> Notifications </saf-sr-only>
+          </saf-button>
+        </saf-product-header-item>
+        <saf-product-header-item>
+          <saf-button appearance="tertiary" icon-only="">
+            <saf-icon icon-name="grid"></saf-icon>
+            <saf-sr-only> Applications </saf-sr-only>
+          </saf-button>
+        </saf-product-header-item>
+        <saf-product-header-item>
+          <saf-button appearance="tertiary" icon-only="">
+            <saf-avatar
+              type="image"
+              size="small"
+              img-src="https://avatars.githubusercontent.com/u/23642967?v=4"
+              label="user profile image"
+            ></saf-avatar>
+            <saf-sr-only> User profile </saf-sr-only>
+          </saf-button>
+        </saf-product-header-item>
+      </div>
+    </saf-product-header>
+  </div>
+
+  <!-- Header Without Settings -->
+  <div class="Component-heading">
+    <h4 id="product-header-without-settings">Header Without Settings</h4>
+    <saf-anchor href="#product-header-without-settings">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <saf-product-header tasks-aria-label="Product" global-aria-label="Global">
+      <saf-logo
+        slot="logo"
+        appearance="1-color-reversed"
+        product-name="Product Name"
+      ></saf-logo>
+      <div slot="tasks">
+        <saf-product-header-item>
+          <saf-button appearance="tertiary" icon-only="">
+            <saf-icon icon-name="magnifying-glass"></saf-icon>
+            <saf-sr-only> Search </saf-sr-only>
+          </saf-button>
+        </saf-product-header-item>
+        <saf-product-header-item>
+          <saf-button appearance="tertiary" icon-only="">
+            <saf-icon icon-name="star"></saf-icon>
+            <saf-sr-only> Favorites </saf-sr-only>
+          </saf-button>
+        </saf-product-header-item>
+      </div>
+    </saf-product-header>
+  </div>
+
+  <!-- Header With Badge -->
+  <div class="Component-heading">
+    <h4 id="product-header-with-avatar">Header With Badge</h4>
+    <saf-anchor href="#product-header-with-avatar">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <saf-product-header tasks-aria-label="Product" global-aria-label="Global">
+      <saf-logo
+        slot="logo"
+        appearance="1-color-reversed"
+        product-name="Product Name"
+      ></saf-logo>
+      <div slot="tasks">
+        <saf-product-header-item>
+          <saf-badge id="info-light" status="info" emphasis="subtle">
+            <span>ID #12345</span>
+          </saf-badge>
+        </saf-product-header-item>
+        <saf-product-header-item>
+          <saf-button id="tertiary" appearance="tertiary" icon-only="">
+            <saf-icon icon-name="magnifying-glass"></saf-icon>
+            <saf-sr-only> Search </saf-sr-only>
+          </saf-button>
+        </saf-product-header-item>
+        <saf-product-header-item>
+          <saf-button appearance="tertiary" icon-only="">
+            <saf-icon icon-name="star"></saf-icon>
+            <saf-sr-only> Favorites </saf-sr-only>
+          </saf-button>
+        </saf-product-header-item>
+      </div>
+      <div slot="global">
+        <saf-product-header-item>
+          <saf-button appearance="tertiary" icon-only="">
+            <saf-icon icon-name="circle-question"></saf-icon>
+            <saf-sr-only> Help </saf-sr-only>
+          </saf-button>
+        </saf-product-header-item>
+        <saf-product-header-item>
+          <saf-button appearance="tertiary" icon-only="">
+            <saf-icon icon-name="bell"></saf-icon>
+            <saf-sr-only> Notifications </saf-sr-only>
+          </saf-button>
+        </saf-product-header-item>
+        <saf-product-header-item>
+          <saf-button appearance="tertiary" icon-only="">
+            <saf-icon icon-name="grid"></saf-icon>
+            <saf-sr-only> Applications </saf-sr-only>
+          </saf-button>
+        </saf-product-header-item>
+      </div>
+    </saf-product-header>
+  </div>
+</section>

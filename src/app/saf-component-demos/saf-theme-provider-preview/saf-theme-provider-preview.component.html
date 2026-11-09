@@ -1,0 +1,30 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+
+  <div class="Component-heading">
+    <h3 id="theme-provider">Theme Provider</h3>
+    <saf-anchor href="#theme-provider">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="theme-provider-preview">Isolated preview</h4>
+    <saf-anchor href="#theme-provider-preview">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <div class="ThemeProviderPreview">
+    <p class="ThemeProviderPreview-copy">
+      This preview runs in an isolated iframe so changing the theme inside the
+      preview does not affect the rest of the application.
+    </p>
+
+    <iframe
+      class="ThemeProviderPreview-frame"
+      title="Isolated theme provider preview"
+      src="/#/theme-provider-preview"
+    ></iframe>
+  </div>
+</section>

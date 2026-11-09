@@ -1,0 +1,27 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="comment-field">Comment field</h3>
+    <saf-anchor href="#comment-field">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <div class="Component-demo Component-demo--centered">
+    <saf-comment-field>
+      <div slot="start">
+        <saf-avatar
+          type="image"
+          size="medium"
+          img-src="https://avatars.githubusercontent.com/u/23642967?v=4"
+          label="user profile image"
+        ></saf-avatar>
+      </div>
+      <saf-text-area label="Post a reply"></saf-text-area>
+      <div slot="end" style="display: flex; gap: 8px">
+        <saf-button appearance="secondary">Cancel</saf-button>
+        <saf-button appearance="primary">Submit</saf-button>
+      </div>
+    </saf-comment-field>
+  </div>
+</section>

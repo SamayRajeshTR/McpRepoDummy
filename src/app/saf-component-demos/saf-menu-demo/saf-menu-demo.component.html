@@ -1,0 +1,226 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <!-- Menu -->
+  <div class="Component-heading">
+    <h3 id="menu-title">Menu</h3>
+    <saf-anchor href="#menu">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <saf-menu (change)="handleMenuItemChange('menu', 'No')">
+      <saf-menu-item role="menuitem"> Menu item 1 </saf-menu-item>
+      <saf-menu-item role="menuitem"> Menu item 2 </saf-menu-item>
+      <saf-menu-item role="menuitem"> Menu item 3 </saf-menu-item>
+    </saf-menu>
+  </div>
+
+  <!-- With checkbox items -->
+  <div class="Component-heading">
+    <h4 id="menu-with-checkbox-items">With checkbox items</h4>
+    <saf-anchor href="#menu-with-checkbox-items">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <saf-menu>
+      <saf-menu-item
+        role="menuitemcheckbox"
+        (change)="handleMenuItemChange('checkbox - menu item 1', 'No')"
+      >
+        Menu item 1
+      </saf-menu-item>
+      <saf-menu-item
+        role="menuitemcheckbox"
+        (change)="handleMenuItemChange('checkbox - menu item 2', 'No')"
+      >
+        Menu item 2
+      </saf-menu-item>
+      <saf-menu-item
+        role="menuitemcheckbox"
+        (change)="handleMenuItemChange('checkbox - menu item 3', 'No')"
+      >
+        Menu item 3
+      </saf-menu-item>
+    </saf-menu>
+  </div>
+
+  <!-- With aria-current -->
+  <div class="Component-heading">
+    <h4 id="menu-with-aria-current">With aria-current</h4>
+    <saf-anchor href="#menu-with-aria-current">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo nested-menu Component-demo--centered">
+    <saf-menu>
+      <saf-menu-item [attr.aria-current]="getTopLevelAriaCurrent('1')">
+        Menu item 1
+        <saf-menu slot="submenu">
+          <saf-menu-item
+            [attr.aria-current]="getChildAriaCurrent('1.1')"
+            (change)="selectedItem = '1.1'"
+          >
+            Menu item 1.1
+          </saf-menu-item>
+          <saf-menu-item
+            [attr.aria-current]="getChildAriaCurrent('1.2')"
+            (change)="selectedItem = '1.2'"
+          >
+            Menu item 1.2
+          </saf-menu-item>
+          <saf-menu-item
+            [attr.aria-current]="getChildAriaCurrent('1.3')"
+            (change)="selectedItem = '1.3'"
+          >
+            Menu item 1.3
+          </saf-menu-item>
+        </saf-menu>
+      </saf-menu-item>
+      <saf-menu-item [attr.aria-current]="getTopLevelAriaCurrent('2')">
+        Menu item 2
+        <saf-menu slot="submenu">
+          <saf-menu-item
+            [attr.aria-current]="getChildAriaCurrent('2.1')"
+            (change)="selectedItem = '2.1'"
+          >
+            Menu item 2.1
+          </saf-menu-item>
+          <saf-menu-item
+            [attr.aria-current]="getChildAriaCurrent('2.2')"
+            (change)="selectedItem = '2.2'"
+          >
+            Menu item 2.2
+          </saf-menu-item>
+          <saf-menu-item
+            [attr.aria-current]="getChildAriaCurrent('2.3')"
+            (change)="selectedItem = '2.3'"
+          >
+            Menu item 2.3
+          </saf-menu-item>
+        </saf-menu>
+      </saf-menu-item>
+      <saf-menu-item [attr.aria-current]="getTopLevelAriaCurrent('3')">
+        Menu item 3
+        <saf-menu slot="submenu">
+          <saf-menu-item
+            [attr.aria-current]="getChildAriaCurrent('3.1')"
+            (change)="selectedItem = '3.1'"
+          >
+            Menu item 3.1
+          </saf-menu-item>
+          <saf-menu-item
+            [attr.aria-current]="getChildAriaCurrent('3.2')"
+            (change)="selectedItem = '3.2'"
+          >
+            Menu item 3.2
+          </saf-menu-item>
+          <saf-menu-item
+            [attr.aria-current]="getChildAriaCurrent('3.3')"
+            (change)="selectedItem = '3.3'"
+          >
+            Menu item 3.3
+          </saf-menu-item>
+        </saf-menu>
+      </saf-menu-item>
+    </saf-menu>
+  </div>
+
+  <!-- With nested items -->
+  <div class="Component-heading">
+    <h4 id="menu-with-nested-items">With nested items</h4>
+    <saf-anchor href="#menu-with-nested-items">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo nested-menu Component-demo--centered">
+    <saf-menu>
+      <saf-menu-item
+        (change)="handleMenuItemChange('nested menu item 1', 'Yes')"
+      >
+        Menu item 1
+        <saf-menu slot="submenu">
+          <saf-menu-item (change)="handleSubMenuItemChange('menu item 1.1')">
+            Menu item 1.1
+          </saf-menu-item>
+          <saf-menu-item (change)="handleSubMenuItemChange('menu item 1.2')">
+            Menu item 1.2
+          </saf-menu-item>
+          <saf-menu-item (change)="handleSubMenuItemChange('menu item 1.3')">
+            Menu item 1.3
+          </saf-menu-item>
+        </saf-menu>
+      </saf-menu-item>
+      <saf-menu-item
+        (change)="handleMenuItemChange('nested menu item 2', 'Yes')"
+      >
+        Menu item 2
+        <saf-menu slot="submenu">
+          <saf-menu-item (change)="handleSubMenuItemChange('menu item 2.1')">
+            Menu item 2.1
+          </saf-menu-item>
+          <saf-menu-item (change)="handleSubMenuItemChange('menu item 2.2')">
+            Menu item 2.2
+          </saf-menu-item>
+          <saf-menu-item (change)="handleSubMenuItemChange('menu item 2.3')">
+            Menu item 2.3
+          </saf-menu-item>
+        </saf-menu>
+      </saf-menu-item>
+      <saf-menu-item
+        (change)="handleMenuItemChange('nested menu item 3', 'Yes')"
+      >
+        Menu item 3
+        <saf-menu slot="submenu">
+          <saf-menu-item (change)="handleSubMenuItemChange('menu item 3.1')">
+            Menu item 3.1
+          </saf-menu-item>
+          <saf-menu-item (change)="handleSubMenuItemChange('menu item 3.2')">
+            Menu item 3.2
+          </saf-menu-item>
+          <saf-menu-item (change)="handleSubMenuItemChange('menu item 3.3')">
+            Menu item 3.3
+          </saf-menu-item>
+        </saf-menu>
+      </saf-menu-item>
+    </saf-menu>
+  </div>
+
+  <!-- With radio items -->
+  <div class="Component-heading">
+    <h4 id="menu-with-radio-items">With radio items</h4>
+    <saf-anchor href="#menu-with-radio-items">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <div (change)="handleMenuItemChange('menu with radio', 'No')">
+      <saf-menu>
+        <saf-menu-item role="menuitemradio"> Menu item 1 </saf-menu-item>
+        <saf-menu-item role="menuitemradio"> Menu item 2 </saf-menu-item>
+        <saf-menu-item role="menuitemradio"> Menu item 3 </saf-menu-item>
+      </saf-menu>
+    </div>
+  </div>
+
+  <!-- Compact menu -->
+  <div class="Component-heading">
+    <h4 id="menu-compact-menu">Compact menu</h4>
+    <saf-anchor href="#menu-compact-menu">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <saf-menu density="compact" (change)="handleMenuItemChange('menu', 'No')">
+      <saf-menu-item role="menuitem"> Menu item 1 </saf-menu-item>
+      <saf-menu-item role="menuitem"> Menu item 2 </saf-menu-item>
+      <saf-menu-item role="menuitem"> Menu item 3 </saf-menu-item>
+    </saf-menu>
+  </div>
+
+  <!-- @TODO - Consider laying out the messages similar to accordion and button so consumers can see them more easily -->
+  <div style="postion: sticky; top: 20px">
+    <p class="Component-message">{{ selectedMenuText }}</p>
+    <p class="Component-message">{{ selectedSubMenuText }}</p>
+  </div>
+</section>

@@ -1,0 +1,132 @@
+@media (width <= 1280px) {
+  :root {
+    --saf-spacing-6: 8px;
+  }
+}
+
+.drawer-container {
+  width: 545px;
+}
+
+.drag-item {
+  display: flex;
+}
+
+.drag-icon {
+  position: relative;
+}
+
+.drag-icon saf-icon {
+  cursor: move;
+  margin-top: var(--saf-spacing-1);
+}
+
+:host ::ng-deep .cdk-drag-placeholder {
+  opacity: var(--saf-opacity-0);
+}
+
+.cdk-drag-preview {
+  z-index: var(--saf-z-index-alert-toast);
+
+  &.drag-box {
+    box-sizing: border-box;
+    border-radius: var(--saf-border-radius-xs);
+    box-shadow: var(--saf-drop-shadow-elevation-1);
+  }
+}
+
+.drag-box {
+  align-items: flex-start;
+  background: var(--saf-color-background-level-2);
+  border: 1px solid #909090;
+  border-radius: var(--saf-border-radius-xs);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: var(--saf-spacing-0);
+  padding: var(--drag-box-padding);
+  width: 100%;
+
+  .drag-button {
+    /* As this is a style just for a demo it is ok to disable this rule */
+    /* stylelint-disable custom-property-pattern */
+    background: var(
+      --color-interactive-tertiary-default,
+      rgba(255, 255, 255, 0)
+    );
+    border: 1px solid var(--saf-color-white);
+    border-radius: var(--saf-border-radius-xs);
+    margin-inline-end: var(--saf-spacing-2);
+  }
+
+  .remove-button {
+    margin-left: var(--saf-spacing-2);
+    margin-right: var(--saf-spacing-2);
+  }
+
+  .drag-content {
+    width: 292px;
+  }
+}
+
+.drag-index {
+  padding-right: var(--saf-spacing-4);
+  padding-top: var(--saf-spacing-0);
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 30px;
+
+  span.index {
+    margin-top: var(--saf-spacing-0);
+    font: var(--saf-type-body-base-md-strong-compact);
+    margin-bottom: var(--saf-spacing-0);
+  }
+}
+
+saf-drawer#filter-drawer::part(control) {
+  width: 551px;
+}
+
+.manageColumns-rowfields {
+  list-style-type: none;
+  padding: var(--saf-spacing-0);
+  margin: var(--saf-spacing-0);
+  justify-content: space-evenly;
+
+  .manageColumns-rowfields li {
+    padding: var(--saf-spacing-0);
+    margin: var(--saf-spacing-0);
+    margin-bottom: var(--saf-spacing-4);
+  }
+}
+
+.manageColumns-rowfields-item {
+  margin-bottom: var(--saf-spacing-4);
+}
+
+.manager-footer {
+  display: flex;
+  width: 100%;
+}
+
+.manager-footer saf-button {
+  margin: var(--saf-spacing-0) var(--saf-spacing-2);
+}
+
+.manager-footer saf-button:nth-child(1) {
+  flex: 1;
+}
+
+.manager-footer saf-button saf-icon {
+  transform: rotate(180deg);
+  margin-right: var(--saf-spacing-1);
+}
+
+.add-column-button {
+  margin: var(--saf-spacing-3) var(--saf-spacing-0);
+}
+
+.trigger-button {
+  margin-right: var(--saf-spacing-1);
+}

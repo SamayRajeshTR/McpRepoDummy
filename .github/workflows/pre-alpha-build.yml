@@ -1,0 +1,67 @@
+name: A11y Improvements - Pre Alpha Package
+
+on:
+  repository_dispatch:
+    types: [update-saffron-a11y]
+
+jobs:
+  build-latest-pre-alpha:
+    name: "Install Latest Pre-alpha"
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        ref: a11y-improvements
+
+    - name: Authenticate NPM for Package Install
+      uses: ./.github/actions/npm-login
+      with:
+        user: ${{ secrets.NPM_USER }}
+        token: ${{ secrets.NPM_TOKEN }}
+        email: ${{ secrets.NPM_EMAIL }}
+        npmrc_path: ~/.npmrc
+
+    - name: Use Node.js 20.x
+      with:
+        node-version: 22
+        cache: 'npm'
+      uses: actions/setup-node@v3
+
+    - name: Install Dependencies
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: npm install
+
+    - name: Install Latest @saffron/core-components
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: npm install @saffron/core-components@pre-alpha --save-exact
+
+    - name: Install Latest @saffron/core-styles
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: npm install @saffron/core-styles@pre-alpha --save-exact
+
+    - name: Build
+      run: npm run build
+
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v4
+      with:
+        commit-message: update Saffron Packages to latest alpha
+        title: Update Saffron Packages with latest Pre-alpha
+        body: Update Saffron Packages to latest pre-alpha
+        branch: update-saffron-packages-pre-alpha
+        base: a11y-improvements
+
+    - name: Deploy to temporary Angular site
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        personal_token: ${{ secrets.TEMP_ALPHA_TOKEN }}
+        publish_dir: ./build
+        external_repository: tr/saffron_angular_a11y
+        exclude_assets: '.github,node_modules'

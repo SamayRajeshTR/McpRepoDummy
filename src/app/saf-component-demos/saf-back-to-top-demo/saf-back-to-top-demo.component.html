@@ -1,0 +1,16 @@
+<section class="Component" style="height: 2000px;">
+  <app-in-page-navigation [links]="inPageLinks" />
+     <div class="Component-heading">
+        <h3 id="back-to-top">Back to Top</h3>
+        <saf-anchor href="#back-to-top">
+            <app-link-icon></app-link-icon>
+        </saf-anchor>
+    </div>
+    <div class="Component-demo">
+        <h4>See the back-to-top button on the bottom right hand of this screen</h4>
+        <p>
+            The back to top is set to scroll to the top of the body. 
+        </p>
+        <saf-back-to-top yOffset="300" scroll-to-id="back-to-top#top"></saf-back-to-top>
+    </div>
+</section>

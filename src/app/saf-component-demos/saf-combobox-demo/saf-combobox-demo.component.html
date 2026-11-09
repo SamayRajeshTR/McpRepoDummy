@@ -1,0 +1,368 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="combobox">Combobox</h3>
+    <saf-anchor href="#combobox">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="combobox-default">Default with autocomplete</h4>
+    <saf-anchor href="#combobox-default"><app-link-icon></app-link-icon></saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <saf-combobox
+      autocomplete="true"
+      placeholder=""
+      search-mode="startsWith"
+      label="Label"
+      instructional-text="Instructional text"
+      optional-text=""
+      a11y-aria-description="Start typing to narrow your search"
+      id="combobox-default-example"
+      (click)="onOptionSelect($event)"
+      >
+      <saf-option> William Hartnell </saf-option>
+      <saf-option> Patrick Troughton </saf-option>
+      <saf-option> Jon Pertwee </saf-option>
+      <saf-option> Tom Baker </saf-option>
+      <saf-option> Peter Davidson </saf-option>
+      <saf-option> Colin Baker </saf-option>
+      <saf-option> Sylvester McCoy </saf-option>
+      <saf-option> Paul McGann </saf-option>
+      <saf-option> Christopher Eccleston </saf-option>
+      <saf-option> David Tenant </saf-option>
+      <saf-option> Matt Smith </saf-option>
+      <saf-option> Peter Capaldi </saf-option>
+      <saf-option> Jodie Whittaker </saf-option>
+      <saf-option> Ncuti Gatwa </saf-option>
+    </saf-combobox>
+  </div>
+
+  <!-- Clearable -->
+  <div class="Component-heading">
+    <h4 id="combobox-clearable">Clearable</h4>
+    <saf-anchor href="#combobox-clearable"><app-link-icon></app-link-icon></saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <saf-combobox
+      clearable="true"
+      placeholder=""
+      label="Label"
+      (clear)="onClear($event)"
+      instructional-text="Instructional text"
+      [value]="clearableValue"
+      optional-text=""
+      a11y-aria-description="Start typing to narrow your search"
+      id="combobox-clearable"
+      (input)="onInput($event)"
+      >
+      @for (option of options; track option) {
+        <saf-option (click)="onOptionClick(option, $event)"> {{ option }} </saf-option>
+      }
+    </saf-combobox>
+  </div>
+
+  <!-- Compact -->
+  <div class="Component-heading">
+    <h4 id="combobox-compact-combobox">Compact combobox</h4>
+    <saf-anchor href="#combobox-compact-combobox"><app-link-icon></app-link-icon></saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <saf-combobox
+      placeholder=""
+      density="compact"
+      label="Label"
+      instructional-text="Instructional text"
+      optional-text=""
+      id="combobox-compact"
+      (click)="onOptionSelect($event)"
+      >
+      <saf-option> William Hartnell </saf-option>
+      <saf-option> Patrick Troughton </saf-option>
+      <saf-option> Jon Pertwee </saf-option>
+      <saf-option> Tom Baker </saf-option>
+      <saf-option> Peter Davidson </saf-option>
+    </saf-combobox>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="combobox-disabled">Disabled</h4>
+    <saf-anchor href="#combobox-disabled"><app-link-icon></app-link-icon></saf-anchor>
+  </div>
+
+  <div class="Component-demo Component-demo--centered">
+    <saf-combobox
+      placeholder=""
+      label="Label"
+      instructional-text="Instructional text"
+      optional-text=""
+      disabled
+      id="combobox-disabled"
+      >
+      <saf-option> William Hartnell </saf-option>
+      <saf-option> Patrick Troughton </saf-option>
+      <saf-option> Jon Pertwee </saf-option>
+      <saf-option> Tom Baker </saf-option>
+      <saf-option> Peter Davidson </saf-option>
+      <saf-option> Colin Baker </saf-option>
+      <saf-option> Sylvester McCoy </saf-option>
+      <saf-option> Paul McGann </saf-option>
+      <saf-option> Christopher Eccleston </saf-option>
+      <saf-option> David Tenant </saf-option>
+      <saf-option> Matt Smith </saf-option>
+      <saf-option> Peter Capaldi </saf-option>
+      <saf-option> Jodie Whittaker </saf-option>
+      <saf-option> Ncuti Gatwa </saf-option>
+    </saf-combobox>
+  </div>
+
+  <!-- Infinite -->
+  <div class="Component-heading">
+    <h4 id="combobox-with-infinite-scroll">With infinite scroll and remote search</h4>
+    <saf-anchor href="#combobox-with-infinite-scroll"><app-link-icon></app-link-icon></saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <saf-combobox
+      open-on-focus="true"
+      placeholder=""
+      label="Label"
+      instructional-text="Instructional text"
+      (input)="onSearch($event)"
+      (scroll-end)="onMockFetch()"
+      [searchOffline]="false"
+      [loading]="loading"
+      optional-text=""
+      a11y-aria-description="Start typing to narrow your search"
+      id="combobox-infinite"
+      (click)="onOptionSelect($event)"
+      >
+      @for (option of filteredOptions; track option) {
+        <saf-option>{{ option.label }}</saf-option>
+      }
+      @if (!loading && !filteredOptions.length) {
+        <saf-option disabled slot="empty-option">No results found for "{{search}}"</saf-option>
+      }
+    </saf-combobox>
+  </div>
+
+  <!-- Single -->
+  <div class="Component-heading">
+    <h4 id="combobox-with-single-selection">With single selection</h4>
+    <saf-anchor href="#combobox-with-single-selection"><app-link-icon></app-link-icon></saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <div>
+      <saf-combobox
+        label="Combobox with single selection"
+        instructionalText="Select an option"
+        searchMode="startsWith"
+        searchOffline="true"
+        [multiple]="false"
+        openOnFocus="true"
+        >
+        @for (option of options; track option) {
+          <saf-option
+            (click)="onSingleClick(option)"
+          [selected]="singleValue === option"> {{ option }} </saf-option>
+        }
+      </saf-combobox>
+      <div style="margin-top: 8px">
+        <saf-text appearance="body-strong-sm">
+          Selected item: {{ singleValue }}
+        </saf-text>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Multiple -->
+  <div class="Component-heading">
+    <h4 id="combobox-with-multi-selection">With multi-selection</h4>
+    <saf-anchor href="#combobox-with-multi-selection"><app-link-icon></app-link-icon></saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <saf-combobox
+      multiple="true"
+      label="Label"
+      instructional-text="Instructional text"
+      optional-text=""
+      a11y-aria-description="Start typing to narrow your search"
+      id="combobox-multiple"
+      [value]="multipleValue"
+      [placeholder]="multiplePlaceholder"
+      >
+      @for (option of multipleOptions; track option) {
+        <saf-option
+          [selected]="option.selected"
+          (click)="onMultipleClick(option)"
+          >
+          {{ option.label }}
+        </saf-option>
+      }
+      @for (option of selectedOptions; track option; let i = $index) {
+        <saf-chip
+          slot="chips"
+          [closeButtonLabel]="'Remove ' + option.label"
+          closeable
+          (remove)="onMultipleRemove(option)"
+          >
+          {{ option.label }}
+        </saf-chip>
+      }
+      @if (selectedOptions.length) {
+        <saf-button
+          slot="chips"
+          a11y-aria-label="Clear all"
+          appearance="tertiary"
+          density="extra-compact"
+          (click)="onMultipleClearAll()">
+          <saf-icon slot="start" icon-name="arrow-rotate-right"></saf-icon>
+          Clear all
+        </saf-button>
+      }
+    </saf-combobox>
+  </div>
+
+  <!-- With sub-string highlighting -->
+  <div class="Component-heading">
+    <h4 id="combobox-with-sub-string-highlighting">With sub-string highlighting</h4>
+    <saf-anchor href="#combobox-with-sub-string-highlighting"><app-link-icon></app-link-icon></saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <saf-combobox
+      #comboboxAutocomplete
+      highlight-substrings="true"
+      label="Label"
+      instructional-text="Instructional text"
+      optional-text=""
+      a11y-aria-description="Start typing to narrow your search"
+      id="combobox-highlight"
+      (click)="onOptionSelect($event)"
+      >
+      <saf-option> William Hartnell </saf-option>
+      <saf-option> Patrick Troughton </saf-option>
+      <saf-option> Jon Pertwee </saf-option>
+      <saf-option> Tom Baker </saf-option>
+      <saf-option> Peter Davidson </saf-option>
+    </saf-combobox>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <saf-button (click)="onSetAutocomplete()">Set autocomplete</saf-button>
+  </div>
+
+  <!-- Virtualized -->
+  <div class="Component-heading">
+    <h4 id="combobox-virtualized">Virtualized</h4>
+    <saf-anchor href="#combobox-virtualized"><app-link-icon></app-link-icon></saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <saf-combobox
+      virtualized="true"
+      label="Label"
+      instructional-text="Virtualized example with 1000 items"
+      optional-text=""
+      id="combobox-virtualized"
+      (click)="onOptionSelect($event)"
+      >
+      @for (option of virtualizedOptions; track option) {
+        <saf-option>{{ option.label }}</saf-option>
+      }
+    </saf-combobox>
+  </div>
+
+  <!-- Adding custom options -->
+  <div class="Component-heading">
+    <h4 id="combobox-free-solo">Adding custom options</h4>
+    <saf-anchor href="#combobox-free-solo"><app-link-icon></app-link-icon></saf-anchor>
+  </div>
+
+  <saf-combobox
+    #combobox
+    [label]="
+      'Combobox with the ability to add custom options. Start typing an option that doesn\'t exist.'
+    "
+    [instructionalText]="'Select an option'"
+    [searchOffline]="false"
+    (input)="onInputFreeSolo($event)"
+    >
+    @for (option of filteredOptionsFreeSolo; track option) {
+      <saf-option
+        [key]="option.id"
+        [selected]="option === selectedItem"
+        (click)="onOptionClickFreeSolo(option)"
+        >
+        {{ option.label }}
+      </saf-option>
+    }
+    @if (searchTerm && !searchTermExistsAsOption) {
+      <saf-option
+        (click)="onAddCustomOption($event)"
+        >
+        Add "{{ searchTerm }}"
+      </saf-option>
+    }
+  </saf-combobox>
+  <div style="margin-top: 8px">
+    <saf-text appearance="body-strong-sm">
+      Selected item: {{ selectedItem ? selectedItem.label : "" }}
+      @if (selectedItem) {
+        {{
+        selectedItem.id === -1
+        ? " (custom option)"
+        : " (chosen from the list)"
+        }}
+      }
+    </saf-text>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="combobox-in-a-form">In a form</h4>
+    <saf-anchor href="#combobox-in-a-form"><app-link-icon></app-link-icon></saf-anchor>
+  </div>
+  <p>Selected Value: {{ selectedValue }}</p>
+  <div class="Component-demo Component-demo--centered">
+    <form id="combobox-in-form" (submit)="onSubmit($event)" (reset)="onReset()">
+      <saf-combobox
+        #comboboxValue
+        autocomplete="true"
+        search-mode="startWith"
+        label="Select an item"
+        instructional-text="Instructional text"
+        [attr.validation-message]="validationMessage"
+        optional-text=""
+        required
+        (input)="onChange()"
+        id="combobox-form"
+        [invalid]="isValid === false ? true : undefined"
+        (click)="onOptionSelect($event)"
+        >
+        <saf-option> William Hartnell </saf-option>
+        <saf-option> Patrick Troughton </saf-option>
+        <saf-option> Jon Pertwee </saf-option>
+        <saf-option> Tom Baker </saf-option>
+        <saf-option> Peter Davidson </saf-option>
+        <saf-option> Colin Baker </saf-option>
+        <saf-option> Sylvester McCoy </saf-option>
+        <saf-option> Paul McGann </saf-option>
+        <saf-option> Christopher Eccleston </saf-option>
+        <saf-option> David Tenant </saf-option>
+        <saf-option> Matt Smith </saf-option>
+        <saf-option> Peter Capaldi </saf-option>
+        <saf-option> Jodie Whittaker </saf-option>
+        <saf-option> Ncuti Gatwa </saf-option>
+      </saf-combobox>
+      <div style="margin-top: 24px">
+        <saf-form-button type="submit">Submit</saf-form-button>
+        <saf-form-button
+          appearance="secondary"
+          class="form-cancel-button"
+          type="reset"
+          style="margin-left: 8px"
+          >Reset</saf-form-button
+          >
+        </div>
+      </form>
+    </div>
+  </section>

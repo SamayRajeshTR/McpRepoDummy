@@ -1,0 +1,164 @@
+/* You can add global styles to this file, and also import other style files */
+@use "./node_modules/@saffron/core-styles/dist/index.css";
+
+/* Overrides */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--saf-color-background-level-0);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--saf-font-family-brand);
+  font-weight: var(--saf-font-weight-medium);
+}
+
+/* Will need to revisit these visual styles */
+h1,
+h2 {
+  font-size: 32px;
+  line-height: 125%;
+}
+
+h3 {
+  font-size: 28px;
+  line-height: 128%;
+}
+
+h4 {
+  font-size: 24px;
+  line-height: 133%;
+}
+
+h5 {
+  font-size: 20px;
+}
+
+p {
+  line-height: 150%;
+}
+
+pre,
+code {
+  background: var(--saf-color-background-level-2, #fafafa);
+  border: 1px solid var(--saf-color-border-strong);
+  border-radius: 4px;
+  display: inline-block;
+  font-family: "Source Code Pro", Menlo, Monaco, Consolas, "Courier New", monospace;
+  line-height: 150%;
+  margin: 0;
+  padding: 8px;
+  width: 100%;
+  white-space: break-spaces; // Wraps code formatting for small screens
+}
+
+pre code {
+  border: none;
+  padding: 0;
+}
+
+/* Component layout */
+.Component {
+  display: block;
+}
+
+.Component-heading {
+  align-items: baseline;
+  display: flex;
+}
+
+.Component-heading saf-anchor {
+  margin-inline-start: 8px;
+}
+
+.Component-message {
+  margin-top: 0;
+}
+
+.Component-demo {
+  margin-bottom: 32px;
+  padding: 0 var(--saf-spacing-4);
+}
+
+.Component-demo--centered {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.Component-demo--noPadding {
+	padding: 0;
+}
+.Component-code--inline {
+	display: inline;
+	padding: 2px 4px; // Reduce padding for inline code blocks
+}
+/* Utilities */
+.u-weightSemiBold,
+strong {
+  font-weight: 600;
+}
+
+.u-inlineBlock {
+  display: inline-block;
+}
+
+.u-flex {
+  display: flex;
+}
+
+.u-flexColumn {
+  flex-direction: column;
+}
+
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+/* Wijmo FlexGrid */
+.wj-content.no-left-right-borders {
+	border-left: unset;
+	border-right: unset;
+
+	.wj-colheaders .wj-row .wj-header {
+		&:first-child {
+			border-left: var(--saf-line-width-thin) solid var(--saf-color-border-strong);
+		}
+		&:last-child {
+			border-right: var(--saf-line-width-thin) solid var(--saf-color-border-strong);
+		}
+  }
+}
+
+/* Wijmo FlexGrid Toolbar*/
+.demo-1440-block {
+	display: none;
+}
+
+@media screen and (min-width: 1440px) {
+	.demo-1440-block {
+		display: block;
+	}
+
+	.demo-1440-hidden {
+		display: none;
+	}
+}

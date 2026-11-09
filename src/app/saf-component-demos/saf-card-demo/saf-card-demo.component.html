@@ -1,0 +1,355 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="card">Card</h3>
+    <saf-anchor href="#card">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-heading">
+    <h4 id="card-vertical">Vertical</h4>
+    <saf-anchor href="#card-vertical">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo" style="max-width: 384px">
+    <saf-card>
+      <img
+        slot="media"
+        src="https://thomsonreuters.wpenginepowered.com/en-us/wp-content/uploads/sites/20/2020/08/RTX13KDN-Corporate-transparency-Thomas-Peter-800x450-1-800x450.jpg"
+        alt="Landscape mountains"
+        loading="lazy"
+      />
+      <saf-badge attached slot="badge" status="warning">
+        <saf-sr-only>Warning</saf-sr-only>
+        <saf-icon
+          icon-name="triangle-exclamation"
+          appearance="filled"
+        ></saf-icon>
+        <span>Warning</span>
+      </saf-badge>
+
+      <div slot="eyebrow">Eyebrow header</div>
+      <div slot="heading">Placeholder for card title</div>
+
+      <div slot="controls">
+        <saf-anchor href="https://www.reuters.com/" target="_blank"
+          >Link text</saf-anchor
+        >
+        <saf-button id="card-vertical-label" appearance="secondary"
+          >Label</saf-button
+        >
+      </div>
+    </saf-card>
+  </div>
+  <!-- Vertical compact -->
+  <div class="Component-heading">
+    <h4 id="card-vertical-compact">Vertical compact</h4>
+    <saf-anchor href="#card-vertical-compact">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo" style="max-width: 384px">
+    <saf-card density="compact">
+      <img
+        slot="media"
+        src="https://thomsonreuters.wpenginepowered.com/en-us/wp-content/uploads/sites/20/2020/08/RTX13KDN-Corporate-transparency-Thomas-Peter-800x450-1-800x450.jpg"
+        alt="Landscape mountains"
+        loading="lazy"
+      />
+      <saf-badge attached slot="badge" status="warning">
+        <saf-sr-only>Warning</saf-sr-only>
+        <saf-icon
+          icon-name="triangle-exclamation"
+          appearance="filled"
+        ></saf-icon>
+        <span>Warning</span>
+      </saf-badge>
+
+      <div slot="eyebrow">Eyebrow header</div>
+      <div slot="heading">Placeholder for card title</div>
+
+      <div slot="controls">
+        <saf-anchor href="https://www.reuters.com/" target="_blank"
+          >Link text</saf-anchor
+        >
+        <saf-button id="card-vertical-label" appearance="secondary"
+          >Label</saf-button
+        >
+      </div>
+    </saf-card>
+  </div>
+  <!-- Vertical inset -->
+  <div class="Component-heading">
+    <h4 id="card-vertical-inset">Vertical inset</h4>
+    <saf-anchor href="#card-vertical-inset">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo" style="max-width: 384px">
+    <saf-card [imageBleed]="false">
+      <img
+        slot="media"
+        src="https://thomsonreuters.wpenginepowered.com/en-us/wp-content/uploads/sites/20/2020/08/RTX13KDN-Corporate-transparency-Thomas-Peter-800x450-1-800x450.jpg"
+        alt="Landscape mountains"
+        loading="lazy"
+      />
+      <saf-badge attached slot="badge" status="warning">
+        <saf-sr-only>Warning</saf-sr-only>
+        <saf-icon
+          icon-name="triangle-exclamation"
+          appearance="filled"
+        ></saf-icon>
+        <span>Warning</span>
+      </saf-badge>
+
+      <div slot="eyebrow">Eyebrow header</div>
+      <div slot="heading">Placeholder for card title</div>
+
+      <div slot="controls">
+        <saf-anchor href="https://www.reuters.com/" target="_blank"
+          >Link text</saf-anchor
+        >
+        <saf-button id="card-vertical-label" appearance="secondary"
+          >Label</saf-button
+        >
+      </div>
+    </saf-card>
+  </div>
+  <!-- Vertical inset compact -->
+  <div class="Component-heading">
+    <h4 id="card-vertical-inset-compact">Vertical inset compact</h4>
+    <saf-anchor href="#card-vertical-inset-compact">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo" style="max-width: 384px">
+    <saf-card [imageBleed]="false" density="compact">
+      <img
+        slot="media"
+        src="https://thomsonreuters.wpenginepowered.com/en-us/wp-content/uploads/sites/20/2020/08/RTX13KDN-Corporate-transparency-Thomas-Peter-800x450-1-800x450.jpg"
+        alt="Landscape mountains"
+        loading="lazy"
+      />
+      <saf-badge attached slot="badge" status="warning">
+        <saf-sr-only>Warning</saf-sr-only>
+        <saf-icon
+          icon-name="triangle-exclamation"
+          appearance="filled"
+        ></saf-icon>
+        <span>Warning</span>
+      </saf-badge>
+
+      <div slot="eyebrow">Eyebrow header</div>
+      <div slot="heading">Placeholder for card title</div>
+
+      <div slot="controls">
+        <saf-anchor href="https://www.reuters.com/" target="_blank"
+          >Link text</saf-anchor
+        >
+        <saf-button id="card-vertical-label" appearance="secondary"
+          >Label</saf-button
+        >
+      </div>
+    </saf-card>
+  </div>
+
+  <!-- Horizontal -->
+  <div class="Component-heading">
+    <h4 id="card-horizontal">Horizontal</h4>
+    <saf-anchor href="#card-horizontal">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo" style="max-width: 558px">
+    <saf-card appearance="horizontal">
+      <img
+        slot="media"
+        src="https://thomsonreuters.wpenginepowered.com/en-us/wp-content/uploads/sites/20/2022/08/Other-13-800x450.jpeg"
+        alt="Landscape mountains"
+        loading="lazy"
+      />
+      <saf-badge attached slot="badge" status="info">
+        <saf-sr-only>Info</saf-sr-only>
+        <saf-icon icon-name="circle-info" appearance="filled"></saf-icon>
+        <span>Info</span>
+      </saf-badge>
+
+      <div slot="eyebrow">Eyebrow header</div>
+      <div slot="heading">Placeholder for card title</div>
+
+      <div slot="controls">
+        <saf-anchor href="https://www.reuters.com/" target="_blank"
+          >Link text</saf-anchor
+        >
+        <saf-button appearance="secondary">Label</saf-button>
+      </div>
+    </saf-card>
+  </div>
+
+  <!-- Horizontal Compact -->
+  <div class="Component-heading">
+    <h4 id="card-horizontal-compact">Horizontal compact</h4>
+    <saf-anchor href="#card-horizontal-compact">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo" style="max-width: 558px">
+    <saf-card appearance="horizontal" density="compact">
+      <img
+        slot="media"
+        src="https://thomsonreuters.wpenginepowered.com/en-us/wp-content/uploads/sites/20/2022/08/Other-13-800x450.jpeg"
+        alt="Landscape mountains"
+        loading="lazy"
+      />
+      <saf-badge attached slot="badge" status="info">
+        <saf-sr-only>Info</saf-sr-only>
+        <saf-icon icon-name="circle-info" appearance="filled"></saf-icon>
+        <span>Info</span>
+      </saf-badge>
+
+      <div slot="eyebrow">Eyebrow header</div>
+      <div slot="heading">Placeholder for card title</div>
+
+      <div slot="controls">
+        <saf-anchor href="https://www.reuters.com/" target="_blank"
+          >Link text</saf-anchor
+        >
+        <saf-button appearance="secondary">Label</saf-button>
+      </div>
+    </saf-card>
+  </div>
+  <!-- Horizontal inset -->
+  <div class="Component-heading">
+    <h4 id="card-horizontal-inset">Horizontal inset</h4>
+    <saf-anchor href="#card-horizontal-inset">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo" style="max-width: 558px">
+    <saf-card appearance="horizontal" [imageBleed]="false">
+      <img
+        slot="media"
+        src="https://thomsonreuters.wpenginepowered.com/en-us/wp-content/uploads/sites/20/2022/08/Other-13-800x450.jpeg"
+        alt="Landscape mountains"
+        loading="lazy"
+      />
+      <saf-badge attached slot="badge" status="info">
+        <saf-sr-only>Info</saf-sr-only>
+        <saf-icon icon-name="circle-info" appearance="filled"></saf-icon>
+        <span>Info</span>
+      </saf-badge>
+
+      <div slot="eyebrow">Eyebrow header</div>
+      <div slot="heading">Placeholder for card title</div>
+
+      <div slot="controls">
+        <saf-anchor href="https://www.reuters.com/" target="_blank"
+          >Link text</saf-anchor
+        >
+        <saf-button appearance="secondary">Label</saf-button>
+      </div>
+    </saf-card>
+  </div>
+  <!-- Horizontal inset compact -->
+  <div class="Component-heading">
+    <h4 id="card-horizontal-inset-compact">Horizontal inset compact</h4>
+    <saf-anchor href="#card-horizontal-inset-compact">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo" style="max-width: 558px">
+    <saf-card appearance="horizontal" density="compact" [imageBleed]="false">
+      <img
+        slot="media"
+        src="https://thomsonreuters.wpenginepowered.com/en-us/wp-content/uploads/sites/20/2022/08/Other-13-800x450.jpeg"
+        alt="Landscape mountains"
+        loading="lazy"
+      />
+      <saf-badge attached slot="badge" status="info">
+        <saf-sr-only>Info</saf-sr-only>
+        <saf-icon icon-name="circle-info" appearance="filled"></saf-icon>
+        <span>Info</span>
+      </saf-badge>
+
+      <div slot="eyebrow">Eyebrow header</div>
+      <div slot="heading">Placeholder for card title</div>
+
+      <div slot="controls">
+        <saf-anchor href="https://www.reuters.com/" target="_blank"
+          >Link text</saf-anchor
+        >
+        <saf-button appearance="secondary">Label</saf-button>
+      </div>
+    </saf-card>
+  </div>
+
+  <!-- No image -->
+  <div class="Component-heading">
+    <h4 id="card-no-image">No image</h4>
+    <saf-anchor href="#card-no-image">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo" style="max-width: 384px">
+    <saf-card>
+      <div slot="eyebrow">Eyebrow header</div>
+      <div slot="heading">Placeholder for card title</div>
+      <saf-radio-group name="fruits" label="Fruits" orientation="vertical">
+        <saf-radio value="apples"> Apples </saf-radio>
+        <saf-radio value="bananas"> Bananas </saf-radio>
+        <saf-radio value="oranges"> Oranges </saf-radio>
+      </saf-radio-group>
+      <div slot="controls">
+        <saf-anchor href="https://www.reuters.com/" target="_blank"
+          >Link text</saf-anchor
+        >
+        <saf-button appearance="secondary">Label</saf-button>
+      </div>
+    </saf-card>
+  </div>
+  <div class="Component-heading">
+    <h4 id="card-vertical-icon">Vertical icon</h4>
+    <saf-anchor href="#card-vertical-icon">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo" style="max-width: 384px">
+    <saf-card>
+      <saf-icon slot="icon" size="40" icon-name="dice-d4"></saf-icon>
+      <div slot="eyebrow">Eyebrow header</div>
+      <div slot="heading">Placeholder for card title</div>
+      <p>
+        Description - lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Sed nec auctor orci, a convallis nisl.
+      </p>
+      <div slot="controls">
+        <saf-anchor href="https://www.reuters.com/" target="_blank"
+          >Link text</saf-anchor
+        >
+      </div>
+    </saf-card>
+  </div>
+  <div class="Component-heading">
+    <h4 id="card-horizontal-icon">Horizontal icon</h4>
+    <saf-anchor href="#card-horizontal-icon">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo" style="max-width: 558px">
+    <saf-card appearance="horizontal">
+      <saf-icon slot="icon" size="40" icon-name="dice-d4"></saf-icon>
+      <div slot="eyebrow">Eyebrow header</div>
+      <div slot="heading">Placeholder for card title</div>
+      <p>
+        Description - lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Sed nec auctor orci, a convallis nisl.
+      </p>
+      <div slot="controls">
+        <saf-anchor href="https://www.reuters.com/" target="_blank"
+          >Link text</saf-anchor
+        >
+      </div>
+    </saf-card>
+  </div>
+</section>

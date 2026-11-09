@@ -1,0 +1,101 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="dialog">Dialog</h3>
+    <saf-anchor href="#dialog">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <!-- Default -->
+  <div class="Component-heading">
+    <h4 id="dialog-default">Default</h4>
+    <saf-anchor href="#dialog-default">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <saf-button id="dialog-button" appearance="primary" (click)="toggleShow()">Show dialog</saf-button>
+  </div>
+
+  <ng-template appBodyPortal>
+    <saf-dialog
+      [attr.open]="isOpen"
+      [attr.aria-hidden]="!isOpen"
+      aria-label="Simple dialog"
+      aria-modal="true"
+      aria-labelledby="dialogTitle1"
+      id="dialog1"
+      modal="true"
+      role="dialog"
+      is-footer="true"
+      is-header="true"
+      dialog-title="Dialog title"
+      dialog-subtitle="Dialog Subtitle (optional)"
+      (close)="hideDialog()"
+      trigger-id="dialog-button"
+    >
+      <div class="dialogMainContent">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+      <div slot="footer">
+        <saf-button id="dialog-button-secondary" appearance="secondary">secondary</saf-button>
+        <saf-button id="dialog-button-primary" appearance="primary">primary</saf-button>
+      </div>
+    </saf-dialog>
+  </ng-template>
+
+  <!-- Dialog escaping containment -->
+  <div class="Component-heading">
+    <h4 id="dialog-escaping-containment">Dialog escaping containment</h4>
+    <saf-anchor href="#dialog-escaping-containment">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <p style="margin: 0 0 var(--saf-spacing-3)">
+    Demonstrates opening a dialog using the appBodyPortal directive to render it outside the component hierarchy, avoiding layout containment and stacking context issues.
+  </p>
+  <div class="Component-demo card-container">
+    <saf-card>
+      <img
+        slot="media"
+        src="https://thomsonreuters.wpenginepowered.com/en-us/wp-content/uploads/sites/20/2020/08/RTX13KDN-Corporate-transparency-Thomas-Peter-800x450-1-800x450.jpg"
+        alt="Landscape mountains"
+        loading="lazy"
+      />
+
+      <div slot="heading">Card with containing layout</div>
+
+      <p>Open the dialog from this card to see how it renders outside a containing layout without being clipped.</p>
+
+      <div slot="controls">
+        <saf-button id="portal-dialog-button" appearance="primary" (click)="showPortalDialog()">Open dialog</saf-button>
+      </div>
+
+      <ng-template appBodyPortal>
+        <saf-dialog
+          [attr.open]="isPortalDialogOpen"
+          [attr.aria-hidden]="!isPortalDialogOpen"
+          aria-modal="true"
+          id="portal-dialog-1"
+          modal="true"
+          role="dialog"
+          is-footer="true"
+          is-header="true"
+          dialog-title="Dialog title"
+          dialog-subtitle="Dialog Subtitle (optional)"
+          (close)="hidePortalDialog()"
+          trigger-id="portal-dialog-button"
+        >
+          <div class="dialog-main-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+          <div class="dialog-cta-div" slot="footer">
+            <saf-button id="portal-dialog-button-secondary" appearance="secondary">Secondary</saf-button>
+            <saf-button id="portal-dialog-button-primary" appearance="primary">Primary</saf-button>
+          </div>
+        </saf-dialog>
+      </ng-template>
+    </saf-card>
+  </div>
+</section>

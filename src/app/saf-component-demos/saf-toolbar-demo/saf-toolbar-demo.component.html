@@ -1,0 +1,122 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="toolbar">Toolbar</h3>
+    <saf-anchor href="#toolbar">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <!-- Default -->
+  <div class="Component-heading">
+    <h4 id="toolbar-default">Default</h4>
+    <saf-anchor href="#toolbar-default">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <saf-toolbar>
+      <div slot="top-row-start">
+        <saf-button appearance="primary">
+          <saf-icon slot="start" icon-name="plus" appearance="filled">
+          </saf-icon>
+          Add new
+        </saf-button>
+        <saf-button appearance="secondary">
+          <saf-icon slot="start" icon-name="envelope" appearance="filled">
+          </saf-icon>
+          Send
+        </saf-button>
+      </div>
+    </saf-toolbar>
+  </div>
+
+  <!-- Full example -->
+  <div class="Component-heading">
+    <h4 id="toolbar-full-example">Full example</h4>
+    <saf-anchor href="#toolbar-full-example">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <saf-toolbar>
+      <div slot="top-row-start">
+        <saf-button appearance="primary">
+          <saf-icon slot="start" icon-name="plus" appearance="filled">
+          </saf-icon>
+          Add new
+        </saf-button>
+        <saf-button appearance="secondary">
+          <saf-icon slot="start" icon-name="envelope" appearance="filled">
+          </saf-icon>
+          Send
+        </saf-button>
+      </div>
+      <div slot="top-row-end">
+        <saf-search-field a11y-aria-describedby="search field">
+        </saf-search-field>
+      </div>
+      <div slot="bottom-row-start">
+        <saf-checkbox> Select all </saf-checkbox>
+      </div>
+      <div slot="bottom-row-end">
+        <saf-button appearance="secondary">
+          <saf-icon slot="start" icon-name="chevron-down"> </saf-icon>
+          Grid actions
+        </saf-button>
+        <saf-divider
+          orientation="vertical"
+          role="separator"
+          style="height: 42px; background: black"
+        ></saf-divider>
+        (Showing 1 of 25 of 500)
+      </div>
+    </saf-toolbar>
+  </div>
+
+  <!-- Compact -->
+  <div class="Component-heading">
+    <h4 id="toolbar-compact-toolbar">Compact toolbar</h4>
+    <saf-anchor href="#toolbar-compact-toolbar">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <saf-toolbar density="compact">
+      <div slot="top-row-start">
+        <saf-button appearance="primary">
+          <saf-icon slot="start" icon-name="plus" appearance="filled">
+          </saf-icon>
+          Add new
+        </saf-button>
+        <saf-button appearance="secondary">
+          <saf-icon slot="start" icon-name="envelope" appearance="filled">
+          </saf-icon>
+          Send
+        </saf-button>
+      </div>
+      <div slot="top-row-end">
+        <saf-search-field
+          density="compact"
+          a11y-aria-describedby="search field"
+        >
+        </saf-search-field>
+      </div>
+      <div slot="bottom-row-start">
+        <saf-checkbox> Select all </saf-checkbox>
+      </div>
+      <div slot="bottom-row-end">
+        <saf-button appearance="secondary">
+          <saf-icon slot="start" icon-name="chevron-down"> </saf-icon>
+          Grid actions
+        </saf-button>
+        <saf-divider
+          orientation="vertical"
+          role="separator"
+          style="height: 42px; background: black"
+        ></saf-divider>
+        (Showing 1 of 25 of 500)
+      </div>
+    </saf-toolbar>
+  </div>
+</section>

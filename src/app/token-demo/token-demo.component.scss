@@ -1,0 +1,56 @@
+// @use '../../../node_modules/@saffron/core-styles/dist/index.css';
+
+// Targeting css-part tablist here to reach inside of the saf-tabs style encapsulation
+saf-tabs.saffron::part(tablist) {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	border-bottom: 1px solid var(--saf-color-border-subtle); // Design token
+	display: block;
+	padding: 0;
+}
+// Targeting css-part activeIndicator here to reach inside of the saf-tabs style encapsulation
+saf-tabs.saffron::part(activeIndicator) {
+	display: none;
+}
+// No css-part here, targeting saf-tab directly
+saf-tabs.saffron saf-tab {
+	background: transparent;
+	border-color: transparent;
+	border-width: 2px;
+	color: var(--saf-color-text-strong); // Design token
+	font: var(--saf-type-body-base-md-strong-standard); // Design token
+	padding: 8px 16px;
+
+	&:hover {
+		background: var(--saf-button-color-background-tertiary-hover); // Design token
+		border-width: 2px 2px 4px 2px;
+		border-style: solid;
+		border-color: var(--saf-button-color-foreground-tertiary-hover); // Design token
+		color: var(--saf-button-color-foreground-tertiary-hover); // Design token
+	}
+	&[disabled] {
+		color: var(--saf-color-interactive-states-foreground-disabled); // Design token
+	}
+	&[aria-selected="true"],
+	&:active {
+		border-bottom-width: 4px;
+		border-bottom-color: var(--saf-button-color-foreground-tertiary-active); // Design token
+		color: var(--saf-button-color-foreground-tertiary-active); // Design token
+	}
+	&:focus {
+		background: var(--saf-button-color-background-tertiary-active); // Design token
+		border-bottom: 4px solid var(--saf-button-color-foreground-tertiary-active); // Design token
+		box-shadow: var(--saf-drop-shadow-focus); // Design token
+		color: var(--saf-button-color-foreground-tertiary-active); // Design tokens
+	}
+}
+
+// Demo styles
+ol li {
+	margin-bottom: 32px;
+}
+ol li img {
+	display: block;
+	margin-top: 16px;
+}

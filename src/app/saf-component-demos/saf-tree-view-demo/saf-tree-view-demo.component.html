@@ -1,0 +1,156 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="tree-view">Tree View</h3>
+    <saf-anchor href="#tree-view">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-heading">
+    <h3 id="tree-view-default">Default</h3>
+    <saf-anchor href="#tree-view-default">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--fullWidth">
+    <saf-tree-view>
+      <saf-tree-item nested="true">
+        Tree item 1
+        <saf-tree-item nested="true"> Tree item 1-1 </saf-tree-item>
+      </saf-tree-item>
+      <saf-tree-item nested="true"> Tree item 2 </saf-tree-item>
+    </saf-tree-view>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="tree-view-flat">Flat</h4>
+    <saf-anchor href="#tree-view-flat">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <div class="Component-demo Component-demo--fullWidth">
+    <saf-tree-view>
+      <saf-tree-item> Tree item 1 </saf-tree-item>
+      <saf-tree-item> Tree item 2 </saf-tree-item>
+      <saf-tree-item> Tree item 3 </saf-tree-item>
+      <saf-tree-item> Tree item 4 </saf-tree-item>
+    </saf-tree-view>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="tree-view-nested">Nested</h4>
+    <saf-anchor href="#tree-view-nested">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <div class="Component-demo Component-demo--fullWidth">
+    <saf-tree-view>
+      <saf-tree-item nested="true" expanded="true">
+        Branch with sub-branches
+        <saf-tree-item nested="true"> Sub Branch 1 </saf-tree-item>
+
+        <saf-tree-item nested="true">
+          Sub Branch 2
+
+          <saf-tree-item nested="true">
+            Stick 1
+            <saf-tree-item nested="true"> Leaf 1 </saf-tree-item>
+            <saf-tree-item nested="true"> Leaf 2 </saf-tree-item>
+          </saf-tree-item>
+
+          <saf-tree-item nested="true"> Stick 2 </saf-tree-item>
+        </saf-tree-item>
+      </saf-tree-item>
+      <saf-tree-item nested="true"> Branch without branches </saf-tree-item>
+    </saf-tree-view>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="tree-view-dynamic-menu">Dynamic Menu</h4>
+    <saf-anchor href="#tree-view-dynamic-menu">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <div class="Component-demo Component-demo--fullWidth">
+    <saf-tree-view>
+      @for (item of ['Chapter I', 'Chapter II', 'Chapter III']; track item) {
+        <saf-tree-item
+          >
+          {{ item }}
+          @for (i of ['I', 'II']; track i) {
+            <saf-tree-item>
+              {{ item }} - {{ i }}
+              @for (j of ['I']; track j) {
+                <saf-tree-item>
+                  {{ item }} - {{ i }} - {{ j }}
+                </saf-tree-item>
+              }
+            </saf-tree-item>
+          }
+        </saf-tree-item>
+      }
+    </saf-tree-view>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="tree-view-dynamic-tree">Dynamic Tree</h4>
+    <saf-anchor href="#tree-view-dynamic-tree">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <div class="Component-demo Component-demo--fullWidth">
+    <saf-tree-view>
+      @for (data of treeData; track data) {
+        <saf-tree-item-recursive
+          [data]="data"
+        ></saf-tree-item-recursive>
+      }
+    </saf-tree-view>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="tree-view-keyboard-click">Keyboard click</h4>
+    <saf-anchor href="#tree-view-keyboard-click">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <p>
+    Focus an item and press Enter or Space. Each press should raise exactly one click and select
+    the item. Only the parent should raise expanded-change. The disabled item should do nothing.
+  </p>
+
+  <div class="Component-demo Component-demo--fullWidth">
+    <saf-tree-view data-testid="keyboardClickTree">
+      <saf-tree-item
+        id="keyboard-click-leaf"
+        (click)="countClick('leaf')"
+        (expanded-change)="countExpandedChange('leaf')"
+      >
+        Leaf item
+      </saf-tree-item>
+      <saf-tree-item
+        id="keyboard-click-parent"
+        (click)="countClick('parent')"
+        (expanded-change)="countExpandedChange('parent')"
+      >
+        Parent item
+        <saf-tree-item id="keyboard-click-child" (click)="countClick('child')">
+          Child item
+        </saf-tree-item>
+      </saf-tree-item>
+      <saf-tree-item id="keyboard-click-disabled" disabled (click)="countClick('disabled')">
+        Disabled item
+      </saf-tree-item>
+    </saf-tree-view>
+  </div>
+  <ul data-testid="keyboardClickCounts">
+    <li>Leaf: {{ clickCounts['leaf'] }} clicks, {{ expandedChangeCounts['leaf'] }} expanded-change</li>
+    <li>Parent: {{ clickCounts['parent'] }} clicks, {{ expandedChangeCounts['parent'] }} expanded-change</li>
+    <li>Child: {{ clickCounts['child'] }} clicks</li>
+    <li>Disabled: {{ clickCounts['disabled'] }} clicks</li>
+  </ul>
+</section>

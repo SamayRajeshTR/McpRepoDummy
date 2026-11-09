@@ -1,0 +1,78 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="pagination-title">Pagination</h3>
+    <saf-anchor href="#pagination">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <!-- Default -->
+  <div class="Component-heading">
+    <h4 id="pagination-default">Default</h4>
+    <saf-anchor href="#pagination-default">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <saf-pagination
+      data-testid="pagination"
+      total-item-count="5000"
+      [hasBorder]="false"
+    ></saf-pagination>
+  </div>
+
+  <!-- Compact -->
+  <div class="Component-heading">
+    <h4 id="pagination-compact-pagination">Compact pagination</h4>
+    <saf-anchor href="#pagination-compact-pagination">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <saf-pagination
+      density="compact"
+      data-testid="pagination-compact"
+      total-item-count="5000"
+      [hasBorder]="false"
+    ></saf-pagination>
+  </div>
+
+  <!-- Custom items per page -->
+  <div class="Component-heading">
+    <h4 id="pagination-custom-items-per-page">Custom items per page</h4>
+    <saf-anchor href="#pagination-custom-items-per-page">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <saf-pagination
+      data-testid="custom-items-per-page"
+      total-item-count="5000"
+      [itemsArray]="[25, 50, 100, 250, 500]"
+      [itemsPerPage]="250"
+    ></saf-pagination>
+  </div>
+
+  <!-- Controlled -->
+  <div class="Component-heading">
+    <h4 id="pagination-controlled">Controlled</h4>
+    <saf-anchor href="#pagination-controlled">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <saf-pagination
+      data-testid="controlled"
+      controlled
+      [totalItemCount]="controlled.totalItemCount"
+      [currentPageIndex]="controlled.currentPageIndex"
+      [itemsArray]="controlled.itemsArray"
+      [itemsPerPage]="controlled.itemsPerPage"
+      (previous)="onPrevious($event)"
+      (next)="onNext($event)"
+      (change)="onChange($event)"
+      (items-per-page-change)="onItemsPerPageChange($event)"
+    ></saf-pagination>
+  </div>
+</section>

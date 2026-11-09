@@ -1,0 +1,195 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="radio-group">Radio group</h3>
+    <saf-anchor href="#radio-group">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <saf-radio-group
+      name="fruits"
+      label="Label"
+      instructional-text="Instructional text"
+    >
+      <saf-radio value="apples"> Apples </saf-radio>
+
+      <saf-radio value="bananas"> Bananas </saf-radio>
+
+      <saf-radio value="oranges"> Oranges </saf-radio>
+    </saf-radio-group>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="radio-group-vertical">Vertical</h4>
+    <saf-anchor href="#radio-group-vertical">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <div class="Component-demo Component-demo--centered">
+    <saf-radio-group
+      name="fruits"
+      orientation="vertical"
+      label="Label"
+      instructional-text="Instructional text"
+    >
+      <saf-radio value="apples"> Apples </saf-radio>
+
+      <saf-radio value="bananas"> Bananas </saf-radio>
+
+      <saf-radio value="oranges"> Oranges </saf-radio>
+    </saf-radio-group>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="radio-group-readonly">Read-only</h4>
+    <saf-anchor href="#radio-group-readonly">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <div class="Component-demo Component-demo--centered">
+    <saf-radio-group
+      name="fruits-readonly"
+      readonly
+      value="bananas"
+      label="Label"
+      instructional-text="Instructional text"
+    >
+      <saf-radio value="apples"> Apples </saf-radio>
+
+      <saf-radio value="bananas"> Bananas </saf-radio>
+
+      <saf-radio value="oranges"> Oranges </saf-radio>
+    </saf-radio-group>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="radio-group-readonly-vertical">Read-only vertical</h4>
+    <saf-anchor href="#radio-group-readonly-vertical">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <div class="Component-demo Component-demo--centered">
+    <saf-radio-group
+      name="fruits-readonly-vertical"
+      readonly
+      orientation="vertical"
+      value="bananas"
+      label="Label"
+      instructional-text="Instructional text"
+    >
+      <saf-radio value="apples"> Apples </saf-radio>
+
+      <saf-radio value="bananas"> Bananas </saf-radio>
+
+      <saf-radio value="oranges"> Oranges </saf-radio>
+    </saf-radio-group>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="radio-group-invalid">Invalid</h4>
+    <saf-anchor href="#radio-group-invalid">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <saf-radio-group
+      invalid
+      validation-message="Validation message"
+      name="fruits"
+      label="Label"
+      instructional-text="Instructional text"
+    >
+      <saf-radio value="apples"> Apples </saf-radio>
+
+      <saf-radio value="bananas"> Bananas </saf-radio>
+
+      <saf-radio value="oranges"> Oranges </saf-radio>
+    </saf-radio-group>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="radio-group-radio-button">Radio button</h4>
+    <saf-anchor href="#radio-group-radio-button">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <div class="Component-demo Component-demo--centered">
+    <saf-radio checked=""> Label </saf-radio>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="radio-group-radio-button-disabled">Disabled</h4>
+    <saf-anchor href="#radio-group-radio-button-disabled">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <div class="Component-demo Component-demo--centered">
+    <saf-radio-group orientation="vertical">
+      <saf-radio id="radiogroup-disabled-unchecked" disabled="">
+        Disabled unchecked
+      </saf-radio>
+      <saf-radio id="radiogroup-disabled-checked" disabled checked>
+        Disabled checked
+      </saf-radio>
+    </saf-radio-group>
+  </div>
+
+  <div class="Component-heading">
+    <h3 id="animals-demo">Form Demo</h3>
+    <saf-anchor href="#animals-demo">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <form
+      id="animals-form"
+      (submit)="handleFormSubmit($event)"
+      (reset)="handleFormReset($event)"
+    >
+      <saf-radio-group
+        #animalGroup
+        name="animals"
+        orientation="vertical"
+        label="Select an Animal"
+        instructional-text="Choose your favorite animal"
+        [attr.invalid]="isInvalid"
+        [attr.validation-message]="validationMessage"
+        (change)="handleSelectionChange($event)"
+      >
+        @for (animal of animals; track animal) {
+          <saf-radio [value]="animal.toLowerCase()">
+            {{ animal }}
+          </saf-radio>
+        }
+        <div style="margin-top: 24px; display: flex; gap: 16px">
+          <saf-form-button appearance="primary" type="submit">Submit</saf-form-button>
+          <saf-form-button
+            appearance="secondary"
+            class="form-cancel-button"
+            type="reset"
+            >Reset</saf-form-button
+          >
+        </div>
+      </saf-radio-group>
+      <p>Selected Animal: {{ selectedAnimal }}</p>
+      @if (animalSubmitted) {
+        <saf-alert
+          appearance="success"
+          alert-type="inline"
+          duration="0"
+          close-aria-label="Close alert"
+          hide-close-button="true"
+          style="margin-top: 16px"
+        >
+          Form Submitted! Your choice: {{ submittedAnimalValue }}
+        </saf-alert>
+      }
+    </form>
+  </div>
+</section>

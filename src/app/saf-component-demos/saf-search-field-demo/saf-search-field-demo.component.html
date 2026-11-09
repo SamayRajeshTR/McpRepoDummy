@@ -1,0 +1,85 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="search-field">Search field</h3>
+    <saf-anchor href="#search-field">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="search-field-default">Default</h4>
+    <saf-anchor href="#search-field-default">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <saf-search-field
+      id="saf-search-field"
+      label="Search"
+      instructional-text="Instructional text"
+      >
+    </saf-search-field>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="search-field-compact-search-field">Compact search field</h4>
+    <saf-anchor href="#search-field-compact-search-field">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <saf-search-field
+      density="compact"
+      id="saf-search-field"
+      label="Search"
+      instructional-text="Instructional text"
+      >
+    </saf-search-field>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="search-field-with-pre-filter">With pre-filter</h4>
+    <saf-anchor href="#search-field-with-pre-filter">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo Component-demo--centered">
+    <div>
+      <saf-search-field
+        label="Search with pre-filter"
+        placeholder="Search for a movie title"
+        (search)="handleSearch($event)"
+        (clear)="handleClear()"
+        >
+        <saf-select
+          [value]="filter"
+          prefilter
+          aria-label="Filter by"
+          slot="pre-filter"
+          (change)="handleFilter($event)">
+          @for (category of categories; track category) {
+            <saf-option>{{ category }}</saf-option>
+          }
+        </saf-select>
+      </saf-search-field>
+      @if (searchResults.length) {
+        <div>
+          <h5 style="margin: 16px 0px;">Search results:</h5>
+          <ul style="padding-left: 12px">
+            @for (item of searchResults; track item) {
+              <li style="padding-bottom: 8px;">
+                {{item.title}} ({{item.category}})
+              </li>
+            }
+          </ul>
+        </div>
+      }
+      @if (!searchResults.length && search) {
+        <div>
+          <h5 style="margin: 30px 0px;">No results found</h5>
+        </div>
+      }
+    </div>
+  </div>
+</section>

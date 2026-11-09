@@ -1,0 +1,157 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="wizard">Wizard</h3>
+    <saf-anchor href="#wizard">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="wizard-horizontal">Horizontal</h4>
+    <saf-anchor href="#wizard-horizontal">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <saf-wizard a11y-aria-label="Custom aria label">
+      <saf-stepper
+        slot="stepper"
+        [activeStep]="activeHStep"
+        orientation="horizontal"
+        [observeResize]="false"
+        >
+        <saf-step
+          [statusLabel]="getStatusLabel(1, activeHStep)"
+          [status]="getStatus(1, activeHStep)"
+          stepTitle="Step title 1"
+          >
+          <div>Step description 1</div>
+        </saf-step>
+        <saf-step
+          [statusLabel]="getStatusLabel(2, activeHStep)"
+          [status]="getStatus(2, activeHStep)"
+          stepTitle="Step title 2"
+          >
+          <div>Step description 2</div>
+        </saf-step>
+        <saf-step
+          [statusLabel]="getStatusLabel(3, activeHStep)"
+          [status]="getStatus(3, activeHStep)"
+          stepTitle="Step title 3"
+          >
+          <div>Step description 3</div>
+        </saf-step>
+        <saf-step
+          [statusLabel]="getStatusLabel(4, activeHStep)"
+          [status]="getStatus(4, activeHStep)"
+          stepTitle="Step title 4"
+          >
+          <div>Step description 4</div>
+        </saf-step>
+      </saf-stepper>
+      <saf-wizard-step-content step="1">
+        <p>Step content 1</p>
+      </saf-wizard-step-content>
+      <saf-wizard-step-content step="2">
+        <p>Step content 2</p>
+      </saf-wizard-step-content>
+      <saf-wizard-step-content step="3">
+        <p>Step content 3</p>
+      </saf-wizard-step-content>
+      <saf-wizard-step-content step="4">
+        <p>Step content 4</p>
+      </saf-wizard-step-content>
+      <div slot="footer" class="footer">
+        <saf-button appearance="tertiary">
+          Cancel
+          <saf-icon slot="end" icon-name="circle-xmark"></saf-icon>
+        </saf-button>
+        @if (activeHStep > 1) {
+          <saf-button
+            appearance="secondary"
+            (click)="handleHBack()"
+            >
+            Previous
+            <saf-icon slot="end" icon-name="circle-arrow-left"></saf-icon>
+          </saf-button>
+        }
+        @if (activeHStep < 4) {
+          <saf-button
+            appearance="primary"
+            (click)="handleHNext()"
+            >
+            Next
+            <saf-icon slot="end" icon-name="circle-arrow-right"></saf-icon>
+          </saf-button>
+        }
+        @if (activeHStep === 4) {
+          <saf-button appearance="primary">
+            Finish
+            <saf-icon slot="end" icon-name="check"></saf-icon>
+          </saf-button>
+        }
+      </div>
+    </saf-wizard>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="wizard-vertical">Vertical</h4>
+    <saf-anchor href="#wizard-vertical">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <saf-wizard heading-level="3">
+      <saf-stepper
+        slot="stepper"
+        [activeStep]="activeVStep"
+        orientation="vertical"
+        [observeResize]="false"
+        >
+        @for (step of steps; track step; let i = $index) {
+          <saf-step
+            [statusLabel]="getStatusLabel(i + 1, activeVStep)"
+            [status]="getStatus(i + 1, activeVStep)"
+            [stepTitle]="step.title"
+            >
+            <div>{{ step.description }}</div>
+          </saf-step>
+        }
+      </saf-stepper>
+      @for (step of steps; track step; let i = $index) {
+        <saf-wizard-step-content
+          [step]="i + 1"
+          >
+          <p>
+            {{ step.contentText }}
+          </p>
+        </saf-wizard-step-content>
+      }
+      <div slot="footer" class="footer">
+        <saf-button appearance="tertiary">
+          Cancel
+          <saf-icon slot="end" icon-name="circle-xmark"></saf-icon>
+        </saf-button>
+        @if (activeVStep > 1) {
+          <saf-button
+            appearance="secondary"
+            (click)="handleVBack()"
+            >
+            Previous
+            <saf-icon slot="end" icon-name="circle-arrow-left"></saf-icon>
+          </saf-button>
+        }
+        <saf-button appearance="primary" (click)="handleVNext()">
+          {{ activeVStep === steps.length ? "Finish" : "Next" }}
+          <saf-icon
+            slot="end"
+            [icon-name]="
+              activeVStep === steps.length ? 'check' : 'circle-arrow-right'
+            "
+          ></saf-icon>
+        </saf-button>
+      </div>
+    </saf-wizard>
+  </div>
+</section>

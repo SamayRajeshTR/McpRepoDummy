@@ -1,0 +1,519 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="action-card">Action Card</h3>
+    <saf-anchor href="#action-card">
+      <app-link-icon></app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <!-- With footer -->
+  <div class="Component-heading">
+    <h4 id="action-card-with-footer">With footer</h4>
+    <saf-anchor href="#action-card-with-footer"
+      ><app-link-icon></app-link-icon
+    ></saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <div style="margin: 0 auto; max-width: 280px;">
+      <saf-action-card>
+        <saf-action-card-action
+          mode="button"
+          (click)="onButtonClick($event)"
+        >
+          <saf-icon icon-name="sparkles" slot="start"></saf-icon>
+          <saf-icon icon-name="chevron-right" slot="end"></saf-icon>
+          <span slot="card-title">Card title</span>
+          <span slot="description">
+            Short description for the card providing more details
+          </span>
+        </saf-action-card-action>
+        <div slot="controls">
+          <div>metadata</div>
+          <div>
+            <saf-tooltip
+              id="tooltip-favorite-button-with-footer"
+              anchor="favorite-button-with-footer"
+              placement="top"
+              aria-hidden="true"
+              >Favorite</saf-tooltip
+            >
+            <saf-button
+              nested-item
+              id="favorite-button-with-footer"
+              icon-only
+              density="extra-compact"
+              appearance="tertiary"
+              a11y-aria-label="Favorite"
+              aria-pressed="false"
+            >
+              <saf-icon icon-name="star"></saf-icon>
+            </saf-button>
+          </div>
+        </div>
+      </saf-action-card>
+    </div>
+  </div>
+
+  <!-- Title and description -->
+  <div class="Component-heading">
+    <h4 id="action-card-title-and-description">Title and description</h4>
+    <saf-anchor href="#action-card-title-and-description"
+      ><app-link-icon></app-link-icon
+    ></saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <div style="margin: 0 auto; max-width: 280px;">
+      <saf-action-card>
+        <saf-action-card-action
+          mode="a"
+          href="https://saffron.thomsonreuters.com"
+        >
+          <saf-icon icon-name="sparkles" slot="start"></saf-icon>
+          <saf-icon icon-name="chevron-right" slot="end"></saf-icon>
+          <span slot="card-title">Card title</span>
+          <span slot="description">
+            Short description for the card providing more details
+          </span>
+        </saf-action-card-action>
+      </saf-action-card>
+    </div>
+  </div>
+
+  <!-- Title only -->
+  <div class="Component-heading">
+    <h4 id="action-card-title-only">Title only</h4>
+    <saf-anchor href="#action-card-title-only"
+      ><app-link-icon></app-link-icon
+    ></saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <div style="margin: 0 auto; max-width: 280px;">
+      <saf-action-card>
+        <saf-action-card-action
+          mode="button"
+          (click)="onButtonClick($event)"
+        >
+          <saf-icon icon-name="sparkles" slot="start"></saf-icon>
+          <saf-icon icon-name="chevron-right" slot="end"></saf-icon>
+          <span slot="card-title">Card title</span>
+        </saf-action-card-action>
+      </saf-action-card>
+    </div>
+  </div>
+
+  <!-- With router -->
+  <div class="Component-heading">
+    <h4 id="action-card-with-router">With router</h4>
+    <saf-anchor href="#action-card-with-router"
+      ><app-link-icon></app-link-icon
+    ></saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <div style="margin: 0 auto; max-width: 280px;">
+      <saf-action-card>
+        <saf-action-card-action
+          mode="a"
+          href="/"
+          (click)="onNavigate($event)"
+        >
+          <saf-icon icon-name="sparkles" slot="start"></saf-icon>
+          <saf-icon icon-name="chevron-right" slot="end"></saf-icon>
+          <span slot="card-title">Navigate to route</span>
+          <span slot="description">
+            Navigate using Angular router
+          </span>
+        </saf-action-card-action>
+      </saf-action-card>
+    </div>
+  </div>
+
+  <!-- Compact action card -->
+  <div class="Component-heading">
+    <h4 id="action-card-compact-action-card">Compact action card</h4>
+    <saf-anchor href="#action-card-compact-action-card"
+      ><app-link-icon></app-link-icon
+    ></saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <div style="margin: 0 auto; max-width: 280px;">
+      <saf-action-card density="compact">
+        <saf-action-card-action
+          mode="button"
+          (click)="onButtonClick($event)"
+        >
+          <saf-icon icon-name="sparkles" slot="start"></saf-icon>
+          <saf-icon icon-name="chevron-right" slot="end"></saf-icon>
+          <span slot="card-title">Card title</span>
+          <span slot="description">
+            Short description for the card providing more details
+          </span>
+        </saf-action-card-action>
+        <div slot="controls">
+          <div>metadata</div>
+          <div>
+            <saf-tooltip
+              id="tooltip-favorite-button-compact"
+              anchor="favorite-button-compact"
+              placement="top"
+              aria-hidden="true"
+              >Favorite</saf-tooltip
+            >
+            <saf-button
+              nested-item
+              id="favorite-button-compact"
+              icon-only
+              density="extra-compact"
+              appearance="tertiary"
+              a11y-aria-label="Favorite"
+              aria-pressed="false"
+            >
+              <saf-icon icon-name="star"></saf-icon>
+            </saf-button>
+          </div>
+        </div>
+      </saf-action-card>
+    </div>
+  </div>
+
+  <!-- Action card group -->
+  <div class="Component-heading">
+    <h4 id="action-card-action-card-group">Action card group</h4>
+    <saf-anchor href="#action-card-action-card-group"
+      ><app-link-icon></app-link-icon
+    ></saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <style>
+			ul {
+				display: grid;
+				gap: var(--saf-spacing-4);
+				grid-template-columns: 1fr 1fr;
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+			}
+			/* Responsive: single column on smaller screens */
+			@media (max-width: 768px) {
+				ul {
+					grid-template-columns: 1fr;
+				}
+			}
+			.footer-buttons {
+				align-items: center;
+				display: flex;
+				gap: var(--saf-spacing-2);
+				height: 24px;
+			}
+		</style>
+		<ul aria-label="Action card group">
+			<li>
+				<saf-action-card>
+					<saf-action-card-action
+						mode="button"
+						(click)="onButtonClick($event)"
+					>
+						<saf-icon icon-name="sparkles" slot="start"></saf-icon>
+						<saf-icon icon-name="chevron-right" slot="end"></saf-icon>
+						<span slot="card-title"><span>Card title</span></span>
+						<saf-badge slot="badge" density="compact" status="neutral" emphasis="subtle"
+							>Beta</saf-badge
+						>
+						<span slot="description"
+							>Short description for the card providing more details</span
+						>
+					</saf-action-card-action>
+					<div slot="controls">
+						<div>Metadata</div>
+						<div class="footer-buttons">
+							<saf-tooltip
+								id="tooltip-edit-button-1"
+								anchor="edit-button-1"
+								placement="top"
+                aria-hidden="true"
+								>Edit</saf-tooltip
+							>
+							<saf-button
+								nested-item
+								id="edit-button-1"
+								icon-only
+								density="extra-compact"
+								appearance="tertiary"
+								a11y-aria-label="Edit"
+							>
+								<saf-icon icon-name="pen-line"></saf-icon>
+							</saf-button>
+							<saf-tooltip
+								id="tooltip-delete-button-1"
+								anchor="delete-button-1"
+								placement="top"
+                aria-hidden="true"
+								>Delete</saf-tooltip
+							>
+							<saf-button
+								nested-item
+								id="delete-button-1"
+								icon-only
+								density="extra-compact"
+								appearance="tertiary"
+								a11y-aria-label="Delete"
+							>
+								<saf-icon icon-name="trash-can"></saf-icon>
+							</saf-button>
+							<saf-divider orientation="vertical" role="presentation"></saf-divider>
+							<saf-tooltip
+								id="tooltip-favorite-button-1"
+								anchor="favorite-button-1"
+								placement="top"
+                aria-hidden="true"
+								>Favorite</saf-tooltip
+							>
+							<saf-button
+								nested-item
+								id="favorite-button-1"
+								icon-only
+								density="extra-compact"
+								appearance="tertiary"
+								a11y-aria-label="Favorite"
+								aria-pressed="false"
+							>
+								<saf-icon icon-name="star"></saf-icon>
+							</saf-button>
+						</div>
+					</div>
+				</saf-action-card>
+			</li>
+			<li>
+				<saf-action-card>
+					<saf-action-card-action
+						mode="button"
+						(click)="onButtonClick($event)"
+					>
+						<saf-icon icon-name="sparkles" slot="start"></saf-icon>
+						<saf-icon icon-name="chevron-right" slot="end"></saf-icon>
+						<span slot="card-title">
+							<span>Card title</span>
+						</span>
+						<span slot="description"
+							>Short description for the card providing more details</span
+						>
+					</saf-action-card-action>
+					<div slot="controls">
+						<div class="footer-buttons" style="margin-inline-start: auto">
+							<saf-tooltip
+								id="tooltip-edit-button-2"
+								anchor="edit-button-2"
+								placement="top"
+                aria-hidden="true"
+								>Edit</saf-tooltip
+							>
+							<saf-button
+								nested-item
+								id="edit-button-2"
+								icon-only
+								density="extra-compact"
+								appearance="tertiary"
+								a11y-aria-label="Edit"
+							>
+								<saf-icon icon-name="pen-line"></saf-icon>
+							</saf-button>
+							<saf-tooltip
+								id="tooltip-delete-button-2"
+								anchor="delete-button-2"
+								placement="top"
+                aria-hidden="true"
+								>Delete</saf-tooltip
+							>
+							<saf-button
+								nested-item
+								id="delete-button-2"
+								icon-only
+								density="extra-compact"
+								appearance="tertiary"
+								a11y-aria-label="Delete"
+							>
+								<saf-icon icon-name="trash-can"></saf-icon>
+							</saf-button>
+							<saf-divider orientation="vertical" role="presentation"></saf-divider>
+							<saf-tooltip
+								id="tooltip-favorite-button-2"
+								anchor="favorite-button-2"
+								placement="top"
+                aria-hidden="true"
+								>Favorite</saf-tooltip
+							>
+							<saf-button
+								nested-item
+								id="favorite-button-2"
+								icon-only
+								density="extra-compact"
+								appearance="tertiary"
+								a11y-aria-label="Favorite"
+								aria-pressed="false"
+							>
+								<saf-icon icon-name="star"></saf-icon>
+							</saf-button>
+						</div>
+					</div>
+				</saf-action-card>
+			</li>
+			<li>
+				<saf-action-card>
+					<saf-action-card-action
+						mode="button"
+						(click)="onButtonClick($event)"
+					>
+						<saf-icon icon-name="sparkles" slot="start"></saf-icon>
+						<saf-icon icon-name="chevron-right" slot="end"></saf-icon>
+						<span slot="card-title">
+							<span>Card title</span>
+						</span>
+						<span slot="description"
+							>Short description for the card providing more details</span
+						>
+					</saf-action-card-action>
+					<div slot="controls" class="controls-grid">
+						<div>This is longer content that wraps onto two lines</div>
+						<div class="footer-buttons">
+							<saf-tooltip
+								id="tooltip-edit-button-3"
+								anchor="edit-button-3"
+								placement="top"
+                aria-hidden="true"
+								>Edit</saf-tooltip
+							>
+							<saf-button
+								nested-item
+								id="edit-button-3"
+								icon-only
+								density="extra-compact"
+								appearance="tertiary"
+								a11y-aria-label="Edit"
+							>
+								<saf-icon icon-name="pen-line"></saf-icon>
+							</saf-button>
+							<saf-tooltip
+								id="tooltip-delete-button-3"
+								anchor="delete-button-3"
+								placement="top"
+                aria-hidden="true"
+								>Delete</saf-tooltip
+							>
+							<saf-button
+								nested-item
+								id="delete-button-3"
+								icon-only
+								density="extra-compact"
+								appearance="tertiary"
+								a11y-aria-label="Delete"
+							>
+								<saf-icon icon-name="trash-can"></saf-icon>
+							</saf-button>
+							<saf-divider orientation="vertical" role="presentation"></saf-divider>
+							<saf-tooltip
+								id="tooltip-favorite-button-3"
+								anchor="favorite-button-3"
+								placement="top"
+                aria-hidden="true"
+								>Favorite</saf-tooltip
+							>
+							<saf-button
+								nested-item
+								id="favorite-button-3"
+								icon-only
+								density="extra-compact"
+								appearance="tertiary"
+								a11y-aria-label="Favorite"
+								aria-pressed="false"
+							>
+								<saf-icon icon-name="star"></saf-icon>
+							</saf-button>
+						</div>
+					</div>
+				</saf-action-card>
+			</li>
+			<li>
+				<saf-action-card>
+					<saf-action-card-action
+						mode="a"
+						href="https://saffron.thomsonreuters.com"
+						target="_blank"
+					>
+						<saf-icon icon-name="sparkles" slot="start"></saf-icon>
+						<saf-icon
+							icon-name="external-link"
+							slot="end"
+							[presentation]="false"
+							aria-label="(opens in new tab)"
+						></saf-icon>
+						<span slot="card-title">Card title</span>
+						<saf-badge slot="badge" density="compact" status="neutral" emphasis="subtle"
+							>Beta</saf-badge
+						>
+						<span slot="description"
+							>Short description for the card providing more details</span
+						>
+					</saf-action-card-action>
+					<div slot="controls">
+						<div>Metadata</div>
+						<div class="footer-buttons">
+							<saf-tooltip
+								id="tooltip-edit-button-4"
+								anchor="edit-button-4"
+								placement="top"
+                aria-hidden="true"
+								>Edit</saf-tooltip
+							>
+							<saf-button
+								nested-item
+								id="edit-button-4"
+								icon-only
+								density="extra-compact"
+								appearance="tertiary"
+								a11y-aria-label="Edit"
+							>
+								<saf-icon icon-name="pen-line"></saf-icon>
+							</saf-button>
+							<saf-tooltip
+								id="tooltip-delete-button-4"
+								anchor="delete-button-4"
+								placement="top"
+                aria-hidden="true"
+								>Delete</saf-tooltip
+							>
+							<saf-button
+								nested-item
+								id="delete-button-4"
+								icon-only
+								density="extra-compact"
+								appearance="tertiary"
+								a11y-aria-label="Delete"
+							>
+								<saf-icon icon-name="trash-can"></saf-icon>
+							</saf-button>
+							<saf-divider orientation="vertical" role="presentation"></saf-divider>
+							<saf-tooltip
+								id="tooltip-favorite-button-4"
+								anchor="favorite-button-4"
+								placement="top"
+                aria-hidden="true"
+								>Favorite</saf-tooltip
+							>
+							<saf-button
+								nested-item
+								id="favorite-button-4"
+								icon-only
+								density="extra-compact"
+								appearance="tertiary"
+								a11y-aria-label="Favorite"
+								aria-pressed="false"
+							>
+								<saf-icon icon-name="star"></saf-icon>
+							</saf-button>
+						</div>
+					</div>
+				</saf-action-card>
+			</li>
+		</ul>
+  </div>
+</section>

@@ -1,0 +1,172 @@
+/* Study setup styles */
+
+.layout-grid {
+  padding: var(--saf-spacing-8) var(--saf-spacing-10);
+  @media (max-width: 320px) {
+      padding: var(--saf-spacing-4);
+  }
+}
+.layout-grid-heading {
+  border-bottom: var(--saf-line-width-thin) solid var(--saf-color-border-subtle);
+  background-color: var(--saf-color-background-level-2);
+}
+.border {
+  border-radius: var(--saf-border-radius-sm);
+  border: var(--saf-line-width-thin) solid var(--saf-color-border-strong);
+}
+
+.layout-menu {
+  display: block;
+}
+
+.z-index-1 {
+  z-index: 1;
+  position: relative;
+}
+
+.mainContent {
+display: flex;
+}
+
+.content {
+flex: 1;
+background: var(--saf-color-background-level-0);
+}
+
+.layout-grid-border {
+border: 1px solid var(--saf-color-border-subtle);
+border-radius: var(--saf-border-radius-sm);
+box-shadow: var(--saf-drop-shadow-elevation-1);
+}
+.container {
+align-items: center;
+display: flex;
+justify-content: center;
+}
+
+.stretch20 {
+min-height: 20vh;
+}
+.stretch30 {
+min-height: 30vh;
+}
+
+.stretch50 {
+min-height: 50vh;
+}
+
+.stretch80 {
+min-height: 80vh;
+}
+.detail-containers {
+  border: 1px solid var(--saf-color-border-subtle);
+  border-radius: var(--saf-border-radius-sm);
+  min-height: 200px;
+}
+.detail-containers saf-list::part(list) {
+  padding-inline-start: 0;
+}
+
+/* this is a temp fix, the font var --saf-type-label-text-md-strong-standard
+is undefined */
+saf-button {
+  font: 500 16px/150% "Clario", "Helvetica Neue", Arial, sans-serif;
+}
+
+.practice-areas {
+  container-name: practiceAreas;
+  container-type: inline-size;
+}
+
+.practice-areas div {
+  display: block;
+  column-count: 3
+}
+
+@container practiceAreas (max-width: 20em) {
+  .practice-areas div {
+    column-count: initial;
+  }
+}
+
+
+.practice-areas saf-anchor {
+  display: block;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.main-box {
+  border: 1px solid var(--saf-color-border-subtle);
+  border-radius: var(--saf-border-radius-sm);
+  background: var(--saf-color-background-level-0);
+}
+
+.practical-law {
+  background: var(--saf-color-background-level-0);
+  display: block;
+}
+
+.main-box:first-of-type {
+  margin-bottom: 24px;
+}
+
+.right-side-bar {
+  border-bottom: 1px solid var(--saf-color-border-subtle);
+}
+
+.featured-item {
+  flex-direction: row;
+}
+
+.featured-item div {
+  padding-left: 8px;
+}
+
+.practical-law h3 {
+  margin: 16px 0;
+  font-size: 24px;
+}
+
+.practical-law  h4 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.layout-template {
+border: var(--saf-line-width-thin) solid #e5e5e5;
+}
+
+
+.layout-template saf-footer {
+border-top: 1px solid #e5e5e5;
+}
+
+.main-nav {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: space-between;
+height: 58px;
+border-bottom: 1px solid #e0e0e0;
+width: 100%
+}
+
+.main-nav nav ul {
+display: flex;
+align-items: center;
+list-style-type: none;
+padding: 0;
+margin: 0;
+}
+
+.main-nav nav li {
+padding: 0 24px;
+}
+
+.header-container {
+  background: var(--saf-color-background-level-0);
+  border-bottom: 1px solid #e0e0e0;
+}

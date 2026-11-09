@@ -1,0 +1,522 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="prompt">AI Prompt</h3>
+    <saf-anchor href="#prompt">
+      <app-link-icon></app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <!-- Default -->
+  <div class="Component-heading">
+    <h4 id="ai-prompt-default">Default</h4>
+    <saf-anchor href="#ai-prompt-default">
+      <app-link-icon></app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <saf-ai-prompt
+      label="How can I help?"
+      placeholder="What would you like to do today?"
+      instructional-text="Ask me a question to get started."
+      aria-label="AI prompt input"
+      auto-expand
+      min-height="56"
+      max-height="300"
+      show-remaining-text
+      heading-as-label>
+      <span slot="security-caption">
+        Your data is
+        <saf-anchor href="https://www.thomsonreuters.com/en/privacy-statement">
+          secure and private.
+        </saf-anchor>
+      </span>
+    </saf-ai-prompt>
+  </div>
+
+  <!-- Error state with character count -->
+  <div class="Component-heading">
+    <h4 id="ai-prompt-error-state">Error state with character count</h4>
+    <saf-anchor href="#ai-prompt-error-state">
+      <app-link-icon></app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <saf-ai-prompt
+      label="How can I help?"
+      placeholder="What would you like to do today?"
+      instructional-text="Ask me a question to get started."
+      aria-label="AI prompt input with error state"
+      auto-expand
+      min-height="56"
+      max-height="300"
+      validation-message="Something went wrong. Your request could not be completed at this time. Try again in a moment or ask another question."
+      invalid
+      show-remaining-text
+      heading-as-label>
+      <span slot="security-caption">
+        Your data is
+        <saf-anchor href="https://www.thomsonreuters.com/en/privacy-statement">
+          secure and private.
+        </saf-anchor>
+      </span>
+    </saf-ai-prompt>
+  </div>
+
+  <!-- Without heading label -->
+  <div class="Component-heading">
+    <h4 id="ai-prompt-without-heading-label">Without heading label</h4>
+    <saf-anchor href="#ai-prompt-without-heading-label">
+      <app-link-icon></app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo">
+    <saf-ai-prompt
+      label="How can I help?"
+      placeholder="What would you like to do today?"
+      instructional-text="Ask me a question to get started."
+      aria-label="AI prompt input without heading"
+      auto-expand
+      min-height="56"
+      max-height="300"
+      show-remaining-text>
+      <span slot="security-caption">
+        Your data is
+        <saf-anchor href="https://www.thomsonreuters.com/en/privacy-statement">
+          secure and private.
+        </saf-anchor>
+      </span>
+    </saf-ai-prompt>
+  </div>
+  <!-- Expands Up -->
+  <div class="Component-heading">
+    <h4 id="ai-prompt-expands-up">Expands Up</h4>
+    <saf-anchor href="#ai-prompt-expands-up">
+      <app-link-icon></app-link-icon>
+    </saf-anchor>
+  </div>
+  <p class="Component-message">
+    This prompt is positioned at the bottom and expands upward
+  </p>
+  <div
+    class="Component-demo"
+    style="
+      height: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      border: 1px solid var(--saf-color-border-subtle);
+      border-radius: var(--saf-border-radius-sm);
+      padding: 16px;
+    ">
+    <saf-ai-prompt
+      label="Enter a message"
+      placeholder="Ask a question or enter the topic you'd like to research..."
+      instructional-text="Instructional hint text displayed below the input"
+      aria-label="AI prompt input that expands upward"
+      auto-expand
+      min-height="56"
+      max-height="300"
+      data-testid="expands-up-prompt">
+    </saf-ai-prompt>
+  </div>
+  <!-- Full Composer -->
+  <div class="Component-heading">
+    <h4 id="ai-prompt-with-custom-options">With additional actions</h4>
+    <saf-anchor href="#ai-prompt-with-custom-options">
+      <app-link-icon></app-link-icon>
+    </saf-anchor>
+  </div>
+  <p class="Component-message">{{ composerMessage }}</p>
+  <div class="Component-demo">
+    <saf-ai-prompt
+      label="How can I help?"
+      placeholder="What would you like to do today?"
+      instructional-text="Ask me a question to get started."
+      heading-as-label
+      aria-label="How can I help?"
+      [value]="composerValue"
+      auto-expand
+      min-height="80"
+      max-height="200"
+      show-remaining-text
+      (change)="handleComposerChange($event)"
+      (send)="handleSend($event)"
+      data-testid="composer-prompt">
+      <div slot="actions" style="display: flex; gap: 8px; align-items: center;">
+        <saf-button
+          appearance="tertiary"
+          (click)="handleActionClick('Attach')"
+          density="compact"
+          aria-label="Attach file">
+          <saf-icon slot="start" icon-name="upload"></saf-icon>
+          <span>Upload</span>
+        </saf-button>
+        <saf-button
+          appearance="tertiary"
+          icon-only
+          density="compact"
+          (click)="handleActionClick('Voice')"
+          aria-label="Voice input">
+          <saf-icon icon-name="microphone"></saf-icon>
+        </saf-button>
+      </div>
+    </saf-ai-prompt>
+    <p><strong>Prompt value:</strong> {{ composerValue }}</p>
+    @if (sendedValue) {
+      <p><strong>Sended value:</strong> {{ sendedValue }}</p>
+    }
+  </div>
+  <!-- With loading -->
+  <div class="Component-heading">
+    <h4 id="ai-prompt-with-loading">With loading</h4>
+    <saf-anchor href="#ai-prompt-with-loading">
+      <app-link-icon></app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-demo" style="margin-bottom: 100px;">
+    <saf-ai-prompt
+      label="How can I help?"
+      placeholder="What would you like to do today?"
+      instructional-text="Ask me a question to get started."
+      heading-as-label
+      aria-label="How can I help?"
+      auto-expand
+      [processing]="processing"
+      (stop)="onStop()"
+      (send)="onSend()"
+      data-testid="loading-prompt">
+      <span slot="security-caption">
+        Your data is
+        <saf-anchor href="https://www.thomsonreuters.com/en/privacy-statement">
+          secure and private.
+        </saf-anchor>
+      </span>
+    </saf-ai-prompt>
+    @if (cancelled) {
+      <saf-alert
+        appearance="informational"
+        duration="0"
+        close-aria-label="Close alert"
+        [hideCloseButton]="false"
+        alert-type="toast">
+        The request was cancelled!
+      </saf-alert>
+    }
+  </div>
+
+  <!-- With inline mention -->
+  <div class="Component-heading">
+    <h4 id="ai-prompt-with-agent-menu">With inline mention</h4>
+    <saf-anchor href="#ai-prompt-with-agent-menu">
+      <app-link-icon></app-link-icon>
+    </saf-anchor>
+  </div>
+  <p class="Component-message">
+    This demonstrates the agent menu that can be triggered by typing "@", "#",
+    or "/" in the prompt. The menus are populated with agent options, tags, and
+    commands respectively.
+  </p>
+  <div class="Component-demo" style="margin-bottom: 100px;">
+    <saf-ai-prompt
+      label="How can I help?"
+      heading-as-label
+      placeholder="Enter @ to see agent options, # for tags, or / for commands..."
+      instructional-text="Ask me a question to get started."
+      aria-label="How can I help?"
+      auto-expand
+      min-height="56"
+      max-height="300"
+      [menuTriggers]="menuTriggers"
+      data-testid="agent-menu-prompt">
+      <span slot="security-caption">
+        Your data is
+        <saf-anchor href="https://www.thomsonreuters.com/en/privacy-statement">
+          secure and private.
+        </saf-anchor>
+      </span>
+      <saf-listbox slot="menu" id="agent-menu" aria-label="Agent menu">
+        <saf-option>Claude 4</saf-option>
+        <saf-option>Claude 4.5</saf-option>
+        <saf-option>Workspace</saf-option>
+        <saf-option>OneDrive</saf-option>
+        <saf-option>Dropbox</saf-option>
+        <saf-option>Google Drive</saf-option>
+        <saf-option>Google Mail</saf-option>
+        <saf-option>Google Home</saf-option>
+      </saf-listbox>
+      <saf-listbox slot="menu" id="tag-menu" aria-label="Tag menu">
+        <saf-option>browser</saf-option>
+        <saf-option>codebase</saf-option>
+        <saf-option>workflows</saf-option>
+        <saf-option>testing</saf-option>
+        <saf-option>accessibility</saf-option>
+      </saf-listbox>
+      <saf-listbox slot="menu" id="command-menu" aria-label="Command menu">
+        <saf-option>explain</saf-option>
+        <saf-option>fix</saf-option>
+        <saf-option>setupTests</saf-option>
+        <saf-option>refactor</saf-option>
+        <saf-option>generateDocs</saf-option>
+      </saf-listbox>
+    </saf-ai-prompt>
+  </div>
+
+  <!-- With file upload -->
+  <div class="Component-heading">
+    <h4 id="ai-prompt-with-file-upload">With file upload</h4>
+    <saf-anchor href="#ai-prompt-with-file-upload">
+      <app-link-icon></app-link-icon>
+    </saf-anchor>
+  </div>
+  <p class="Component-message">
+    This demonstrates file upload functionality combined with inline mention. You
+    can upload multiple files (up to 50, max 1MB each) and trigger menus by
+    typing "@", "#", or "/" in the prompt. The send button enables when files
+    are uploaded.
+  </p>
+  <div class="Component-demo" style="min-height: 400px; margin-bottom: 100px;">
+    <style>
+      saf-alert::part(control) {
+        box-sizing: border-box;
+      }
+      .multi-error::part(content) {
+        display: block;
+      }
+      .upload-files-header {
+        font-size: var(--saf-font-size-md);
+        margin-block: var(--saf-spacing-2);
+      }
+      .upload-files-header:focus {
+        outline: none;
+      }
+      .alert-heading {
+        margin-block: 0;
+      }
+      saf-list saf-list-item {
+        margin-block-start: var(--saf-spacing-1);
+      }
+      .chip-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--saf-spacing-2);
+      }
+    </style>
+    <saf-ai-prompt
+      [sendDisabled]="sendDisabled"
+      label="How can I help?"
+      heading-as-label
+      instructional-text="Ask me a question to get started."
+      file-upload
+      [menuTriggers]="menuTriggers"
+      (send)="handleFileUploadSend()"
+      data-testid="file-upload-prompt">
+      <div slot="additional-content">
+        <div
+          aria-live="polite"
+          aria-atomic="true"
+          style="
+            position: absolute;
+            height: 1px;
+            width: 1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+          ">
+          {{ liveAnnouncement }}
+        </div>
+        @if (fileErrors.length > 0) {
+          <saf-alert
+            (close)="handleAlertClose()"
+            tabIndex="0"
+            #uploadAlert
+            [class.multi-error]="
+              fileErrors.reduce(
+                (count, error) => count + error.rejected.length,
+                0
+              ) > 1
+            "
+            appearance="error"
+            alert-type="inline">
+            <span aria-live="assertive" aria-atomic="true">
+              @if (
+                generateErrorMessage(fileErrors) &&
+                typeof generateErrorMessage(fileErrors) === 'string'
+              ) {
+                {{ generateErrorMessage(fileErrors) }}
+              } @else if (
+                generateErrorMessage(fileErrors) &&
+                typeof generateErrorMessage(fileErrors) === 'object'
+              ) {
+                @let errorMsg = generateErrorMessage(fileErrors);
+                <div
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    gap: var(--saf-spacing-4);
+                  ">
+                  @if (errorMsg.sizeFiles && errorMsg.sizeFiles.length === 1) {
+                    <span>
+                      {{ errorMsg.sizeFiles[0].name }} exceeds the file size
+                      limit. It was not uploaded.
+                    </span>
+                  }
+                  @if (errorMsg.sizeFiles && errorMsg.sizeFiles.length > 1) {
+                    <div>
+                      <h6 class="alert-heading">
+                        <saf-text appearance="heading-md" density="inherit">
+                          The following files were not uploaded because they
+                          exceed the file size limit:
+                        </saf-text>
+                      </h6>
+                      <saf-list size="medium">
+                        @for (file of errorMsg.sizeFiles; track file.name) {
+                          <saf-list-item>{{ file.name }}</saf-list-item>
+                        }
+                      </saf-list>
+                    </div>
+                  }
+                  @if (errorMsg.typeFiles && errorMsg.typeFiles.length === 1) {
+                    <h6 class="alert-heading">
+                      <saf-text
+                        appearance="heading-md"
+                        density="inherit"
+                        style="margin: 0">
+                        {{ errorMsg.typeFiles[0].name }} uses the wrong file
+                        type. It was not uploaded.
+                      </saf-text>
+                    </h6>
+                  }
+                  @if (errorMsg.typeFiles && errorMsg.typeFiles.length > 1) {
+                    <div>
+                      <h6 class="alert-heading">
+                        <saf-text appearance="heading-md" density="inherit">
+                          The following files were not uploaded because they
+                          were the wrong type:
+                        </saf-text>
+                      </h6>
+                      <saf-list size="medium">
+                        @for (file of errorMsg.typeFiles; track file.name) {
+                          <saf-list-item>{{ file.name }}</saf-list-item>
+                        }
+                      </saf-list>
+                    </div>
+                  }
+                </div>
+              }
+            </span>
+            <saf-button
+              slot="end"
+              appearance="tertiary"
+              aria-label="Dismiss error message"
+              (click)="handleAlertClose()">
+              <saf-icon icon-name="close" size="16"></saf-icon>
+            </saf-button>
+          </saf-alert>
+        }
+        @if (uploadFiles.length > 0) {
+          <div>
+            <p #chipGroupHeaderRef class="upload-files-header" tabIndex="-1">
+              {{ liveAnnouncement }}
+            </p>
+            <div class="chip-group">
+              <saf-group-focus-manager
+                fallback-selector="#upload-file-button"
+                role="group"
+                aria-label="Uploaded files">
+                @for (file of visibleFiles; track file.id) {
+                  <saf-chip
+                    closeable
+                    [close-button-label]="'Remove ' + file.name"
+                    (remove)="removeFile(file.id)">
+                    {{ file.name }}
+                  </saf-chip>
+                }
+                @if (uploadFiles.length > VISIBLE_CHIPS_COUNT) {
+                  <saf-button
+                    appearance="tertiary"
+                    density="extra-compact"
+                    (click)="toggleShowAllChips()">
+                    @if (showAllChips) {
+                      <saf-icon icon-name="minus" size="16" slot="start">
+                      </saf-icon>
+                      Show less
+                    } @else {
+                      <saf-icon icon-name="plus" size="16" slot="start">
+                      </saf-icon>
+                      {{ uploadFiles.length - VISIBLE_CHIPS_COUNT }} more items
+                    }
+                  </saf-button>
+                }
+              </saf-group-focus-manager>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div slot="actions">
+        <saf-file-upload
+          multiple
+          max-files="50"
+          accept=".pdf, .docx, .png, .jpg, .jpeg, .md"
+          max-file-size="1000000"
+          (click)="handleUploadClick()"
+          (files-selected)="handleFilesSelected($event)"
+          (invalid-selection)="handleInvalidSelection($event)">
+          <saf-button
+            id="upload-file-button"
+            density="compact"
+            #uploadButtonRef
+            appearance="tertiary">
+            <saf-icon icon-name="upload" size="16" slot="start"></saf-icon>
+            Upload Files
+            <saf-sr-only> Types: PDF, DOCX, PNG, JPG. Max: 1MB. </saf-sr-only>
+          </saf-button>
+        </saf-file-upload>
+        <saf-tooltip
+          id="upload-button-tooltip"
+          anchor="upload-file-button"
+          aria-hidden="true"
+          position="top">
+          Types: PDF, DOCX, PNG, JPG. Max: 1MB.
+        </saf-tooltip>
+        <saf-button
+          id="library-button"
+          appearance="tertiary"
+          density="compact">
+          <saf-icon icon-name="sparkles" size="16" slot="start"></saf-icon>
+          Library
+        </saf-button>
+      </div>
+      <div slot="security-caption">
+        <span>Your data is </span>
+        <saf-anchor href="https://www.thomsonreuters.com/en/privacy-statement">
+          secure and private.
+        </saf-anchor>
+      </div>
+      <saf-listbox slot="menu" id="agent-menu" aria-label="Agent menu">
+        <saf-option>Claude 4</saf-option>
+        <saf-option>Claude 4.5</saf-option>
+        <saf-option>Workspace</saf-option>
+        <saf-option>OneDrive</saf-option>
+        <saf-option>Dropbox</saf-option>
+        <saf-option>Google Drive</saf-option>
+        <saf-option>Google Mail</saf-option>
+        <saf-option>Google Home</saf-option>
+      </saf-listbox>
+      <saf-listbox slot="menu" id="tag-menu" aria-label="Tag menu">
+        <saf-option>browser</saf-option>
+        <saf-option>codebase</saf-option>
+        <saf-option>workflows</saf-option>
+        <saf-option>testing</saf-option>
+        <saf-option>accessibility</saf-option>
+      </saf-listbox>
+      <saf-listbox slot="menu" id="command-menu" aria-label="Command menu">
+        <saf-option>explain</saf-option>
+        <saf-option>fix</saf-option>
+        <saf-option>setupTests</saf-option>
+        <saf-option>refactor</saf-option>
+        <saf-option>generateDocs</saf-option>
+      </saf-listbox>
+    </saf-ai-prompt>
+  </div>
+</section>

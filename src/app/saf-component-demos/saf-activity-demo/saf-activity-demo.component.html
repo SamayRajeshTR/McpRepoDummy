@@ -1,0 +1,77 @@
+<section class="Component">
+  <app-in-page-navigation [links]="inPageLinks" />
+  <div class="Component-heading">
+    <h3 id="activity">Activity</h3>
+    <saf-anchor href="#activity">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+  <div class="Component-heading">
+    <h4 id="activity-note">Note</h4>
+    <saf-anchor href="#activity-note">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <div class="Component-demo Component-demo--centered">
+    <saf-activity-note> Activity </saf-activity-note>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="activity-icon">Activity with icon</h4>
+    <saf-anchor href="#activity-icon">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <div class="Component-demo Component-demo--centered">
+    <saf-activity time="5 days ago" time-id="fa-timeId" header-id="fa-headerId">
+      <saf-icon slot="start" icon-name="list-check"></saf-icon>
+      <h4 slot="title">Activity text</h4>
+      <saf-activity-note>Note 1</saf-activity-note>
+      <saf-activity-note>Note 2</saf-activity-note>
+      <saf-activity-note>Note 3</saf-activity-note>
+    </saf-activity>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="activity-signed-in-no-image-avatar">Signed in no image avatar</h4>
+    <saf-anchor href="#activity-signed-in-no-image-avatar">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <div class="Component-demo Component-demo--centered">
+    <saf-activity time="1 day ago">
+      <saf-avatar slot="start" label="Tebin Raouf">TR</saf-avatar>
+      <h4 slot="title">Tebin's activity feed</h4>
+      <saf-activity-note>Published a document.</saf-activity-note>
+      <saf-activity-note>Shared a link.</saf-activity-note>
+      <saf-activity-note>Left a comment.</saf-activity-note>
+    </saf-activity>
+  </div>
+
+  <div class="Component-heading">
+    <h4 id="activity-signed-in-with-image-avatar">
+      Signed in with image avatar
+    </h4>
+    <saf-anchor href="#activity-signed-in-with-image-avatar">
+      <app-link-icon> </app-link-icon>
+    </saf-anchor>
+  </div>
+
+  <div class="Component-demo Component-demo--centered">
+    <saf-activity time="1 month ago">
+      <saf-avatar
+        slot="start"
+        type="image"
+        img-src="https://avatars.githubusercontent.com/u/23642967?v=4"
+        label="Tebin Raouf"
+      ></saf-avatar>
+      <h4 slot="title">Tebin's activity feed</h4>
+      <saf-activity-note>Published a document.</saf-activity-note>
+      <saf-activity-note>Shared a link.</saf-activity-note>
+      <saf-activity-note>Left a comment.</saf-activity-note>
+    </saf-activity>
+  </div>
+</section>

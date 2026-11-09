@@ -1,0 +1,116 @@
+version: "1.0"
+# NOTE: GitHub OIDC sets job_workflow_ref to @refs/pull/<N>/merge for pull_request events
+# and @refs/heads/<branch> for workflow_dispatch / push. Policies for workflows that fire
+# from PR events MUST include the pull-merge form in the job_workflow_ref regex.
+
+trust_policies:
+  - name: "saffron-design-system-alpha-dispatch"
+    description: "Allow alpha-packages workflow to trigger repository_dispatch on saffron_angular-example (pull_request:closed AND workflow_dispatch)"
+    issuer: "https://token.actions.githubusercontent.com"
+    rules:
+      - name: "alpha-dispatch-main-or-pr"
+        logic: AND
+        conditions:
+          - field: "repository"
+            pattern: "^tr/saffron_design_system$"
+          - field: "job_workflow_ref"
+            pattern: "^tr/saffron_design_system/.github/workflows/alpha-packages\\.yml@refs/(heads/main|pull/[0-9]+/merge)$"
+    permissions:
+      actions: write
+
+  - name: "saffron-design-system-generate-dats"
+    description: "Allow generate-component-dats workflow to create issues on saffron_angular-example (pull_request:labeled)"
+    issuer: "https://token.actions.githubusercontent.com"
+    rules:
+      - name: "generate-dats-pr"
+        logic: AND
+        conditions:
+          - field: "repository"
+            pattern: "^tr/saffron_design_system$"
+          - field: "job_workflow_ref"
+            pattern: "^tr/saffron_design_system/.github/workflows/generate-component-dats\\.yml@refs/pull/[0-9]+/merge$"
+          - field: "event_name"
+            pattern: "^pull_request$"
+    permissions:
+      issues: write
+
+  # sync-dat-demos-to-paiella.yml — cross-repo entry; source workflow lives in
+  # tr/saffron_design_system, this repo is a read-only checkout source.
+  # Replaces secrets.CARLOS_SYNC_PAT. Ref AB#176369.
+  - name: "saffron-sync-dat-demos"
+    description: "Allow tr/saffron_design_system sync-dat-demos-to-paiella.yml to read-checkout this repo"
+    issuer: "https://token.actions.githubusercontent.com"
+    rules:
+      - name: "sync-dat-demos-dispatch-main-or-next"
+        logic: AND
+        conditions:
+          - field: "repository"
+            pattern: "^tr/saffron_design_system$"
+          - field: "job_workflow_ref"
+            pattern: "^tr/saffron_design_system/.github/workflows/sync-dat-demos-to-paiella\\.yml@refs/heads/(main|next)$"
+          - field: "event_name"
+            pattern: "^workflow_dispatch$"
+    permissions:
+      contents: read
+
+  # sync-extraction-to-mcp-server.yml — cross-repo entry; source workflow lives
+  # in tr/saffron_design_system. Reads demos from this repo as part of the
+  # post-release extraction sync (folded in from sync-dat-demos-to-paiella.yml).
+  - name: "saffron-sync-extraction"
+    description: "Allow tr/saffron_design_system sync-extraction-to-mcp-server.yml to read-checkout this repo"
+    issuer: "https://token.actions.githubusercontent.com"
+    rules:
+      - name: "sync-extraction-dispatch-or-release"
+        logic: AND
+        conditions:
+          - field: "repository"
+            pattern: "^tr/saffron_design_system$"
+          - field: "job_workflow_ref"
+            pattern: "^tr/saffron_design_system/.github/workflows/sync-extraction-to-mcp-server\\.yml@refs/heads/(main|next)$"
+          - field: "event_name"
+            pattern: "^(workflow_dispatch|workflow_run)$"
+    permissions:
+      contents: read
+
+  # gate-smoke-test.yml — zero side-effect GATE exchange verification.
+  # This repo has never been a GATE source before this migration; this entry
+  # exists purely to prove the OIDC→GATE exchange works from main before any
+  # consumer workflow (tag-contributors-prs.yml) depends on it.
+  - name: "gate-smoke-test"
+    description: "Verify OIDC→GATE exchange from main (read-only, no side effects)"
+    issuer: "https://token.actions.githubusercontent.com"
+    rules:
+      - name: "smoke-test-dispatch-main"
+        logic: AND
+        conditions:
+          - field: "repository"
+            pattern: "^tr/saffron_angular-example$"
+          - field: "job_workflow_ref"
+            pattern: "^tr/saffron_angular-example/.github/workflows/gate-smoke-test\\.yml@refs/heads/main$"
+          - field: "event_name"
+            pattern: "^workflow_dispatch$"
+    permissions:
+      contents: read
+
+  # tag-contributors-prs.yml — adds contribution label to external PRs on open/reopen.
+  # Replaces secrets.BOBBY_GITHUB (dead PAT, confirmed 2026-09-08). members:read is
+  # intentionally NOT requested — GATE rejects org-scoped permissions in repo-scoped
+  # requests. The workflow uses github.event.pull_request.author_association (no API
+  # call, no token) to distinguish internal from external contributors instead.
+  # Mirrors tr/saffron_design_system's identical fix (AB#158165, PR #2836).
+  - name: "tag-contributors-prs"
+    description: "Allow tag-contributors-prs workflow to read/write PR labels on pull_request events"
+    issuer: "https://token.actions.githubusercontent.com"
+    rules:
+      - name: "tag-prs-pull-request"
+        logic: AND
+        conditions:
+          - field: "repository"
+            pattern: "^tr/saffron_angular-example$"
+          - field: "job_workflow_ref"
+            pattern: "^tr/saffron_angular-example/.github/workflows/tag-contributors-prs\\.yml@refs/pull/[0-9]+/merge$"
+          - field: "event_name"
+            pattern: "^pull_request$"
+    permissions:
+      pull_requests: write
+      issues: write
