@@ -131,7 +131,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   }
 
   navigateHome(): void {
-    this.router.navigate(['/getting-started']);
+    this.router.navigate(['/password-generator']);
   }
 
   isActive(path: string): boolean {

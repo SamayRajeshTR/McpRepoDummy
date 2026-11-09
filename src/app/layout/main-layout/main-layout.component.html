@@ -19,7 +19,7 @@
     </saf-button>
 
     <!-- Logo -->
-    <saf-anchor slot="logo" href="/getting-started" (click)="$event.preventDefault(); navigateHome()">
+    <saf-anchor slot="logo" href="#/password-generator" (click)="$event.preventDefault(); navigateHome()">
       <saf-logo appearance="1-color-reversed" product-name="Saffron Angular Example"></saf-logo>
     </saf-anchor>
 
@@ -131,10 +131,10 @@
             <section class="breadcrumb-section">
               <saf-breadcrumb>
                 <saf-breadcrumb-item
-                  href="/getting-started"
+                  href="#/password-generator"
                   (click)="$event.preventDefault(); navigateHome()"
                 >Home</saf-breadcrumb-item>
-                @if (currentItem && currentItem.path !== '/getting-started') {
+                @if (currentItem && currentItem.path !== '/password-generator') {
                   <saf-breadcrumb-item>{{ currentItem.label }}</saf-breadcrumb-item>
                 }
               </saf-breadcrumb>

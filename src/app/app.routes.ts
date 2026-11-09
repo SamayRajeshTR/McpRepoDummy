@@ -1,6 +1,7 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
 import { GettingStartedComponent } from './getting-started/getting-started.component';
+import { PasswordGeneratorComponent } from './password-generator/password-generator.component';
 import { TokenDemo } from './token-demo/token-demo.component';
 import { TokenStudy } from './token-study/token-study.component';
 import { DocumentationStudy } from './documentation-study/documentation-study.component';
@@ -93,6 +94,11 @@ export const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       // Landing page
+  {
+    path: 'password-generator',
+    component: PasswordGeneratorComponent,
+    title: 'Secure password generator',
+  },
   {
     path: 'getting-started',
     component: GettingStartedComponent,
@@ -439,7 +445,7 @@ export const routes: Routes = [
     component: DocumentationStudy,
     title: 'Documentation study',
   },
-      { path: '', redirectTo: 'getting-started', pathMatch: 'full' },
+      { path: '', redirectTo: 'password-generator', pathMatch: 'full' },
       // Intercepts the hash anchor that saf-back-to-top generates (<a href="#page-top">).
       // HashLocationStrategy treats the hash as a route, so the router would otherwise
       // redirect to /getting-started. Returning false cancels the navigation (URL unchanged)

@@ -24,6 +24,13 @@ export interface NavigationCategoryGroup {
 }
 
 export const allNavigationItems: NavigationItem[] = [
+  {
+    id: 'password-generator',
+    label: 'Password Generator',
+    path: '/password-generator',
+    icon: 'key',
+    category: 'getting-started',
+  },
   // Getting Started
   {
     id: 'getting-started',
