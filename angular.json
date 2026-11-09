@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "saffron-angular-example": {
+    "password-generator": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -14,7 +14,7 @@
           "builder": "@angular/build:application",
           "options": {
             "outputPath": {
-              "base": "dist/saffron-angular-example"
+              "base": "dist/password-generator"
             },
             "index": "src/index.html",
             "polyfills": [
@@ -27,8 +27,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/@saffron/core-styles/dist/wijmo_5_20252_44.css"
+              "src/styles.scss"
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
@@ -81,10 +80,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "saffron-angular-example:build:production"
+              "buildTarget": "password-generator:build:production"
             },
             "development": {
-              "buildTarget": "saffron-angular-example:build:development"
+              "buildTarget": "password-generator:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -92,7 +91,7 @@
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n",
           "options": {
-            "buildTarget": "saffron-angular-example:build"
+            "buildTarget": "password-generator:build"
           }
         },
         "test": {
@@ -111,8 +110,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/@saffron/core-styles/dist/wijmo_5_20252_44.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
@@ -121,9 +119,6 @@
           "builder": "angular-cli-ghpages:deploy",
           "options": {
             "baseHref": "./",
-            "name": "Saffron Design System",
-            "email": "DSFeedback@tr.com",
-            "cname": "tr.github.io",
             "branch": "gh-pages"
           }
         },

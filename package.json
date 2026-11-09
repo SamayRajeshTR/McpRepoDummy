@@ -1,5 +1,5 @@
 {
-  "name": "saffron-angular-example",
+  "name": "password-generator",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -12,24 +12,19 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "deploy": "ng deploy --no-silent",
-    "clean": "npx rimraf ./node_modules ./.angular/cache package-lock.json",
-    "copilot:extract-data": "node ./code-extraction-for-copilot.mjs"
+    "clean": "npx rimraf ./node_modules ./.angular/cache package-lock.json"
   },
   "engines": {
     "node": "^22.22.3 || ^24.15.0 || >=26.0.0"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^22.1.6",
-    "@angular/cdk": "^22.1.6",
     "@angular/common": "^22.1.6",
     "@angular/compiler": "^22.1.6",
     "@angular/core": "^22.1.6",
     "@angular/forms": "^22.1.6",
     "@angular/platform-browser": "^22.1.6",
     "@angular/platform-browser-dynamic": "^22.1.6",
-    "@angular/router": "^22.1.6",
-    "@grapecity/wijmo.angular2.all": "5.20252.44",
     "@saffron/core-components": "4.0.0",
     "@saffron/core-styles": "4.0.0",
     "rxjs": "~7.8.2",

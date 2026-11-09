@@ -1,20 +1,21 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ViewportScroller } from '@angular/common';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { PasswordGeneratorComponent } from './password-generator/password-generator.component';
 
 @Component({
   selector: 'app-root',
-  template: '<router-outlet></router-outlet>',
-  styles: [':host { display: block; height: 100%; }'],
-  imports: [RouterOutlet],
+  template: `
+    <saf-theme-provider mode="light">
+      <main>
+        <h1>Secure password generator</h1>
+        <app-password-generator></app-password-generator>
+      </main>
+    </saf-theme-provider>
+  `,
+  styles: [`
+    :host { display: block; }
+    main { max-width: 44rem; margin-inline: auto; padding: 2rem 1rem; }
+  `],
+  imports: [PasswordGeneratorComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppComponent {
-  title = 'saffron-angular-example';
-
-  constructor(scroller: ViewportScroller) {
-    // Offset anchor scrolling by 70px so sections land below the sticky header.
-    // This is used by anchorScrolling: 'enabled' (configured in app.config.ts)
-    // when navigating to a route that has a URL fragment (e.g. pasted URLs).
-    scroller.setOffset([0, 70]);
-  }
-}
+export class AppComponent {}

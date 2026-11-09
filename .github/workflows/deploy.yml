@@ -84,7 +84,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/saffron-angular-example
+          publish_dir: ./dist/password-generator/browser
           exclude_assets: ".github,node_modules"
           destination_dir: ${{ steps.extract_deployment_name.outputs.deployment_name }}
 

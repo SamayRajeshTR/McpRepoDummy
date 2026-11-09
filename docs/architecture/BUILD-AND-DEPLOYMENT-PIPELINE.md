@@ -37,7 +37,7 @@ flowchart TB
 1. **Label PR** — add the `GitHub Pages Deployment` label to the PR under review
 2. **Build preview** — `multi-deployment-pr.yml` runs `npm install` and `npm run build`, appends a versioned entry to `multiDeployment/index.html`, commits, and opens a deployment PR
 3. **Merge deployment PR** — team reviews and merges the deployment PR
-4. **Deploy to GitHub Pages** — `deploy.yml` rebuilds the app and publishes `dist/saffron-angular-example` to GitHub Pages under the versioned path
+4. **Deploy to GitHub Pages** — `deploy.yml` rebuilds the app and publishes `dist/password-generator/browser` to GitHub Pages under the versioned path
 5. **Comment on PR** — `deploy.yml` posts the preview URL back to the original PR
 
 ## Components
@@ -62,7 +62,7 @@ flowchart TB
 
 | Artifact                   | Location                        | Consumer                                 |
 | -------------------------- | ------------------------------- | ---------------------------------------- |
-| Built Angular app          | `dist/saffron-angular-example/` | GitHub Pages deployment                  |
+| Built Angular app          | `dist/password-generator/browser/` | GitHub Pages deployment                  |
 | Versioned deployment index | `multiDeployment/index.html`    | Developers and QA navigating PR previews |
 | GitHub Pages preview site  | Versioned path on GitHub Pages  | QA and accessibility specialists         |
 
